@@ -8,8 +8,7 @@
   
 </head>
 <body>
-   <form>   
-   <div class='bold-line'></div>
+<form method="post" action="../connexion/connexion">   <div class='bold-line'></div>
 <div class='container'>
   <div class='window'>
     <div class='overlay'></div>
@@ -21,8 +20,9 @@
         <input type='password' placeholder='Password' class='input-line full-width'></input>
 
       </div>
-      <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div>
-      <div><button class='ghost-round full-width'>Create Account</button></div>
+      <div><button class='ghost-round full-width'>Se Connecter</button></div>
+      <div><button class='ghost-round full-width'>S'inscrire</button></div>
+
     </div>
   </div>
 </div>
