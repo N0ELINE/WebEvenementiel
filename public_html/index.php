@@ -1,15 +1,14 @@
 <?php
 
-
 /**
  * Description of index / routeur
  *
  * @author Nöeline
  */
 
-        $path = trim($_SERVER["PATH_INFO"], "/");
+    $path = trim($_SERVER["PATH_INFO"], "/");
     
-    //require_once '../src/controller/AdministrateurController.php';
+    require_once '../src/controller/ConnexionController.php';
     
     
     if (isset($_SERVER["PATH_INFO"])) {
@@ -22,61 +21,61 @@
     $control = array_shift($fragments);
     switch ($control) {
         
-        case "accueil" : {
-            session_start();
-//            if($_SESSION["role"]->getNom()=='laborantin'){
-//                var_dump($_SESSION["role"]->getNom());
+//         case "accueil" : {
+//             session_start();
+// //            if($_SESSION["role"]->getNom()=='laborantin'){
+// //                var_dump($_SESSION["role"]->getNom());
                
-            accueilroutes($fragments);
-//            }
-//            else {
-//                header('Location: /connexion/404');
-//                }
-            break;
-            }
-        case "collaborateur" : {
-             session_start();
-
-//            if($_SESSION["role"]->getNom()=='fabricant'){
-                collabroutes($fragments);
-//            }
-//            else {
-//                header('Location: /connexion/404');
-//                }
-            break;
-            }
-        case "blog" : {
+//             accueilroutes($fragments);
+// //            }
+// //            else {
+// //                header('Location: /connexion/404');
+// //                }
+//             break;
+//         }
+        case "connexion" : {
               session_start();
-//            if($_SESSION["role"]->getNom()=='administrateur'){
-                blogroutes($fragments);
-//            }
-//            else {
-//                header('Location: /connexion/404');
-//                }
-            break;
+              connexionroutes($fragments);
+              break;
         }
-        case "espaceclient" : {
-          session_start();
-//            if($_SESSION["role"]->getNom()=='administrateur'){
-            clientroutes($fragments);
-//            }
-//            else {
-//                header('Location: /connexion/404');
-//                }
-        break;
-    }
-        case "formation" : {
-            session_start();
+//         case "collaborateur" : {
+//              session_start();
 
-            formationroutes($fragments);
-            break;
-        }
-        case "formation" : {
-          session_start();
+// //            if($_SESSION["role"]->getNom()=='fabricant'){
+//                 collabroutes($fragments);
+// //            }
+// //            else {
+// //                header('Location: /connexion/404');
+// //                }
+//             break;
+//             }
+//         case "blog" : {
+//               session_start();
+// //            if($_SESSION["role"]->getNom()=='administrateur'){
+//                 blogroutes($fragments);
+// //            }
+// //            else {
+// //                header('Location: /connexion/404');
+// //                }
+//             break;
+//         }
+//         case "espaceclient" : {
+//           session_start();
+// //            if($_SESSION["role"]->getNom()=='administrateur'){
+//             clientroutes($fragments);
+// //            }
+// //            else {
+// //                header('Location: /connexion/404');
+// //                }
+//         break;
+//     }
+//         case "formation" : {
+//             session_start();
 
-          connexionroutes($fragments);
-          break;
-      }
+//             formationroutes($fragments);
+//             break;
+//         }
+        
         default : {
             echo "erreur";
             break;
@@ -89,7 +88,6 @@
 
         switch ($action) {
             case "accueil" : {
-                
                     call_user_func_array(["ConnexionController", "display"], $fragments);
                     break;
                 }
