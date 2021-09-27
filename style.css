@@ -30,4 +30,58 @@ header .overlay{
 	text-align: center;
 	font-family: sans-serif;
 }
+#logo {
+	width: 8%;
+	margin-top: 100px;
+	margin-left: 850px;
+}
+
+#proj{
+	background-color: gray;
+}
+.bas_proj{
+	text-align: center;
+}
+
+#titre_cli{
+	text-align: center;
+	color: white;
+	font-family: sans-serif;
+	background-color: #9E0785;
+
+}
+#cli1{
+	color: white;
+	font-family: sans-serif;
+	grid-column: 1 / span 2;
+  	grid-row: third-line / 4;
+	  margin-left: 35px;
+	
+	
+}
+
+#cli2{
+	color: white;
+	font-family: sans-serif;	
+	grid-column: 2 / span 2;
+  	grid-row: third-line / 4;
+}
+
+#cli3{
+	color: white;
+	font-family: sans-serif;
+	grid-column: 3 / span 2;
+  	grid-row: third-line / 4;
+	
+}
+#violet{
+	background-color: #9E0785;
+}
+#client{
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+
+}
+
+
 
