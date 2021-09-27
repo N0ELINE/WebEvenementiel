@@ -8,24 +8,25 @@
   
 </head>
 <body>
-<form method="post" action="../connexion/connexion">   <div class='bold-line'></div>
+<form method="post" action="../connexion/connexion">   
 <div class='container'>
   <div class='window'>
     <div class='overlay'></div>
     <div class='content'>
       <div class='welcome'>Connexion</div>
       <div class='input-fields'>
-        <input type='text' placeholder='Username' class='input-line full-width'></input>
         <input type='email' placeholder='Email' class='input-line full-width'></input>
         <input type='password' placeholder='Password' class='input-line full-width'></input>
 
       </div>
-      <div><button class='ghost-round full-width'>Se Connecter</button></div>
-      <div><button class='ghost-round full-width'>S'inscrire</button></div>
+      <button type="Enregistrer" class='ghost-round full-width'>Se connecter</button>
+  </form>
+  <form method="" action="../connexion/inscription">  
+    <button class='ghost-round full-width' >S'inscrire</button>
+    </form>
 
     </div>
   </div>
 </div>
-  </form>
 </body>
 </html>
