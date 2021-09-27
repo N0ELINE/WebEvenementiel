@@ -1,0 +1,165 @@
+CREATE DATABASE STAREVENT;
+
+
+CREATE TABLE USER(
+    idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    adresseMail VARCHAR(100),
+    hashMdp VARCHAR(255)
+);
+
+CREATE TABLE DROITS(
+    idDroits INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    libelleDroit VARCHAR(100)
+);
+
+CREATE TABLE ATTRIBUTION(
+    idUserAttribution INT NOT NULL,
+    idDroitsAttribution INT NOT NULL,
+    PRIMARY KEY (idUserAttribution,idDroitsAttribution),
+    FOREIGN KEY (idUserAttribution) REFERENCES USER(idUser),
+    FOREIGN KEY (idDroitsAttribution) REFERENCES DROITS(idDroits)
+);
+
+CREATE TABLE NOTIF(
+    idNotif INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    date DATE,
+    heure TIME,
+    contenu VARCHAR(100)
+);
+
+CREATE TABLE NOTIFIE(
+    idUserNotifie INT NOT NULL, 
+    idNotifNotifie INT NOT NULL, 
+    consulte BOOLEAN DEFAULT false,
+    PRIMARY KEY (idUserNotifie, idNotifNotifie),
+    FOREIGN KEY (idUserNotifie) REFERENCES USER(idUser) ,
+    FOREIGN KEY (idNotifNotifie) REFERENCES NOTIF(idNotif)
+);
+
+CREATE TABLE PHOTOSITE(
+    idPhoto INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    lien VARCHAR(200)
+);
+
+CREATE TABLE ARTICLE(
+    idArticle INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(100),
+    prenom VARCHAR(100),
+    description VARCHAR(500),
+    contenu VARCHAR(10000),
+    date DATE,
+    idPhotoArticle INT,
+    FOREIGN KEY (idPhotoArticle) REFERENCES PHOTOSITE(idPhoto)
+);
+
+CREATE TABLE COMMENTAIRE(
+    idCommentaire INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    contenu VARCHAR(1000),
+    idPhotoArticle int,
+    idArticleCommentaire INT,
+    IdUserCommentaire int,
+    FOREIGN KEY (idArticleCommentaire) REFERENCES ARTICLE(idArticle),
+    FOREIGN KEY (idUserCommentaire) REFERENCES USER(idUser)
+);
+
+CREATE TABLE FAVORI(
+    idUserFavori INT NOT NULL ,
+    idArticleFavori INT  NOT NULL ,
+    PRIMARY KEY (idUserFavori, idArticleFavori),
+    FOREIGN KEY (idUserFavori) REFERENCES USER(idUser),
+    FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
+);
+
+CREATE TABLE ATELIER(
+    idAtelier INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nom VARCHAR(100),
+    description VARCHAR(1000),
+    date DATE,
+    heure TIME,
+    dureeMinute INT,
+    effectifMax INT,
+    localisation VARCHAR(1000),
+    idPhotoAtelier INT,
+    FOREIGN KEY (idPhotoAtelier) REFERENCES PHOTOSITE(idPhoto)
+);
+
+CREATE TABLE PARTICIPE(
+    idAtelierParticipe INT NOT NULL,
+    idUserParticipe INT NOT NULL,
+    nbrPersonnes INT,
+    PRIMARY KEY (idUserParticipe, idAtelierParticipe),
+    FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
+    FOREIGN KEY (idAtelierParticipe) REFERENCES ATELIER(idAtelier)
+);
+
+CREATE TABLE GALERIEATELIER(
+    idAtelierGalerie INT NOT NULL,
+    idPhotoGalerie INT NOT NULL,
+    PRIMARY KEY (idAtelierGalerie, idPhotoGalerie),
+    FOREIGN KEY (idPhotoGalerie) REFERENCES PHOTOSITE(idPhoto),
+    FOREIGN KEY (idAtelierGalerie) REFERENCES ATELIER(idAtelier)
+);
+
+CREATE TABLE TYPEFORMATION(
+    idType INT PRIMARY KEY NOT NULL,
+    libelleFormation VARCHAR(100)
+);
+
+CREATE TABLE DIFFICULTEE(
+    idDifficultée INT PRIMARY KEY NOT NULL,
+    libelleDifficultée VARCHAR(100)
+);
+
+CREATE TABLE FORMATION(
+    idFormation INT PRIMARY KEY NOT NULL,
+    nom VARCHAR(200),
+    description VARCHAR(500),
+    dureeHeure INT,
+    idTypeFormation INT,
+    idDifficultéeFormation INT,
+    FOREIGN KEY (idTypeFormation) REFERENCES TYPEFORMATION(idType),
+    FOREIGN KEY (idDifficultéeFormation) REFERENCES DIFFICULTEE(idDifficultée)
+);
+
+CREATE TABLE COMMENCE(
+    idFormationCommence INT NOT NULL,
+    idUserCommence INT NOT NULL,
+    avancement INT DEFAULT 0,
+    dateDebut DATE,
+    PRIMARY KEY (idFormationCommence, idUserCommence),
+    FOREIGN KEY (idUserCommence) REFERENCES USER(idUser),
+    FOREIGN KEY (idFormationCommence) REFERENCES FORMATION(idFormation)
+);
+
+CREATE TABLE AVIS(
+    idAvis INT PRIMARY KEY NOT NULL,
+    contenu VARCHAR(1000),
+    etoiles INT default 0
+);
+
+CREATE TABLE AVISFORMATION(
+    idFormationAvis INT  NOT NULL,
+    idAvisFormation INT  NOT NULL,
+    PRIMARY KEY (idFormationAvis, idAvisFormation),
+    FOREIGN KEY (idFormationAvis) REFERENCES FORMATION(idFormation),
+    FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
+);
+
+CREATE TABLE AVISATELIER(
+    idAtelierAvis INT NOT NULL,
+    idAvisFormation INT NOT NULL,
+    PRIMARY KEY (idAtelierAvis, idAvisFormation),
+    FOREIGN KEY (idAtelierAvis) REFERENCES ATELIER(idAtelier),
+    FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
+);
+
+-- CREATE TABLE CONTACT(
+--     idAtelier
+--     mail VARCHAR(500),
+--     nom VARCHAR(100),
+--     prenom VARCHAR(100),
+--     societe VARCHAR(100),
+--     tel INT,
+--     sujet VARCHAR(200),
+--     message VARCHAR(50000)
+-- );
