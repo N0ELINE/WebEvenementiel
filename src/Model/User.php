@@ -4,8 +4,9 @@ class User {
     private $Id;
     private $Mail;
     private $Mdp;
-    
-    function User() {
+    private $Droit;
+
+    function User(){
         
     }
     
@@ -20,14 +21,21 @@ class User {
     function getMdp() {
         return $this->Mdp;
     }
+
+    function getDroit() {
+        return $this->Droit;
+    }
     
-    function setLogin($Mail) {
-        $this->Mail = $Mail;
+    function setLogin($mail) {
+        $this->Mail = $mail;
     }
 
-    function setMdp($Mdp) {
-        $this->Mdp = $Mdp;
+    function setMdp($mdp) {
+        $this->Mdp = $mdp;
     }
     
+    function setDroit($droit) {
+        $this->Droit = $droit;
+    }
 }
 

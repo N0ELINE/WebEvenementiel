@@ -47,7 +47,7 @@ Class DAOUser {
             $requete -> execute();
     }
     
-   public function save(User $User){
+    public function saveClient(User $User){
        
         $cnx=$this->cnx;
        
@@ -55,14 +55,56 @@ Class DAOUser {
         $Mdp=$User->getMdp();
         
         //requete sql
-        $SQLS="INSERT INTO USER (Mail,Mdp) VALUES (:Mail,:Mdp)";
+        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
         //prepare statement
         $prepareStatementSave=$cnx->prepare($SQLS);
         $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
 
+        $prepareStatementSave->bindValue(":droit",1, PDO::PARAM_STR);
+
         $prepareStatementSave->execute();
     }
+
+    public function saveSalarie(User $User){
+       
+        $cnx=$this->cnx;
+       
+        $Mail=$User->getMail();
+        $Mdp=$User->getMdp();
+        
+        //requete sql
+        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
+        //prepare statement
+        $prepareStatementSave=$cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
+
+        $prepareStatementSave->bindValue(":droit",2, PDO::PARAM_STR);
+
+        $prepareStatementSave->execute();
+    }
+
+   public function saveAdmin(User $User){
+       
+        $cnx=$this->cnx;
+       
+        $Mail=$User->getMail();
+        $Mdp=$User->getMdp();
+        
+        //requete sql
+        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
+        //prepare statement
+        $prepareStatementSave=$cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
+
+        $prepareStatementSave->bindValue(":droit",3, PDO::PARAM_STR);
+
+        $prepareStatementSave->execute();
+    }
+
+    
     
     public function update(User $User){
         
@@ -71,7 +113,7 @@ Class DAOUser {
         $id=$User->getId();
         $Login=$User->getMail();
         $Mdp=$User->getMdp();
-       
+
         //requete sql
         $SQLU="UPDATE USER SET Mail=:Mail, Mdp=:Mdp WHERE Id=:id";
        

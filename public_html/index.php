@@ -20,68 +20,105 @@
     
     $control = array_shift($fragments);
     switch ($control) {
-        
-//         case "accueil" : {
-//             session_start();
-// //            if($_SESSION["role"]->getNom()=='laborantin'){
-// //                var_dump($_SESSION["role"]->getNom());
-               
-//             accueilroutes($fragments);
-// //            }
-// //            else {
-// //                header('Location: /connexion/404');
-// //                }
-//             break;
-//         }
+      case "accueil" : {
+        session_start();
+        accueilroutes($fragments);
+        break;
+      }
         case "connexion" : {
-              session_start();
-              connexionroutes($fragments);
-              break;
+          session_start();
+          connexionroutes($fragments);
+          break;
         }
-//         case "collaborateur" : {
-//              session_start();
-
-// //            if($_SESSION["role"]->getNom()=='fabricant'){
-//                 collabroutes($fragments);
-// //            }
-// //            else {
-// //                header('Location: /connexion/404');
-// //                }
-//             break;
-//             }
-//         case "blog" : {
-//               session_start();
-// //            if($_SESSION["role"]->getNom()=='administrateur'){
-//                 blogroutes($fragments);
-// //            }
-// //            else {
-// //                header('Location: /connexion/404');
-// //                }
-//             break;
-//         }
-//         case "espaceclient" : {
-//           session_start();
-// //            if($_SESSION["role"]->getNom()=='administrateur'){
-//             clientroutes($fragments);
-// //            }
-// //            else {
-// //                header('Location: /connexion/404');
-// //                }
-//         break;
-//     }
-//         case "formation" : {
-//             session_start();
-
-//             formationroutes($fragments);
-//             break;
-//         }
         
-        default : {
-            echo "erreur";
+        case "blog" : {
+          session_start();
+          blogroutes($fragments);
+          break;
+        }
+        case "espaceclient" : {
+          session_start();
+          if($_SESSION["role"]->getNom()=='client'){
+            var_dump($_SESSION["role"]->getNom());
+            clientroutes($fragments);
+            }
+            else {
+              header('Location: /connexion/interdit');
+            }
             break;
+        }
+        case "formation" : {
+          session_start();
+         if($_SESSION["role"]->getNom()=='client'){
+             var_dump($_SESSION["role"]->getNom());
+             
+          formationroutes($fragments);
+         }
+         else {
+             header('Location: /connexion/interdit');
+             }
+          break;
+      }
+      case "evenement" : {
+          session_start();
+          eventsroute($fragments);
+          break;
+    }
+      case "collaborateur" : {
+        session_start();
+       if($_SESSION["role"]->getNom()=='collaborateur'){
+           var_dump($_SESSION["role"]->getNom());
+           collabroutes($fragments);
+        }
+        else {
+          header('Location: /connexion/interdit');
+        }
+        break;
+      }
+      case "admin" : {
+          session_start();
+          if($_SESSION["role"]->getNom()=='admin'){
+            var_dump($_SESSION["role"]->getNom());
+            adminroutes($fragments);
+          }
+          else {
+             header('Location: /connexion/interdit');
+          }
+          break;
+      }        
+        default : {
+          header('Location: /connexion/404');
+          break;
         }
     }
     
+
+    function accueilroutes($fragments) {
+      $action = array_shift($fragments);
+
+      switch ($action) {
+          case "hello" : {
+                  call_user_func_array(["AccueilController", "display"], $fragments);
+                  break;
+          }
+          case "avis":{
+              call_user_func_array(["AccueilController","displayAvis"], $fragments);
+              break;
+          }
+          case "contact":{
+            call_user_func_array(["AccueilController","displayPageContact"], $fragments);
+            break;
+          }
+          case "sendContact":{
+            call_user_func_array(["AccueilController","envoiPageContact"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
     
     function connexionroutes($fragments) {
         $action = array_shift($fragments);
@@ -90,170 +127,210 @@
             case "accueil" : {
                     call_user_func_array(["ConnexionController", "display"], $fragments);
                     break;
-                }
+            }
+            case "inscription":{
+                call_user_func_array(["ConnexionController","displayinscription"], $fragments);
+                break;
+            }
+            case "connexion":{
+              call_user_func_array(["ConnexionController","newconnexion"], $fragments);
+              break;
+            }
+            case "sinscrire":{
+              call_user_func_array(["ConnexionController","newinscription"], $fragments);
+              break;
+            }
             case "sedeconnecter" : {
                     call_user_func_array(["ConnexionController","delconnexion"], $fragments);
                     break;
-                }
+            }
             case "hellouser" : {
                     call_user_func_array(["ConnexionController","helloUser"], $fragments);
                     break;
-                }    
-            case "connexion":{
-                call_user_func_array(["ConnexionController","newconnexion"], $fragments);
-                break;
-            }
-            case "inscription":{
-              call_user_func_array(["ConnexionController","displayinscription"], $fragments);
-              break;
-          }
+            }    
+            
             case "404":{
                 call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
                 break;
             }
+            case "permissiondenided":{
+              call_user_func_array(["ConnexionController","interdit"], $fragments);
+              break;
+            }
             default :{
-                    echo "Action '$action' non defini <hr>";
-                    echo "erreur";
-                    break;
-                }
+              call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+              break;
+            }
         }  
     }
-    
-    // function laboroutes($fragments) {
-    //     $action = array_shift($fragments);
 
-    //     switch ($action) {
-    //         case "accueil" : {
-    //             call_user_func_array(["LaboratoireController", "display"], $fragments);
-    //             break;
-    //             }
-    //         case "anciennescommandes":{
-    //             call_user_func_array(["LaboratoireController","old"], $fragments);
-    //             break;
-    //         }
-            
-    //         //fonctions pour le panier
-    //         case "panier" : {
-    //             call_user_func_array(["LaboratoireController","displaypanier"], $fragments);
-    //             break;
-    //         }    
-    //         case "ajouter" : {
-    //             //ajouter un item du panier
-    //             call_user_func_array(["LaboratoireController","add"], $fragments);
-    //             break;
-    //         } 
-    //         case "supprimertout" : {
-    //             //supprimer un item du panier
-    //             call_user_func_array(["LaboratoireController","delall"], $fragments);
-    //             break;
-    //         }
-    //         case "supprimerun" : {
-    //             //supprimer un item du panier
-    //             call_user_func_array(["LaboratoireController","delone"], $fragments);
-    //             break;
-    //         }
-    //         case "commander":{
-    //             call_user_func_array(["LaboratoireController","save"], $fragments);
-    //             break;
-    //         }
-    //         case "modifier":{
-    //             call_user_func_array(["LaboratoireController","modify"], $fragments);
-    //             break;
-    //         }
-    //         //fin fonctions panier
-            
-    //         default :{
-    //                 echo "Action '$action' non defini <hr>";
-    //                 echo "erreur";
-    //                 break;
-    //             }
-    //     }  
-    // }
-    
-    
-    // function fabroutes($fragments) {
-    //     $action = array_shift($fragments);
+    function blogroutes($fragments) {
+      $action = array_shift($fragments);
 
-    //     switch ($action) {
-    //         case "accueil" : {
-    //             call_user_func_array(["FabriquantController", "display"], $fragments);
-    //             break;
-    //         }
-    //         case "modifier" : {
-    //             call_user_func_array(["FabriquantController", "updateshow"], $fragments);
-    //             break;
-    //         }
-    //         case "enregistrementmodifier" : {
-    //             call_user_func_array(["FabriquantController", "saveupdate"], $fragments);
-    //             break;
-    //         }
-    //         case "nouveau" : {
-    //             call_user_func_array(["FabriquantController", "newshow"], $fragments);
-    //             break;
-    //         }
-    //         case "enregistrementnouveau" : {
-    //             call_user_func_array(["FabriquantController", "savenew"], $fragments);
-    //             break;
-    //         }
-    //         case "supprimer" : {
-    //             call_user_func_array(["FabriquantController", "delete"], $fragments);
-    //             break;
-    //         }
-    //         case "commandesrecues" : {
-    //             call_user_func_array(["FabriquantController", "commande"], $fragments);
-    //             break;
-    //         }
-    //         case "accepter" : {
-    //             call_user_func_array(["FabriquantController", "yes"], $fragments);
-    //             break;
-    //         }
-    //         case "refuser" : {
-    //             call_user_func_array(["FabriquantController", "no"], $fragments);
-    //             break;
-    //         }
-    //         default :{
-    //                 echo "Action '$action' non defini <hr>";
-    //                 echo "erreur";
-    //                 break;
-    //             }
-    //     }  
-     //}
-    
-    
-    // function adminroutes($fragments) {
+      switch ($action) {
+          case "articles" : {
+                  call_user_func_array(["BlogController", "displayArticles"], $fragments);
+                  break;
+          }
+          case "article":{
+              call_user_func_array(["BlogController","displayArticle"], $fragments);
+              break;
+          }
+          case "like":{
+            call_user_func_array(["BlogController","displayPageContact"], $fragments);
+            break;
+          }
+          case "comment":{
+            call_user_func_array(["BlogController","commenter"], $fragments);
+            break;
+          }
+          case "share":{
+            call_user_func_array(["BlogController","partagereseaux"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
 
-    //     $action = array_shift($fragments);
+    function clientroutes($fragments) {
+      $action = array_shift($fragments);
 
-    //     switch ($action) {
-    //         case "accueil" : {
-    //             call_user_func_array(["AdministrateurController", "display"], $fragments);
-    //             break;
-    //         }
-    //         case "modifier" : {
-    //             call_user_func_array(["AdministrateurController", "modify"], $fragments);
-    //             break;
-    //         }
-    //         case "enregistrermodifier" : {
-    //             call_user_func_array(["AdministrateurController", "saveupdate"], $fragments);
-    //             break;
-    //         }
-    //         case "nouveau" : {
-    //             call_user_func_array(["AdministrateurController", "new"], $fragments);
-    //             break;
-    //         }
-    //         case "enregistrernouveau" : {
-    //             call_user_func_array(["AdministrateurController", "savenew"], $fragments);
-    //             break;
-    //         }
-    //         case "supprimer" : {
-    //             call_user_func_array(["AdministrateurController", "delete"], $fragments);
-    //             break;
-    //         }
-    //         default :{
-    //                 echo "Action '$action' non defini <hr>";
-    //                 echo "erreur";
-    //                 break;
-    //             }
-    //     } 
-      
-    //   }
+      switch ($action) {
+          case "accueil" : {
+                  call_user_func_array(["ClientController", "displayclient"], $fragments);
+                  break;
+          }
+          case "notifs":{
+              call_user_func_array(["ClientController","notifs"], $fragments);
+              break;
+          }
+          case "myevents":{
+            call_user_func_array(["ClientController","displayevenements"], $fragments);
+            break;
+          }
+          case "eventgalery":{
+            call_user_func_array(["ClientController","galerie"], $fragments);
+            break;
+          }
+          case "addavis":{
+            call_user_func_array(["ClientController","partagereseaux"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
+    function formationroutes($fragments) {
+      $action = array_shift($fragments);
+
+      switch ($action) {
+          case "accueil" : {
+                  call_user_func_array(["FormationController", "displayformations"], $fragments);
+                  break;
+          }
+          case "maformation":{
+              call_user_func_array(["FormationController","notifs"], $fragments);
+              break;
+          }
+          case "myevents":{
+            call_user_func_array(["FormationController","displayevenements"], $fragments);
+            break;
+          }
+          case "eventgalery":{
+            call_user_func_array(["FormationController","galerie"], $fragments);
+            break;
+          }
+          case "addopignon":{
+            call_user_func_array(["FormationController","partagereseaux"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
+    function collabroutes($fragments) {
+      $action = array_shift($fragments);
+
+      switch ($action) {
+          case "board" : {
+                  call_user_func_array(["CollaborateurController", "tableaudebord"], $fragments);
+                  break;
+          }
+          case "articles":{
+              call_user_func_array(["CollaborateurController","articles"], $fragments);
+              break;
+          }
+          case "addarticle":{
+            call_user_func_array(["CollaborateurController","creerarticle"], $fragments);
+            break;
+          }
+          case "writearticle":{
+            call_user_func_array(["CollaborateurController","ecrirearticle"], $fragments);
+            break;
+          }
+          case "events":{
+            call_user_func_array(["CollaborateurController","afficherevements"], $fragments);
+            break;
+          }
+          case "addevent":{
+            call_user_func_array(["CollaborateurController","ajouterevenement"], $fragments);
+            break;
+          }
+          case "modifyevent":{
+            call_user_func_array(["CollaborateurController","afficherevenement"], $fragments);
+            break;
+          }
+          case "downloadpicture":{
+            call_user_func_array(["CollaborateurController","importphoto"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
+    function adminroutes($fragments) {
+      $action = array_shift($fragments);
+
+      switch ($action) {
+          case "board" : {
+                  call_user_func_array(["AdministrateurController", "tableaudebord"], $fragments);
+                  break;
+          }
+          case "user":{
+              call_user_func_array(["CollaborateurController","displayuser"], $fragments);
+              break;
+          }
+          case "adduser":{
+            call_user_func_array(["CollaborateurController","creeruser"], $fragments);
+            break;
+          }
+          case "deluser":{
+            call_user_func_array(["CollaborateurController","suppruser"], $fragments);
+            break;
+          }
+          case "modifyuser":{
+            call_user_func_array(["CollaborateurController","modifieruser"], $fragments);
+            break;
+          }
+          case "logs":{
+            call_user_func_array(["CollaborateurController","afficherlogs"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }

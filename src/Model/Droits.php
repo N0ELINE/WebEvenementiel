@@ -19,6 +19,7 @@ class Droits {
     function setLibelle($Libelle) {
         $this->Libelle = $Libelle;
     }
+
     
 }
 

@@ -3,6 +3,8 @@
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOUser.php';
 
+require_once '../src/model/User.php';
+
 class ConnexionController {
 
     public function display() {
@@ -43,6 +45,45 @@ class ConnexionController {
             }
         }
     }
+
+    public function newInscriptionClient() {
+        $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
+        $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+
+        $daoUser = new DAOUser();
+        
+        $User = new User();
+        $User->set
+        $User = $daoUser->findByMail($mail);
+
+        foreach ($User as $key => $user) {
+            $Usermail = $user->getMail();
+            $Usermdp = $user->getMdp();
+            $Userid = $user->getId();
+            // $Userrole = $user->getIdRole();
+
+            if ($mail == $Usermail && $Usermdp == $mdp) {         
+                // $daorole = new DAORole();
+                // $role=$daorole->find($Userrole);
+                Session::initialiserSessionGlobale($Userid, $Usermail); //ajouter $roles dans les parenthèses
+                header('Location: /accueil/hello');
+                exit();
+            } else {
+                echo "Erreur de connexion";
+                header('Location: /connexion/accueil');
+                exit();
+            }
+        }
+    }
+
+    public function newInscriptionAdmin() {
+
+    }
+
+    public function newInscriptionSalarie() {
+
+    }
+
 
     public function delconnexion() {
         session_start();

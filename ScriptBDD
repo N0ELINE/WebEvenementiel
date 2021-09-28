@@ -7,7 +7,9 @@ CREATE DATABASE STAREVENT;
 CREATE TABLE USER(
     idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     adresseMail VARCHAR(100),
-    hashMdp VARCHAR(255)
+    hashMdp VARCHAR(255),
+    droit INT,
+    FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
 );
 
 CREATE TABLE DROITS(
@@ -15,13 +17,7 @@ CREATE TABLE DROITS(
     libelleDroit VARCHAR(100)
 );
 
-CREATE TABLE ATTRIBUTION(
-    idUserAttribution INT NOT NULL,
-    idDroitsAttribution INT NOT NULL,
-    PRIMARY KEY (idUserAttribution,idDroitsAttribution),
-    FOREIGN KEY (idUserAttribution) REFERENCES USER(idUser),
-    FOREIGN KEY (idDroitsAttribution) REFERENCES DROITS(idDroits)
-);
+-- droit 1 = client 2 = salarie 3= admin
 
 CREATE TABLE NOTIF(
     idNotif INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
