@@ -21,7 +21,7 @@
       </div>
       <button type="Enregistrer" class='ghost-round full-width'>Se connecter</button>
   </form>
-  <form method="" action="../load/inscription">  
+  <form method="" action="../connexion/inscription">  
     <button class='ghost-round full-width' >S'inscrire</button>
     </form>
 

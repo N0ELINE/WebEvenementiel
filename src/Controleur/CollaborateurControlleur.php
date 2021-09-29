@@ -30,6 +30,10 @@ class ClientController {
 
     }
 
+    public function galerieadd() {
+
+    }
+
     public function afficherevenement() {
 
     }

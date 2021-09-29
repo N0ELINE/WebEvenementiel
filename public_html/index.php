@@ -220,12 +220,8 @@ bonjour
 
       switch ($action) {
           case "accueil" : {
-                  call_user_func_array(["ClientController", "displayclient"], $fragments);
-                  break;
-          }
-          case "notifs":{
-              call_user_func_array(["NotificationController","mesnotifs"], $fragments);
-              break;
+            call_user_func_array(["ClientController", "displayclient"], $fragments);
+            break;
           }
           case "myevents":{
             call_user_func_array(["ClientController","displayevenements"], $fragments);
@@ -302,7 +298,7 @@ bonjour
                   call_user_func_array(["CollaborateurController", "tableaudebord"], $fragments);
                   break;
           }
-          case "articles":{
+          case "allarticles":{
               call_user_func_array(["CollaborateurController","articles"], $fragments);
               break;
           }
@@ -310,7 +306,7 @@ bonjour
             call_user_func_array(["CollaborateurController","creerarticle"], $fragments);
             break;
           }
-          case "writearticle":{
+          case "modifarticle":{
             call_user_func_array(["CollaborateurController","ecrirearticle"], $fragments);
             break;
           }
@@ -345,10 +341,14 @@ bonjour
                   call_user_func_array(["AdministrateurController", "tableaudebord"], $fragments);
                   break;
           }
-          case "user":{
-              call_user_func_array(["AdministrateurController","displayuser"], $fragments);
+          case "users":{
+              call_user_func_array(["AdministrateurController","displayusers"], $fragments);
               break;
           }
+          case "user":{
+            call_user_func_array(["AdministrateurController","displayuser"], $fragments);
+            break;
+        }
           case "adduser":{
             call_user_func_array(["AdministrateurController","creeruser"], $fragments);
             break;
@@ -400,15 +400,19 @@ bonjour
 
         switch ($action) {
           case "all":{
-            call_user_func_array(["NotifControlleur","displayAvis"], $fragments);
+            call_user_func_array(["NotifControlleur","mesnotifs"], $fragments);
             break;
         }
           case "lu":{
-            call_user_func_array(["NotifControlleur","ajouteravisatelier"], $fragments);
+            call_user_func_array(["NotifControlleur","read"], $fragments);
+            break;
+          }
+          case "allnotifs":{
+            call_user_func_array(["NotifControlleur","touteslesnotifs"], $fragments);
             break;
           }
           case "newnotif":{
-            call_user_func_array(["NotifControlleur","ajouteravisformation"], $fragments);
+            call_user_func_array(["NotifControlleur","creernotif"], $fragments);
             break;
           }
           default :{

@@ -47,12 +47,13 @@ Class DAOUser {
             $requete -> execute();
     }
     
-    public function saveClient(User $User){
+    public function saveUser(User $User){
        
         $cnx=$this->cnx;
        
         $Mail=$User->getMail();
         $Mdp=$User->getMdp();
+        $Mdp=$User->getDroit();
         
         //requete sql
         $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
@@ -61,45 +62,7 @@ Class DAOUser {
         $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
 
-        $prepareStatementSave->bindValue(":droit",1, PDO::PARAM_STR);
-
-        $prepareStatementSave->execute();
-    }
-
-    public function saveSalarie(User $User){
-       
-        $cnx=$this->cnx;
-       
-        $Mail=$User->getMail();
-        $Mdp=$User->getMdp();
-        
-        //requete sql
-        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
-        //prepare statement
-        $prepareStatementSave=$cnx->prepare($SQLS);
-        $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
-
-        $prepareStatementSave->bindValue(":droit",2, PDO::PARAM_STR);
-
-        $prepareStatementSave->execute();
-    }
-
-   public function saveAdmin(User $User){
-       
-        $cnx=$this->cnx;
-       
-        $Mail=$User->getMail();
-        $Mdp=$User->getMdp();
-        
-        //requete sql
-        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
-        //prepare statement
-        $prepareStatementSave=$cnx->prepare($SQLS);
-        $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
-
-        $prepareStatementSave->bindValue(":droit",3, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":droit",$Droit, PDO::PARAM_STR);
 
         $prepareStatementSave->execute();
     }

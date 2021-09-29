@@ -2,8 +2,10 @@
 
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOUser.php';
+require_once '../src/model/DAOLogs.php';
 
 require_once '../src/model/User.php';
+require_once '../src/model/Logs.php';
 
 class ConnexionController {
 
@@ -18,6 +20,7 @@ class ConnexionController {
     }
 
     public function newconnexion() {
+        
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
         $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT);
@@ -33,7 +36,15 @@ class ConnexionController {
             $Userid = $user->getId();
             $Userrole = $user->getIdRole();
 
-            if ($mail == $Usermail && $Usermdp == $mdp) {         
+            if ($mail == $Usermail && $Usermdp == $mdp) {
+                //Save le log
+                $daoLogs = new DAOLogs();
+                $log = new Logs();
+                $log->setIdUser($Userid);
+                $log->setDate(date("Y/m/d"));
+                $log->setHeure(date("H:i"));
+                saveLogs($Log);
+
                 $daorole = new DAODroit();
                 $role=$daodroit->find($Userrole);
                 Session::initialiserSessionGlobale($Userid, $Usermail,$Userrole); //ajouter $roles dans les parenthèses
@@ -44,6 +55,7 @@ class ConnexionController {
                 header('Location: /connexion/accueil');
                 exit();
             }
+            exit();
         }
     }
 
