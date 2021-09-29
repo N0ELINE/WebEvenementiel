@@ -6,16 +6,16 @@ require_once '../src/model/DAOUser.php';
 require_once '../src/model/User.php';
 
 class ClientController {
-    public function displayAvis() {
+    public function displayclient() {
 
     }
 
-    public function ajouteravisatelier() {
+    public function displayevenements() {
 
     }
 
-    public function ajouteravisformation() {
+    public function galerie() {
 
     }
-
+    
 }

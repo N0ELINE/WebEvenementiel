@@ -5,6 +5,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once '../src/model/User.php';
+
 class Session {
     
     
@@ -27,14 +29,11 @@ class Session {
         }
     }
     
-    static function initialiserSessionGlobale($id,$login){
+    static function initialiserSessionGlobale($id,$login,$roles){
         self::ajouter("id", $id);
         self::ajouter('mail', $mail);
-        // self::ajouter("roles", $roles); //ajouter $roles en attribut de la fonction
+        self::ajouter("roles", $roles); 
     }
     
-    static function initialiserLaboratoire(){
-        self::ajouter("panier", []);
-    }
     
 }

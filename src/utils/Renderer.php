@@ -11,7 +11,7 @@ class Renderer {
 
 
     public static function render(string $file, array $data = null) {
-        $path = __DIR__ . DIRECTORY_SEPARATOR . "../view" . DIRECTORY_SEPARATOR . $file;
+        $path = __DIR__ . DIRECTORY_SEPARATOR . "../src/View" . DIRECTORY_SEPARATOR . $file;
 //        echo $path;
         ob_start();
         if ($data != null) {

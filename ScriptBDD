@@ -152,6 +152,14 @@ CREATE TABLE AVISATELIER(
     FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
 );
 
+-- CREATE TABLE LOGS(
+--     idUserLogs INT NOT NULL;
+--     dateu DATE;
+--     heure TIME;
+--     PRIMARY KEY (idUserLogs, dateu, heure),
+--     FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
+--     );
+
 CREATE USER 'webuser'@'localhost' IDENTIFIED BY '123+aze';
 
 

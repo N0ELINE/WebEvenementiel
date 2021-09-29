@@ -19,7 +19,8 @@ class ConnexionController {
 
     public function newconnexion() {
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
-        $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+        $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+        $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $daoUser = new DAOUser();
         
@@ -30,12 +31,12 @@ class ConnexionController {
             $Usermail = $user->getMail();
             $Usermdp = $user->getMdp();
             $Userid = $user->getId();
-            // $Userrole = $user->getIdRole();
+            $Userrole = $user->getIdRole();
 
             if ($mail == $Usermail && $Usermdp == $mdp) {         
-                // $daorole = new DAORole();
-                // $role=$daorole->find($Userrole);
-                Session::initialiserSessionGlobale($Userid, $Usermail); //ajouter $roles dans les parenthèses
+                $daorole = new DAODroit();
+                $role=$daodroit->find($Userrole);
+                Session::initialiserSessionGlobale($Userid, $Usermail,$Userrole); //ajouter $roles dans les parenthèses
                 header('Location: /accueil/hello');
                 exit();
             } else {
@@ -48,42 +49,37 @@ class ConnexionController {
 
     public function newInscriptionClient() {
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
-        $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+        $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+        $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         $daoUser = new DAOUser();
+        $daodroit = new DAODroit();
         
         $User = new User();
-        $User->set
-        $User = $daoUser->findByMail($mail);
+        $User->setMail($mail);
+        $User->setMdp($mdp);
+        $droit=$daodroit->findByLibelle("client");
+        $User->setDroit($droit);
 
         foreach ($User as $key => $user) {
             $Usermail = $user->getMail();
             $Usermdp = $user->getMdp();
             $Userid = $user->getId();
-            // $Userrole = $user->getIdRole();
+            $Userrole = $user->getIdRole();
 
             if ($mail == $Usermail && $Usermdp == $mdp) {         
-                // $daorole = new DAORole();
-                // $role=$daorole->find($Userrole);
-                Session::initialiserSessionGlobale($Userid, $Usermail); //ajouter $roles dans les parenthèses
+                
+                $role=$daodroit->find($Userrole);
+                Session::initialiserSessionGlobale($Userid, $Usermail,$Userrole);
                 header('Location: /accueil/hello');
                 exit();
             } else {
-                echo "Erreur de connexion";
+                echo "Erreur d'inscription";
                 header('Location: /connexion/accueil');
                 exit();
             }
         }
     }
-
-    public function newInscriptionAdmin() {
-
-    }
-
-    public function newInscriptionSalarie() {
-
-    }
-
 
     public function delconnexion() {
         session_start();
@@ -98,6 +94,11 @@ class ConnexionController {
 
     public function quatrecentquatre() {
         $page = Renderer::render('page404.php');
+        echo $page;
+    }
+
+    public function interdit() {
+        $page = Renderer::render('accessdenied.php');
         echo $page;
     }
     

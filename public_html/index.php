@@ -1,3 +1,5 @@
+bonjour
+
 <?php
 
 /**
@@ -85,7 +87,29 @@
              header('Location: /connexion/interdit');
           }
           break;
-      }        
+      }  
+      case "opinon" : {
+        session_start();
+        if($_SESSION["role"]->getNom()=='client'){
+          var_dump($_SESSION["role"]->getNom());
+          avisroutes($fragments);
+        }
+        else {
+           header('Location: /connexion/interdit');
+        }
+        break;
+    }   
+    case "notif" : {
+      session_start();
+      if($_SESSION["role"]->getNom()=='client'){
+        var_dump($_SESSION["role"]->getNom());
+        notifroutes($fragments);
+      }
+      else {
+         header('Location: /connexion/interdit');
+      }
+      break;
+  }     
         default : {
           header('Location: /connexion/404');
           break;
@@ -101,16 +125,12 @@
                   call_user_func_array(["AccueilController", "display"], $fragments);
                   break;
           }
-          case "avis":{
-              call_user_func_array(["AccueilController","displayAvis"], $fragments);
-              break;
-          }
           case "contact":{
             call_user_func_array(["AccueilController","displayPageContact"], $fragments);
             break;
           }
           case "sendContact":{
-            call_user_func_array(["AccueilController","envoiPageContact"], $fragments);
+            call_user_func_array(["AccueilController","envoiContact"], $fragments);
             break;
           }
           default :{
@@ -168,16 +188,16 @@
       $action = array_shift($fragments);
 
       switch ($action) {
-          case "articles" : {
+          case "all" : {
                   call_user_func_array(["BlogController", "displayArticles"], $fragments);
                   break;
           }
-          case "article":{
+          case "one":{
               call_user_func_array(["BlogController","displayArticle"], $fragments);
               break;
           }
           case "like":{
-            call_user_func_array(["BlogController","displayPageContact"], $fragments);
+            call_user_func_array(["BlogController","aimerArticle"], $fragments);
             break;
           }
           case "comment":{
@@ -204,7 +224,7 @@
                   break;
           }
           case "notifs":{
-              call_user_func_array(["ClientController","notifs"], $fragments);
+              call_user_func_array(["NotificationController","mesnotifs"], $fragments);
               break;
           }
           case "myevents":{
@@ -215,10 +235,7 @@
             call_user_func_array(["ClientController","galerie"], $fragments);
             break;
           }
-          case "addavis":{
-            call_user_func_array(["ClientController","partagereseaux"], $fragments);
-            break;
-          }
+          
           default :{
             call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
             break;
@@ -230,24 +247,16 @@
       $action = array_shift($fragments);
 
       switch ($action) {
-          case "accueil" : {
+          case "all" : {
                   call_user_func_array(["FormationController", "displayformations"], $fragments);
                   break;
           }
-          case "maformation":{
-              call_user_func_array(["FormationController","notifs"], $fragments);
+          case "one":{
+              call_user_func_array(["FormationController","displayformation"], $fragments);
               break;
           }
-          case "myevents":{
-            call_user_func_array(["FormationController","displayevenements"], $fragments);
-            break;
-          }
-          case "eventgalery":{
-            call_user_func_array(["FormationController","galerie"], $fragments);
-            break;
-          }
-          case "addopignon":{
-            call_user_func_array(["FormationController","partagereseaux"], $fragments);
+          case "myformations":{
+            call_user_func_array(["FormationController","mesformations"], $fragments);
             break;
           }
           default :{
@@ -256,6 +265,34 @@
           }
       }  
     }
+
+    function ateliersroutes($fragments) {
+      $action = array_shift($fragments);
+
+      switch ($action) {
+          case "all" : {
+                  call_user_func_array(["AteliersController", "displayateliers"], $fragments);
+                  break;
+          }
+          case "one":{
+              call_user_func_array(["AteliersController","displayatelier"], $fragments);
+              break;
+          }
+          case "subscribe":{
+            call_user_func_array(["AteliersController","sinscrireatelier"], $fragments);
+            break;
+          }
+          case "unsubscribe":{
+            call_user_func_array(["AteliersController","desinscrireatelier"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
 
     function collabroutes($fragments) {
       $action = array_shift($fragments);
@@ -309,23 +346,23 @@
                   break;
           }
           case "user":{
-              call_user_func_array(["CollaborateurController","displayuser"], $fragments);
+              call_user_func_array(["AdministrateurController","displayuser"], $fragments);
               break;
           }
           case "adduser":{
-            call_user_func_array(["CollaborateurController","creeruser"], $fragments);
+            call_user_func_array(["AdministrateurController","creeruser"], $fragments);
             break;
           }
           case "deluser":{
-            call_user_func_array(["CollaborateurController","suppruser"], $fragments);
+            call_user_func_array(["AdministrateurController","suppruser"], $fragments);
             break;
           }
           case "modifyuser":{
-            call_user_func_array(["CollaborateurController","modifieruser"], $fragments);
+            call_user_func_array(["AdministrateurController","modifieruser"], $fragments);
             break;
           }
           case "logs":{
-            call_user_func_array(["CollaborateurController","afficherlogs"], $fragments);
+            call_user_func_array(["AdministrateurController","afficherlogs"], $fragments);
             break;
           }
           default :{
@@ -334,3 +371,52 @@
           }
       }  
     }
+
+    function opinionroutes($fragments) {
+      $action = array_shift($fragments);
+
+        switch ($action) {
+          case "all":{
+            call_user_func_array(["AccueilController","displayAvis"], $fragments);
+            break;
+        }
+          case "atelier":{
+            call_user_func_array(["AvisControlleur","ajouteravisatelier"], $fragments);
+            break;
+          }
+          case "formation":{
+            call_user_func_array(["AvisControlleur","ajouteravisformation"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
+    function notifroutes($fragments) {
+      $action = array_shift($fragments);
+
+        switch ($action) {
+          case "all":{
+            call_user_func_array(["NotifControlleur","displayAvis"], $fragments);
+            break;
+        }
+          case "lu":{
+            call_user_func_array(["NotifControlleur","ajouteravisatelier"], $fragments);
+            break;
+          }
+          case "newnotif":{
+            call_user_func_array(["NotifControlleur","ajouteravisformation"], $fragments);
+            break;
+          }
+          default :{
+            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            break;
+          }
+      }  
+    }
+
+
+    

@@ -26,7 +26,7 @@ class User {
         return $this->Droit;
     }
     
-    function setLogin($mail) {
+    function setMail($mail) {
         $this->Mail = $mail;
     }
 
