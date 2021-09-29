@@ -62,23 +62,4 @@ Class DAOUser {
 
         $prepareStatementSave->execute();
     }
-    
-    public function update(Droits $Droits){
-        
-        $cnx=$this->cnx;
-       
-        $id=$Droits->getId();
-        $Login=$Droits->getLibelle();
-       
-        //requete sql
-        $SQLU="UPDATE DROITS SET Login=:Login WHERE Id=:id";
-       
-        //prepare statement
-        $prepareStatementUpdate=$cnx->prepare($SQLU);
-        $prepareStatementUpdate->bindValue(":id",$id, PDO::PARAM_INT);
-        $prepareStatementUpdate->bindValue(":Libelle",$Libelle, PDO::PARAM_STR);
-
-        $prepareStatementUpdate->execute();
-    }
-    
 }
