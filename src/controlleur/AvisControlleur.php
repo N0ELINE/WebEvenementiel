@@ -5,12 +5,13 @@ require_once '../src/model/DAOUser.php';
 
 require_once '../src/model/User.php';
 
-class ClientController {
+class AvisControlleur {
     public function displayAvis() {
-        $daoavis = new DAOAvis();    
-        $avisformation=$daoavis->findAllFormation();
-        $avisatelier=$daoavis->findAllAtelier();
-        $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
+        // $daoavis = new DAOAvis();    
+        // $avisformation=$daoavis->findAllFormation();
+        // $avisatelier=$daoavis->findAllAtelier();
+        // $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
+        $page= Renderer::render('accueilAvis.php');
         echo $page;
     }
 
