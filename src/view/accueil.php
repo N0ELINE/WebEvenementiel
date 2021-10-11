@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link href="http://fonts.cdnfonts.com/css/blacker-papua" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
                 
@@ -22,19 +22,19 @@
     <!--Navabare menu-->
     <div class="navbar">
         <div class="titre_head">
-            <img src="./image/logo.png" alt="logo" id="logo_head">
+            <img src="../image/logo.png" alt="logo" id="logo_head">
             <h1 id="titre_head">Star Event</h1>
         </div>
 
         <div class="icon">
-            <img src="./image/connection.png" alt="ecrou" id="icon">
-            <img src="./image/ecrou.png" alt="ecrou" id="icon">
-            <img src="./image/calendar.png" alt="ecrou" id="icon">
-            <img src="./image/cloche.png" alt="ecrou" id="icon">
-            <img src="./image/heart.png" alt="ecrou" id="icon">
+            <img src="../image/connection.png" alt="ecrou" id="icon">
+            <img src="../image/ecrou.png" alt="ecrou" id="icon">
+            <img src="../image/calendar.png" alt="ecrou" id="icon">
+            <img src="../image/cloche.png" alt="ecrou" id="icon">
+            <img src="../image/heart.png" alt="ecrou" id="icon">
         </div>
         <div class="bleu">
-            <img src="./image/bleu.png" alt="ecrou" id="bleu">
+            <img src="../image/bleu.png" alt="ecrou" id="bleu">
         </div>
         <div class="menu">
             <nav class="nav">
@@ -46,8 +46,8 @@
                 <span class="nav-indicator"></span>
             </nav>
 
-            <img src="./image/etoile.gif" alt="ecrou" id="etoile">
-            <img src="./image/etoile2.gif" alt="ecrou" id="etoile2">
+            <img src="../image/etoile.gif" alt="ecrou" id="etoile">
+            <img src="../image/etoile2.gif" alt="ecrou" id="etoile2">
         </div>
        
     </div> <br> <br>
@@ -58,16 +58,16 @@
     <h1 class="titre_star">La Star Event</h1> <br><br><br><br>
     <div class="circles">
 
-        <div class="concave"> <img src="./image/anniv.png" alt="anniv" id="bulle">
+        <div class="concave"> <img src="../image/anniv.png" alt="anniv" id="bulle">
             <p class="rond">10</p>
         </div>
-        <div class="concave"><img src="./image/lettre.png" alt="anniv" id="bulle">
+        <div class="concave"><img src="../image/lettre.png" alt="anniv" id="bulle">
             <p class="rond">10
         </div>
-        <div class="concave"><img src="./image/light.png" alt="anniv" id="bulle">
+        <div class="concave"><img src="../image/light.png" alt="anniv" id="bulle">
             <p class="rond">10
         </div>
-        <div class="concave"><img src="./image/user.png" alt="anniv" id="bulle">
+        <div class="concave"><img src="../image/user.png" alt="anniv" id="bulle">
             <p class="rond">10
         </div>
     </div> <br><br><br>
@@ -103,7 +103,7 @@
         <br><br>
     </div>
 
-    </div><br><br><br>
+    <br><br><br>
 
     <!--Actualité-->
     <div id="actu">
@@ -119,7 +119,7 @@
 
     <!--Idée Projet-->
     <div id="proj">
-        <img src="./image/logo.png" alt="logo" id="logo"><br><br><br>
+        <img src="../image/logo.png" alt="logo" id="logo"><br><br><br>
         <h1 class="bas_proj"> Un projet ?</h1> <br>
         <p class="bas_proj">Nous avons (déjà) des idées</p><br><br>
     </div>
@@ -129,9 +129,9 @@
         <footer>
             <br>
             <div class="social">
-                <i><img src="./image/facebook.png" alt="facebook" id="picto"></i></a>
-                <i><img src="./image/insta.png" alt="insta" id="picto"></i>
-                <i><img src="./image/twitter.png" alt="twitter" id="picto"></i>
+                <i><img src="../image/facebook.png" alt="facebook" id="picto"></i></a>
+                <i><img src="../image/insta.png" alt="insta" id="picto"></i>
+                <i><img src="../image/twitter.png" alt="twitter" id="picto"></i>
 
             </div>
 

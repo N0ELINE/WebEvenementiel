@@ -84,6 +84,7 @@
   	grid-row: third-line / 4;
 	margin-left: 185px;	
 	
+	
 }
 
 #cli2{
@@ -92,6 +93,7 @@
 	grid-column: 2 / span 2;
   	grid-row: third-line / 4;
 	margin-left: 135px;
+	
 }
 
 #cli3{
@@ -101,8 +103,9 @@
   	grid-row: third-line / 4;
 	margin-left: 35px;
 	
+	
 }
-.violet{
+#violet{
 	background-color: #9E0785;
 }
 #client{
@@ -139,7 +142,7 @@
 
  .footer-basic {
 	color:#4b4c4d;
-	background-image: url("./image/footer.png");
+	background-image: url("../image/footer.png");
   }
   
   .footer-basic ul {
@@ -270,7 +273,7 @@
 }
 
 .navbar{
-	background-image:  url("./image/party4.jpg");
+	background-image:  url("../image/party4.jpg");
 	background-repeat: no-repeat;
 	
 	
@@ -382,23 +385,18 @@ position:absolute;
 
  /*Page contact*/
 
-.fond_contact{
-	background-color:red;
-	width: 180px;
-	height: 200px;
-}
 #form_contact {
 	display: grid; 
 	grid-template-columns: 1fr 1fr; 
 	grid-template-rows: repeat(1fr 1fr)  ; 
 	justify-items: center; 
 	text-align: center;
-	background-color: gray;
+
 	
   }
   #title_contact{
 	  text-align: center;
-	  color: white;
+	  color:#9E0785 ;
 	 
 	  
   }
@@ -407,7 +405,7 @@ position:absolute;
      font-size: 20px;
      border-width: 0px;
      border-color: #CCCCCC;
-     background-color: #FFFFFF;
+     background-color: gainsboro;
      color: #000000;
      border-style: solid;
      border-radius: 16px;

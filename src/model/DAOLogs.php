@@ -4,7 +4,7 @@ require_once 'Logs.php';
 require_once 'singleton.php';
 
  
-Class DAOUser {
+Class DAOLogs {
     
     private $cnx;
     
