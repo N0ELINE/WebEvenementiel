@@ -382,6 +382,60 @@ position:absolute;
 
  /*Page contact*/
 
+
+#form_contact {
+	display: grid; 
+	grid-template-columns: 1fr 1fr; 
+	grid-template-rows: repeat(1fr 1fr)  ; 
+	justify-items: center; 
+	background-color: gray;
+	text-align: center;
+	
+  }
+  #title_contact{
+	  text-align: center;
+	  color: white;
+	 
+	  
+  }
+  .contact{
+	padding: 7px;
+     font-size: 20px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 16px;
+     box-shadow: 0px 0px 8px rgba(66,66,66,.75);
+     text-shadow: -50px 0px 0px rgba(66,66,66,.0);
+
+	 
+}
+.contact:focus {
+  outline:none;
+}
+
+#envoyer_btn{
+	margin-left: 450px;
+	background-color: #9E0785;
+	border-radius: 12px;
+	color: white;
+	height: 30px;
+	width: 90px;
+	
+}
+#envoyer_btn:hover{
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+
+/*---------------------------*/
+
+  /*Page Avis*/
+
+
+
 #form_contact {
 	display: grid; 
 	grid-template-columns: 1fr 1fr; 
@@ -414,6 +468,7 @@ position:absolute;
 /*---------------------------*/
 
   /*Page Avis*/
+
 
   #title_avis_formation{
 	text-align: center;
