@@ -1,5 +1,3 @@
-bonjour
-
 <?php
 
 /**
@@ -11,6 +9,7 @@ bonjour
 $path = trim($_SERVER["PATH_INFO"], "/");
 require_once("../src/controlleur/ConnexionController.php");
 require_once("../src/controlleur/AccueilControlleur.php");
+require_once("../src/controlleur/AvisControlleur.php");
 
 if (isset($_SERVER["PATH_INFO"])) {
 } else {
@@ -82,24 +81,27 @@ $fragments = explode("/", $path);
       break;
   }  
   case "opinon" : {
-    if($_SESSION["role"]->getNom()=='client'){
-      var_dump($_SESSION["role"]->getNom());
-      avisroutes($fragments);
-    }
-    else {
-        header('Location: /connexion/interdit');
-    }
-    break;
+
+    opinionroutes($fragments);
+
+    // if($_SESSION["role"]->getNom()=='client'){
+    //   var_dump($_SESSION["role"]->getNom());
+    //   opinionroutes($fragments);
+    // }
+    // else {
+    //     header('Location: /connexion/interdit');
+    // }
+    // break;
 }   
 case "notif" : {
   
-  if($_SESSION["role"]->getNom()=='client'){
-    var_dump($_SESSION["role"]->getNom());
-    notifroutes($fragments);
-  }
-  else {
-      header('Location: /connexion/interdit');
-  }
+  // if($_SESSION["role"]->getNom()=='client'){
+  //   var_dump($_SESSION["role"]->getNom());
+  //   notifroutes($fragments);
+  // }
+  // else {
+  //     header('Location: /connexion/interdit');
+  // }
   break;
 }     
     default : {
@@ -369,7 +371,7 @@ function opinionroutes($fragments) {
 
     switch ($action) {
       case "all":{
-        call_user_func_array(["AccueilController","displayAvis"], $fragments);
+        call_user_func_array(["AvisControlleur","displayAvis"], $fragments);
         break;
     }
       case "atelier":{
