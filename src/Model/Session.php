@@ -32,7 +32,7 @@ class Session {
     static function initialiserSessionGlobale($id,$login,$roles){
         self::ajouter("id", $id);
         self::ajouter('mail', $mail);
-        self::ajouter("roles", $roles); 
+        self::ajouter("role", $role); 
     }
     
     

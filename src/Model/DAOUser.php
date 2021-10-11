@@ -13,7 +13,7 @@ Class DAOUser {
     }    
     
     function find($id) : object {
-            $requete = $this->cnx -> prepare("SELECT * FROM User WHERE IdUser=:id");
+            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE IdUser=:id");
             $requete -> bindValue(':id', $id, PDO::PARAM_INT);
             $requete -> execute();
             $result = $requete->fetchObject('User');
@@ -21,7 +21,7 @@ Class DAOUser {
     }
     
     public function findAll() :Array {
-            $requete = $this->cnx -> prepare("SELECT * FROM User");
+            $requete = $this->cnx -> prepare("SELECT * FROM USER");
             $requete -> execute();      
             $Users = array();
             while ( $result = $requete->fetchObject('User') ){
@@ -31,7 +31,7 @@ Class DAOUser {
     }
     
     public function findByMail(string $adresseMail) :Array {
-            $requete = $this->cnx -> prepare("SELECT * FROM User WHERE adresseMail = :adresseMail");
+            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE adresseMail = :adresseMail");
             $requete -> bindValue(':adresseMail', $adresseMail, PDO::PARAM_STR);
             $requete -> execute();
             $Users = array();
@@ -42,7 +42,7 @@ Class DAOUser {
     }  
     
     public function remove($id){
-            $requete = $this->cnx -> prepare("DELETE FROM User WHERE IdUser=:id");
+            $requete = $this->cnx -> prepare("DELETE FROM USER WHERE IdUser=:id");
             $requete->bindValue("id", $id,PDO::PARAM_INT);
             $requete -> execute();
     }

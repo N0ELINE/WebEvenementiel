@@ -70,6 +70,8 @@ public function findAllAtelier() :Array {
     }
     
     public function save(Avis $Avis){
+
+        //TODO save spacial pour formation & atelier
         
         $cnx=$this->cnx;
         
@@ -94,7 +96,7 @@ public function findAllAtelier() :Array {
         $Login=$Avis->getLibelle();
        
         //requete sql
-        $SQLU="UPDATE DROITS SET contenu=:contenu,etoiles=:etoiles WHERE idAvis=:id";
+        $SQLU="UPDATE AVIS SET contenu=:contenu,etoiles=:etoiles WHERE idAvis=:id";
        
         //prepare statement
         $prepareStatementUpdate=$cnx->prepare($SQLU);

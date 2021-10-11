@@ -10,8 +10,8 @@ bonjour
 
     $path = trim($_SERVER["PATH_INFO"], "/");
     
-    require_once '../src/controller/ConnexionController.php';
-    
+    require_once '../src/Controler/ConnexionController.php';
+    require_once '../src/Controler/AccueilControlleur.php';
     
     if (isset($_SERVER["PATH_INFO"])) {
     } else {
@@ -20,26 +20,24 @@ bonjour
     
     $fragments = explode("/", $path);
     
-    $control = array_shift($fragments);
-    switch ($control) {
-      case "accueil" : {
-        session_start();
+      session_start();
+
+      $control = array_shift($fragments);
+      switch ($control) {
+      case "site" : {
         accueilroutes($fragments);
         break;
       }
-        case "connexion" : {
-          session_start();
+      case "connexion" : {
           connexionroutes($fragments);
           break;
-        }
+      }
         
-        case "blog" : {
-          session_start();
+      case "blog" : {
           blogroutes($fragments);
           break;
-        }
-        case "espaceclient" : {
-          session_start();
+      }
+      case "espaceclient" : {
           if($_SESSION["role"]->getNom()=='client'){
             var_dump($_SESSION["role"]->getNom());
             clientroutes($fragments);
@@ -48,9 +46,8 @@ bonjour
               header('Location: /connexion/interdit');
             }
             break;
-        }
+      }
         case "formation" : {
-          session_start();
          if($_SESSION["role"]->getNom()=='client'){
              var_dump($_SESSION["role"]->getNom());
              
@@ -62,12 +59,10 @@ bonjour
           break;
       }
       case "evenement" : {
-          session_start();
           eventsroute($fragments);
           break;
     }
       case "collaborateur" : {
-        session_start();
        if($_SESSION["role"]->getNom()=='collaborateur'){
            var_dump($_SESSION["role"]->getNom());
            collabroutes($fragments);
@@ -78,7 +73,6 @@ bonjour
         break;
       }
       case "admin" : {
-          session_start();
           if($_SESSION["role"]->getNom()=='admin'){
             var_dump($_SESSION["role"]->getNom());
             adminroutes($fragments);
@@ -89,7 +83,6 @@ bonjour
           break;
       }  
       case "opinon" : {
-        session_start();
         if($_SESSION["role"]->getNom()=='client'){
           var_dump($_SESSION["role"]->getNom());
           avisroutes($fragments);
@@ -100,7 +93,7 @@ bonjour
         break;
     }   
     case "notif" : {
-      session_start();
+      
       if($_SESSION["role"]->getNom()=='client'){
         var_dump($_SESSION["role"]->getNom());
         notifroutes($fragments);
@@ -121,7 +114,7 @@ bonjour
       $action = array_shift($fragments);
 
       switch ($action) {
-          case "hello" : {
+          case "accueil" : {
                   call_user_func_array(["AccueilController", "display"], $fragments);
                   break;
           }
@@ -134,7 +127,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -178,7 +171,7 @@ bonjour
               break;
             }
             default :{
-              call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+              header('Location: /connexion/404');
               break;
             }
         }  
@@ -209,7 +202,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -233,7 +226,7 @@ bonjour
           }
           
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -256,7 +249,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -283,7 +276,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -327,7 +320,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -366,7 +359,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -389,7 +382,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  
@@ -416,7 +409,7 @@ bonjour
             break;
           }
           default :{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
+            header('Location: /connexion/404');
             break;
           }
       }  

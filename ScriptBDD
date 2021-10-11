@@ -1,3 +1,23 @@
+-- USER(idUser, adresseMail, hashMdp, #droit)
+-- DROITS(idDroits, libelleDroit)
+-- NOTIF(idNotif, date,heure, contenu)
+-- NOTIFIE (idUserNotifie, idNotifNotifie, consulte)
+-- PHOTOSITE(idPhoto, lien)
+-- ARTICLE(idArticle, nom, prenom, description, contenu, date, #idPhotoArticle)
+-- COMMENTAIRE(idCommentaire, contenu, #idArticleCommentaire, #idUserCommentaire)
+-- FAVORI(#idUserFavori, #idArticleFavori)
+-- EVENT(idEvent, nom, description, date, heure, dureeMinute, effectifMax, localisation, #idPhotoEvent)
+-- PARTICIPE(#idEventParticipe, #idUserParticipe, nbrPersonnes)
+-- GALERIEEVENT(#idEventGalerie, #idPhotoGalerie)
+-- TYPEFORMATION(idType, libelleFormation)
+-- DIFFICULTEE(idDifficultée, libelleDifficultée)
+-- FORMATION(idFormation, nom, description, #idTypeFormation, #idDifficulteeFormation)
+-- COMMENCE(#idFormationCommence, #idUserCommence, avancement, datedebut)
+-- AVIS(idAvis, contenu, etoiles, #idUserAvis)
+-- AVISFORMATION(#idFormationAvis, #idAvisFormation)
+-- AVISEVENT(#idEventAvis, #idAvisEvent)
+-- LOGS(#idUserLogs, dateu, heure)
+
 
 DELETE DATABASE STAREVENT;
 
@@ -55,7 +75,6 @@ CREATE TABLE COMMENTAIRE(
     idCommentaire INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     contenu VARCHAR(1000),
     idPhotoArticle int,
-    idArticleCommentaire INT,
     IdUserCommentaire int,
     FOREIGN KEY (idArticleCommentaire) REFERENCES ARTICLE(idArticle),
     FOREIGN KEY (idUserCommentaire) REFERENCES USER(idUser)
@@ -103,7 +122,6 @@ CREATE TABLE TYPEFORMATION(
     idType INT PRIMARY KEY NOT NULL,
     libelleFormation VARCHAR(100)
 );
-
 CREATE TABLE DIFFICULTEE(
     idDifficultée INT PRIMARY KEY NOT NULL,
     libelleDifficultée VARCHAR(100)
@@ -115,7 +133,7 @@ CREATE TABLE FORMATION(
     description VARCHAR(500),
     dureeHeure INT,
     idTypeFormation INT,
-    idDifficultéeFormation INT,
+    idDifficulteeFormation INT,
     FOREIGN KEY (idTypeFormation) REFERENCES TYPEFORMATION(idType),
     FOREIGN KEY (idDifficultéeFormation) REFERENCES DIFFICULTEE(idDifficultée)
 );

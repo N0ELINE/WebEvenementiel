@@ -13,7 +13,7 @@ Class DAOUser {
     }    
     
     function find($id) : object {
-            $requete = $this->cnx -> prepare("SELECT * FROM DROITS WHERE IdDroits=:id");
+            $requete = $this->cnx -> prepare("SELECT * FROM DROITS WHERE idDroits=:id");
             $requete -> bindValue(':id', $id, PDO::PARAM_INT);
             $requete -> execute();
             $result = $requete->fetchObject('Droits');
@@ -42,7 +42,7 @@ Class DAOUser {
     }  
     
     public function remove($id){
-            $requete = $this->cnx -> prepare("DELETE FROM DROITS WHERE IdDroits=:id");
+            $requete = $this->cnx -> prepare("DELETE FROM DROITS WHERE idDroits=:id");
             $requete->bindValue("id", $id,PDO::PARAM_INT);
             $requete -> execute();
     }
