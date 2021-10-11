@@ -382,14 +382,18 @@ position:absolute;
 
  /*Page contact*/
 
-
+.fond_contact{
+	background-color:red;
+	width: 180px;
+	height: 200px;
+}
 #form_contact {
 	display: grid; 
 	grid-template-columns: 1fr 1fr; 
 	grid-template-rows: repeat(1fr 1fr)  ; 
 	justify-items: center; 
-	background-color: gray;
 	text-align: center;
+	background-color: gray;
 	
   }
   #title_contact{
@@ -408,12 +412,7 @@ position:absolute;
      border-style: solid;
      border-radius: 16px;
      box-shadow: 0px 0px 8px rgba(66,66,66,.75);
-     text-shadow: -50px 0px 0px rgba(66,66,66,.0);
-
-	 
-}
-.contact:focus {
-  outline:none;
+     text-shadow: -50px 0px 0px rgba(66,66,66,.0);	 
 }
 
 #envoyer_btn{
@@ -431,44 +430,7 @@ position:absolute;
 
 
 /*---------------------------*/
-
   /*Page Avis*/
-
-
-
-#form_contact {
-	display: grid; 
-	grid-template-columns: 1fr 1fr; 
-	grid-template-rows: repeat(1fr 1fr)  ; 
-	justify-items: center; 
-	gap:7vh;
-	background-color: #9E0785;
-  }
-  #title_contact{
-	  text-align: center;
-	  color: white;
-  }
-  .contact{
-	padding: 7px;
-     font-size: 20px;
-     border-width: 0px;
-     border-color: #CCCCCC;
-     background-color: #FFFFFF;
-     color: #000000;
-     border-style: solid;
-     border-radius: 16px;
-     box-shadow: 0px 0px 8px rgba(66,66,66,.75);
-     text-shadow: -50px 0px 0px rgba(66,66,66,.0)
-}
-.contact:focus {
-  outline:none;
-}
-
-
-/*---------------------------*/
-
-  /*Page Avis*/
-
 
   #title_avis_formation{
 	text-align: center;
