@@ -3,32 +3,17 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans:500,700&display=swap');
 
 
-
+ /*Page Accueil*/
 *{padding: 0; margin: 0; box-sizing: border-box;}
-body{height: 900px;}
-header {
-	background: url('header.jpg');
-	text-align: center;
-	width: 100%;
-	height: auto;
-	background-size: cover;
-	background-attachment: fixed;
-	position: relative;
-	overflow: hidden;
-	border-radius: 0 0 85% 85% / 30%;
-}
-header .overlay{
-	width: 100%;
-	height: 100%;
-	padding: 50px;
-	color: #FFF;
-	text-shadow: 1px 1px 1px #333;
-  background-image: linear-gradient( 135deg, #9f05ff69 10%, #fd5e086b 100%);
-	
-}
 
 
 
+
+
+/*---------------------------*/
+
+
+/*Accueil - Actualité -*/
 
 .titre_actu{
 	margin:auto;
@@ -60,10 +45,29 @@ header .overlay{
 	font-size:40px;
 }
 
+.btn_contacter{
+	padding: 7px;
+     font-size: 20px;
+     border-width: 2px;
+     border-color: #56B6D2;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 16px;
+     box-shadow: 0px 0px 18px rgba(66,66,66,.75);
+	 height: 70px;
+	 width: 280px;
+	 margin-left: 780px;
+	
+}
 
 
 
 
+/*---------------------------*/
+
+
+/*Accueil - Parti nos cliients -*/
 
 #titre_cli{
 	text-align: center;
@@ -98,7 +102,7 @@ header .overlay{
 	margin-left: 35px;
 	
 }
-#violet{
+.violet{
 	background-color: #9E0785;
 }
 #client{
@@ -106,26 +110,31 @@ header .overlay{
 	grid-template-columns: repeat(3, 1fr);
 
 }
-.avis_cli{
-	margin-left:780px;
-	border-top: 10px double #9d15af;
-	border-right: 10px groove #a616b3;
-	border-bottom: 10px double #9d15af;
-	border-left: 10px groove #a616b3;
-	width: 240px; 
-	height: 100px; 
-	background: white 
+.btn_avis_cli{
+	padding: 7px;
+     font-size: 20px;
+     border-width: 2px;
+     border-color: #56B6D2;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 16px;
+     box-shadow: 0px 0px 18px rgba(66,66,66,.75);
+	 height: 70px;
+	 width: 280px;
+	 margin-left: 780px;
 	
 }
 #avis{
 	text-align:center;
-	line-height:70px;
+	line-height:45px;
 	font-family: sans-serif;
 	font-size: 20px;
 }
 
- 
+ /*---------------------------*/
 
+/*Accueil - Footer-*/
 
 
  .footer-basic {
@@ -200,7 +209,10 @@ header .overlay{
 	  height: 50px;
   }
   
+/*---------------------------*/
 
+
+/*Accueil - Cercle Info-*/
 
 
   .circles {
@@ -247,10 +259,10 @@ header .overlay{
 	  font-size:60px;
   }
 
+/*---------------------------*/
 
 
-
-
+/*Accueil - Header -*/
 
 
 * {
@@ -364,5 +376,50 @@ position:absolute;
 	  height: 250px;
 	}
 
- 
+/*---------------------------*/
 
+
+
+ /*Page contact*/
+
+#form_contact {
+	display: grid; 
+	grid-template-columns: 1fr 1fr; 
+	grid-template-rows: repeat(1fr 1fr)  ; 
+	justify-items: center; 
+	gap:7vh;
+	background-color: #9E0785;
+  }
+  #title_contact{
+	  text-align: center;
+	  color: white;
+  }
+  .contact{
+	padding: 7px;
+     font-size: 20px;
+     border-width: 0px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 16px;
+     box-shadow: 0px 0px 8px rgba(66,66,66,.75);
+     text-shadow: -50px 0px 0px rgba(66,66,66,.0)
+}
+.contact:focus {
+  outline:none;
+}
+
+
+/*---------------------------*/
+
+  /*Page Avis*/
+
+  #title_avis_formation{
+	text-align: center;
+	color:white;
+  }
+  #title_avis{
+	text-align: center;
+	color:#9E0785;
+  }
