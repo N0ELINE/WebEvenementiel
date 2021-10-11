@@ -7,6 +7,7 @@ require_once '../src/model/User.php';
 
 class AccueilController {
 public function display() {
+    
     $page = Renderer::render('accueil.php');
     echo $page;
 }
