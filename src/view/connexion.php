@@ -15,8 +15,8 @@
     <div class='content'>
       <div class='welcome'>Connexion</div>
       <div class='input-fields'>
-        <input type='email' placeholder='Email' class='input-line full-width'></input>
-        <input type='password' placeholder='Password' class='input-line full-width'></input>
+        <input type='email' placeholder='email' class='input-line full-width' name="email"></input>
+        <input type='password' placeholder='password' class='input-line full-width' name="password"></input>
 
       </div>
       <button type="Enregistrer" class='ghost-round full-width'>Se connecter</button>

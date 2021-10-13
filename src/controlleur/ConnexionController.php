@@ -3,6 +3,7 @@
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOUser.php';
 require_once '../src/model/DAOLogs.php';
+require_once '../src/model/Session.php';
 
 require_once '../src/model/User.php';
 require_once '../src/model/Logs.php';
@@ -22,71 +23,60 @@ class ConnexionController {
     public function newconnexion() {
         
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
-        $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
-        $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-        $daoUser = new DAOUser();
-        
+        $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
+        // $mdp=$hashed_password = password_hash($mdp, PASSWORD_DEFAULT); //hash non fonctionnel TODO
+        // $daoUser = new DAOUser();
         $User = new User();
-        $User = $daoUser->findByMail($mail);
+        // $User = $daoUser->findByIdMail($mail); //TODO 
 
-        foreach ($User as $key => $user) {
-            $Usermail = $user->getMail();
-            $Usermdp = $user->getMdp();
-            $Userid = $user->getId();
-            $Userrole = $user->getIdRole();
+        //-----------test
+        $User->setMail("admin3@gmail.com");
+        $User->setMdp("123+aze");
+        $User->setDroit(3);
+        //-----------test
 
-            if ($mail == $Usermail && $Usermdp == $mdp) {
-                //Save le log
-                $daoLogs = new DAOLogs();
-                $log = new Logs();
-                $log->setIdUser($Userid);
-                $log->setDate(date("Y/m/d"));
-                $log->setHeure(date("H:i"));
-                saveLogs($Log);
+            if ($mail == $User->getMail() && $User->getMdp() == $mdp) {
+                //Save le log TODO BDD
+                // $daoLogs = new DAOLogs();
+                // $log = new Logs();
+                // $log->setIdUser($Userid);
+                // $log->setDate(date("Y/m/d"));
+                // $log->setHeure(date("H:i"));
+                // $daoLogs->saveLogs($Log);
 
-                $daorole = new DAODroit();
-                $role=$daodroit->find($Userrole);
-                Session::initialiserSessionGlobale($Userid, $Usermail,$Userrole); //ajouter $roles dans les parenthèses
-                header('Location: /accueil/hello');
+                //Session TODO
+                // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
+                
+                header('Location: /site/accueil');
                 exit();
             } else {
-                echo "Erreur de connexion";
+                echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
                 header('Location: /connexion/accueil');
                 exit();
             }
             exit();
-        }
     }
 
     public function newInscriptionClient() {
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
-        $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
 
-        $daoUser = new DAOUser();
-        $daodroit = new DAODroit();
-        
         $User = new User();
         $User->setMail($mail);
+        //hash mdp TODO
         $User->setMdp($mdp);
-        $droit=$daodroit->findByLibelle("client");
-        $User->setDroit($droit);
-
-        foreach ($User as $key => $user) {
-            $Usermail = $user->getMail();
-            $Usermdp = $user->getMdp();
-            $Userid = $user->getId();
-            $Userrole = $user->getIdRole();
-
-            if ($mail == $Usermail && $Usermdp == $mdp) {         
-                
-                $role=$daodroit->find($Userrole);
-                Session::initialiserSessionGlobale($Userid, $Usermail,$Userrole);
-                header('Location: /accueil/hello');
+        $User->setDroit(1);
+        
+        $daoUser = new DAOUser();
+        $users =$daoUser->findAll();
+        foreach ($users as $key => $user) {
+            if ($user->getMail() == $User->getMail() && $user->setMdp($mdp) == $User->setMdp($mdp)) {         
+                Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$user->getIdRole());
+                header('Location: /site/accueil');
                 exit();
             } else {
-                echo "Erreur d'inscription";
+                echo "Erreur d'inscription, Veuillez réessayer svp";
                 header('Location: /connexion/accueil');
                 exit();
             }
@@ -94,23 +84,22 @@ class ConnexionController {
     }
 
     public function delconnexion() {
-        session_start();
         Session::detruireSession();
         header('Location: /connexion/accueil');
     }
 
-    public function helloUser() {
-        $page = Renderer::render('vousetesconnecte.php');
-        echo $page;
-    }
+    // public function helloUser() {
+    //     $page = Renderer::render('vousetesconnecte.php');
+    //     echo $page;
+    // }
 
     public function quatrecentquatre() {
-        $page = Renderer::render('page404.php');
+        $page = Renderer::render('404.php');
         echo $page;
     }
 
     public function interdit() {
-        $page = Renderer::render('accessdenied.php');
+        $page = Renderer::render('403.php');
         echo $page;
     }
     

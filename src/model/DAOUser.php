@@ -9,40 +9,32 @@ Class DAOUser {
     private $cnx;
     
     public function __construct() {
-        $this->cnx = Singleton::getInstance() -> cnx;
+        $this->cnx = Singleton::getInstance() -> cnx; //ressort comme null TODO
+        
     }    
     
-    function find($id) : object {
-            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE IdUser=:id");
-            $requete -> bindValue(':id', $id, PDO::PARAM_INT);
+    function findByIdMail($idMail) : object {
+            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE IdUserMail == :idMail");
+            $requete -> bindValue(':idMail', $idMail, PDO::PARAM_STR);
             $requete -> execute();
-            $result = $requete->fetchObject('User');
-            return $result;
+            $result = $requete->fetchObject('User'); 
+            var_dump($result); //retourne false TODO ???
+
+            // return $result;
     }
     
     public function findAll() :Array {
             $requete = $this->cnx -> prepare("SELECT * FROM USER");
-            $requete -> execute();      
+            $requete -> execute();
             $Users = array();
             while ( $result = $requete->fetchObject('User') ){
                 $Users[] = $result; 
             };
             return $Users;       
     }
-    
-    public function findByMail(string $adresseMail) :Array {
-            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE adresseMail = :adresseMail");
-            $requete -> bindValue(':adresseMail', $adresseMail, PDO::PARAM_STR);
-            $requete -> execute();
-            $Users = array();
-            while ($result = $requete->fetchObject('User') ){
-                $Users[] = $result; 
-            }; 
-            return $Users;  
-    }  
-    
+
     public function remove($id){
-            $requete = $this->cnx -> prepare("DELETE FROM USER WHERE IdUser=:id");
+            $requete = $this->cnx -> prepare("DELETE FROM USER WHERE idUser=:id");
             $requete->bindValue("id", $id,PDO::PARAM_INT);
             $requete -> execute();
     }
@@ -53,15 +45,14 @@ Class DAOUser {
        
         $Mail=$User->getMail();
         $Mdp=$User->getMdp();
-        $Mdp=$User->getDroit();
+        $Droit=$User->getDroit();
         
         //requete sql
-        $SQLS="INSERT INTO USER (adresseMail,HashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
+        $SQLS="INSERT INTO USER (adresseMail,hashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
         //prepare statement
         $prepareStatementSave=$cnx->prepare($SQLS);
         $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
-
         $prepareStatementSave->bindValue(":droit",$Droit, PDO::PARAM_STR);
 
         $prepareStatementSave->execute();
@@ -78,7 +69,7 @@ Class DAOUser {
         $Mdp=$User->getMdp();
 
         //requete sql
-        $SQLU="UPDATE USER SET Mail=:Mail, Mdp=:Mdp WHERE Id=:id";
+        $SQLU="UPDATE USER SET Mail=:Mail, Mdp=:Mdp WHERE idUser=:id";
        
         //prepare statement
         $prepareStatementUpdate=$cnx->prepare($SQLU);
