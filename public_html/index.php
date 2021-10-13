@@ -10,6 +10,8 @@ $path = trim($_SERVER["PATH_INFO"], "/");
 require_once("../src/controlleur/ConnexionController.php");
 require_once("../src/controlleur/AccueilControlleur.php");
 require_once("../src/controlleur/AvisControlleur.php");
+require_once("../src/controlleur/FormationControlleur.php");
+
 
 if (isset($_SERVER["PATH_INFO"])) {
 } else {
@@ -47,7 +49,6 @@ $fragments = explode("/", $path);
     case "formation" : {
       // if($_SESSION["role"]->getNom()=='client'){
       //     var_dump($_SESSION["role"]->getNom());
-          
       formationroutes($fragments);
       // }
       // else {
@@ -237,15 +238,15 @@ function formationroutes($fragments) {
 
   switch ($action) {
       case "all" : {
-              call_user_func_array(["FormationController", "displayformations"], $fragments);
+              call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
               break;
       }
       case "one":{
-          call_user_func_array(["FormationController","displayformation"], $fragments);
+          call_user_func_array(["FormationControlleur","displayformation"], $fragments);
           break;
       }
       case "myformations":{
-        call_user_func_array(["FormationController","mesformations"], $fragments);
+        call_user_func_array(["FormationControlleur","mesformations"], $fragments);
         break;
       }
       default :{

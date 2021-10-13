@@ -5,9 +5,10 @@ require_once '../src/model/DAOUser.php';
 
 require_once '../src/model/User.php';
 
-class ClientController {
+class FormationControlleur {
     public function displayformations() {
-        $page= Renderer::render('FormationAccueil.php');
+        var_dump("bonjour madame");
+        // $page= Renderer::render('FormationAccueil.php');
         echo $page;
 
     }
