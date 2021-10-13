@@ -5,10 +5,6 @@ require_once '../src/model/DAOUser.php';
 require_once '../src/model/DAOLogs.php';
 require_once '../src/model/Session.php';
 
-// require_once '../src/model/DAOInscrit.php';
-// require_once '../src/model/Inscrit.php';
-
-
 require_once '../src/model/User.php';
 require_once '../src/model/Logs.php';
 
@@ -66,8 +62,6 @@ class ConnexionController {
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
         // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
 
-        
-
         $User = new User();
         $User->setMail($mail);
         //hash mdp TODO
@@ -105,7 +99,7 @@ class ConnexionController {
     }
 
     public function interdit() {
-        $page = Renderer::render('accessdenied.php');
+        $page = Renderer::render('403.php');
         echo $page;
     }
     

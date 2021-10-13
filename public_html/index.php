@@ -22,68 +22,67 @@ $fragments = explode("/", $path);
 
   $control = array_shift($fragments);
   switch ($control) {
-  case "site" : {
-    accueilroutes($fragments);
-    break;
-  }
-  case "connexion" : {
-      connexionroutes($fragments);
+    case "site" : {
+      accueilroutes($fragments);
       break;
-  }
-    
-  case "blog" : {
-      blogroutes($fragments);
-      break;
-  }
-  case "espaceclient" : {
-      if($_SESSION["role"]->getNom()=='client'){
-        var_dump($_SESSION["role"]->getNom());
-        clientroutes($fragments);
-        }
-        else {
-          header('Location: /connexion/interdit');
-        }
+    }
+    case "connexion" : {
+        connexionroutes($fragments);
         break;
-  }
+    }
+
+    case "blog" : {
+        blogroutes($fragments);
+        break;
+    }
+    case "espaceclient" : {
+        // if($_SESSION["role"]->getNom()=='client'){
+        //   var_dump($_SESSION["role"]->getNom());
+        clientroutes($fragments);
+         // }
+          // else {
+          //   header('Location: /connexion/interdit');
+          // }
+         break;
+    }
     case "formation" : {
-      if($_SESSION["role"]->getNom()=='client'){
-          var_dump($_SESSION["role"]->getNom());
+      // if($_SESSION["role"]->getNom()=='client'){
+      //     var_dump($_SESSION["role"]->getNom());
           
       formationroutes($fragments);
-      }
-      else {
-          header('Location: /connexion/interdit');
-          }
+      // }
+      // else {
+      //     header('Location: /connexion/interdit');
+      //     }
       break;
-  }
-  case "evenement" : {
-      eventsroute($fragments);
-      break;
-}
-  case "collaborateur" : {
-    if($_SESSION["role"]->getNom()=='collaborateur'){
-        var_dump($_SESSION["role"]->getNom());
-        collabroutes($fragments);
     }
-    else {
-      header('Location: /connexion/interdit');
+    case "evenement" : {
+       eventsroute($fragments);
+       break;
     }
-    break;
-  }
-  case "admin" : {
-      if($_SESSION["role"]->getNom()=='admin'){
-        var_dump($_SESSION["role"]->getNom());
-        adminroutes($fragments);
-      }
-      else {
-          header('Location: /connexion/interdit');
-      }
+    case "collaborateur" : {
+      // if($_SESSION["role"]->getNom()=='collaborateur'){
+      //     var_dump($_SESSION["role"]->getNom());
+          collabroutes($fragments);
+      // }
+      // else {
+      //   header('Location: /connexion/interdit');
+      // }
       break;
-  }  
-  case "opinon" : {
-
-    opinionroutes($fragments);
-
+    }
+    case "admin" : {
+       // if($_SESSION["role"]->getNom()=='admin'){
+        //   var_dump($_SESSION["role"]->getNom());
+          adminroutes($fragments);
+       // }
+        // else {
+       //     header('Location: /connexion/interdit');
+        // }
+        break;
+    }  
+    case "opinon" : {
+      opinionroutes($fragments);
+      
     // if($_SESSION["role"]->getNom()=='client'){
     //   var_dump($_SESSION["role"]->getNom());
     //   opinionroutes($fragments);
@@ -92,23 +91,23 @@ $fragments = explode("/", $path);
     //     header('Location: /connexion/interdit');
     // }
     // break;
-}   
-case "notif" : {
+  }   
+  case "notif" : {
   
-  // if($_SESSION["role"]->getNom()=='client'){
-  //   var_dump($_SESSION["role"]->getNom());
-  //   notifroutes($fragments);
-  // }
-  // else {
-  //     header('Location: /connexion/interdit');
-  // }
-  break;
-}     
-    default : {
+    // if($_SESSION["role"]->getNom()=='client'){
+    //   var_dump($_SESSION["role"]->getNom());
+    //   notifroutes($fragments);
+    // }
+    // else {
+    //     header('Location: /connexion/interdit');
+    // }
+    break;
+  }     
+  default : {
       header('Location: /connexion/404');
       break;
-    }
-}
+  }
+  }
 
 
 function accueilroutes($fragments) {
@@ -282,7 +281,6 @@ function ateliersroutes($fragments) {
       }
   }  
 }
-
 
 function collabroutes($fragments) {
   $action = array_shift($fragments);

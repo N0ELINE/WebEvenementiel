@@ -11,7 +11,7 @@ class AvisControlleur {
         // $avisformation=$daoavis->findAllFormation();
         // $avisatelier=$daoavis->findAllAtelier();
         // $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
-        $page= Renderer::render('accueilAvis.php');
+        $page= Renderer::render('avisAccueil.php');
         echo $page;
     }
 
