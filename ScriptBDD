@@ -1,4 +1,4 @@
--- USER(idUser, adresseMail, hashMdp, #droit)
+-- USER(idUserMail, hashMdp, #droit)
 -- DROITS(idDroits, libelleDroit)
 -- NOTIF(idNotif, date,heure, contenu)
 -- NOTIFIE (idUserNotifie, idNotifNotifie, consulte)
@@ -19,25 +19,35 @@
 -- LOGS(#idUserLogs, dateu, heure)
 
 
-DELETE DATABASE STAREVENT;
+DROP DATABASE STAREVENT;
 
 CREATE DATABASE STAREVENT;
+use STAREVENT;
 
-
-CREATE TABLE USER(
-    idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    adresseMail VARCHAR(100),
-    hashMdp VARCHAR(255),
-    droit INT,
-    FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
-);
+CREATE USER 'webuser'@'localhost' IDENTIFIED BY '123+aze';
+GRANT ALL PRIVILEGES ON STAREVENT TO 'webuser'@'localhost';
 
 CREATE TABLE DROITS(
     idDroits INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     libelleDroit VARCHAR(100)
 );
-
+INSERT INTO DROITS (libelleDroit) VALUES ('client');
+INSERT INTO DROITS (libelleDroit) VALUES ('salarie');
+INSERT INTO DROITS (libelleDroit) VALUES ('admin');
 -- droit 1 = client 2 = salarie 3= admin
+
+CREATE TABLE USER(
+    -- idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    IdUserMail VARCHAR(100) PRIMARY KEY NOT NULL,
+    hashMdp VARCHAR(255),
+    droit INT,
+    FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
+);
+INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('client1@gmail.com', '',1);
+INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('salarie2@gmail.com', '123+aze',2);
+INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('admin3@gmail.com', '123+aze',3);
+
+
 
 CREATE TABLE NOTIF(
     idNotif INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -173,14 +183,13 @@ CREATE TABLE AVISATELIER(
 );
 
 CREATE TABLE LOGS(
-    idUserLogs INT NOT NULL,
+    idUserLogs VARCHAR(100) NOT NULL,
     dateu DATE NOT NULL,
     heure TIME NOT NULL,
     PRIMARY KEY (idUserLogs, dateu, heure),
-    FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
+    FOREIGN KEY (idUserLogs) REFERENCES USER(IdUserMail)
     );
 
-CREATE USER 'webuser'@'localhost' IDENTIFIED BY '123+aze';
 
 
 -- CREATE TABLE CONTACT(

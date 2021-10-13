@@ -1,21 +1,16 @@
 <?php
 
 class User {
-    private $Id;
-    private $Mail;
+    private $IdUserMail;
     private $Mdp;
     private $Droit;
 
     function User(){
         
     }
-    
-    function getId() {
-        return $this->Id;
-    }
 
     function getMail() {
-        return $this->Mail;
+        return $this->IdUserMail;
     }
 
     function getMdp() {
@@ -27,7 +22,7 @@ class User {
     }
     
     function setMail($mail) {
-        $this->Mail = $mail;
+        $this->IdUserMail = $mail;
     }
 
     function setMdp($mdp) {
