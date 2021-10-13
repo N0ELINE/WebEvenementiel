@@ -30,7 +30,6 @@ $fragments = explode("/", $path);
         connexionroutes($fragments);
         break;
     }
-
     case "blog" : {
         blogroutes($fragments);
         break;
@@ -81,7 +80,8 @@ $fragments = explode("/", $path);
         break;
     }  
     case "opinon" : {
-      opinionroutes($fragments);
+      var_dump("bhkcbzsjnfejdnjkfnjehufic");
+      // opinionroutes($fragments);
       
     // if($_SESSION["role"]->getNom()=='client'){
     //   var_dump($_SESSION["role"]->getNom());
@@ -91,6 +91,7 @@ $fragments = explode("/", $path);
     //     header('Location: /connexion/interdit');
     // }
     // break;
+    //commit
   }   
   case "notif" : {
   
@@ -413,5 +414,3 @@ function notifroutes($fragments) {
       }
   }  
 }
-
-
