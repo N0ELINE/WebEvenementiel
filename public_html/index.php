@@ -81,8 +81,9 @@ $fragments = explode("/", $path);
       break;
   }  
   case "opinon" : {
-
-    opinionroutes($fragments);
+    var_dump("truc");
+    exit;
+    //opinionroutes($fragments);
 
     // if($_SESSION["role"]->getNom()=='client'){
     //   var_dump($_SESSION["role"]->getNom());

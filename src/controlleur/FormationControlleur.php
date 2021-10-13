@@ -7,6 +7,8 @@ require_once '../src/model/User.php';
 
 class ClientController {
     public function displayformations() {
+        $page= Renderer::render('FormationAccueil.php');
+        echo $page;
 
     }
 
