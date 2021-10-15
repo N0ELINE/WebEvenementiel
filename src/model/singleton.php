@@ -1,11 +1,4 @@
 <?php
-
-/**
- * Description of singletonConfig
- *
- * @author Nöeline
- */
-
 require_once('singletonConfig.php');
 class Singleton  {
     private static $instance;

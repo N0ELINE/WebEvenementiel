@@ -10,17 +10,19 @@ Class DAOUser {
     
     public function __construct() {
         $this->cnx = Singleton::getInstance() -> cnx; //ressort comme null TODO
-        
+        var_dump($this->cnx);
     }    
     
     function findByIdMail($idMail) : object {
-            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE IdUserMail == :idMail");
+            $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE IdUserMail LIKE :idMail");
             $requete -> bindValue(':idMail', $idMail, PDO::PARAM_STR);
-            $requete -> execute();
+            $j = $requete -> execute();
+            if ($j === false) {
+                var_dump($requete->errorInfo());
+            }
             $result = $requete->fetchObject('User'); 
-            var_dump($result); //retourne false TODO ???
 
-            // return $result;
+            return $result ? $result : null;
     }
     
     public function findAll() :Array {

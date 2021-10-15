@@ -25,35 +25,30 @@ class ConnexionController {
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
         // $mdp=$hashed_password = password_hash($mdp, PASSWORD_DEFAULT); //hash non fonctionnel TODO
-        // $daoUser = new DAOUser();
-        $User = new User();
-        // $User = $daoUser->findByIdMail($mail); //TODO 
+        $daoUser = new DAOUser();
+        
+        $User = $daoUser->findByIdMail($mail);
+        var_dump($User);
 
-        //-----------test
-        $User->setMail("admin3@gmail.com");
-        $User->setMdp("123+aze");
-        $User->setDroit(3);
-        //-----------test
+            // if (!empty($User) && $User->getMdp() == $mdp) {
+        //         // Save le log TODO BDD
+        //         // $daoLogs = new DAOLogs();
+        //         // $log = new Logs();
+        //         // $log->setIdUser($Userid);
+        //         // $log->setDate(date("Y/m/d"));
+        //         // $log->setHeure(date("H:i"));
+        //         // $daoLogs->saveLogs($Log);
 
-            if ($mail == $User->getMail() && $User->getMdp() == $mdp) {
-                //Save le log TODO BDD
-                // $daoLogs = new DAOLogs();
-                // $log = new Logs();
-                // $log->setIdUser($Userid);
-                // $log->setDate(date("Y/m/d"));
-                // $log->setHeure(date("H:i"));
-                // $daoLogs->saveLogs($Log);
-
-                //Session TODO
-                // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
+        //         //Session TODO
+        //         // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
                 
-                header('Location: /site/accueil');
-                exit();
-            } else {
-                echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
-                header('Location: /connexion/accueil');
-                exit();
-            }
+        //         header('Location: /site/accueil');
+        //         exit();
+        //     } else {
+        //         echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
+        //         header('Location: /connexion/accueil');
+        //         exit();
+            // }
             exit();
     }
 
