@@ -7,8 +7,8 @@ require_once '../src/model/User.php';
 
 class FormationControlleur {
     public function displayformations() {
-        var_dump("bonjour madame");
-        // $page= Renderer::render('FormationAccueil.php');
+        //var_dump("bonjour madame");
+         $page= Renderer::render('formationAccueil.php');
         echo $page;
 
     }

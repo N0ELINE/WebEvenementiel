@@ -7,6 +7,9 @@ require_once '../src/model/User.php';
 
 class BlogController {
     public function displayArticles() {
+        $page= Renderer::render('blogAccueil.php');
+        
+        echo $page;
 
     }
 
