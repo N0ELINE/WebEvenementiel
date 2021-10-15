@@ -13,11 +13,11 @@ require_once("../src/controlleur/ConnexionController.php");
 require_once("../src/controlleur/BlogControlleur.php");
 require_once("../src/controlleur/ClientControlleur.php");
 require_once("../src/controlleur/FormationControlleur.php");
-require_once("../src/controlleur/EvenementControlleur.php.php");
-require_once("../src/controlleur/CollaborateurControlleur.php.php");
-require_once("../src/controlleur/AdministrateurControlleur.php.php");
+require_once("../src/controlleur/EvenementControlleur.php");
+require_once("../src/controlleur/CollaborateurControlleur.php");
+require_once("../src/controlleur/AdministrateurControlleur.php");
 require_once("../src/controlleur/AvisControlleur.php");
-require_once("../src/controlleur/NotificationControlleur.php.php");
+require_once("../src/controlleur/NotificationControlleur.php");
 
 
 
