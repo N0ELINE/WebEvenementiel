@@ -5,11 +5,11 @@ require_once '../src/model/DAOUser.php';
 
 require_once '../src/model/User.php';
 
-class ClientController {
+class AdministrateurControlleur {
     public function tableaudebord() {
 
     }
-
+//
     public function displayusers() {
         $daouser = new DAOUser();    
         $users=$daouser->findAll();

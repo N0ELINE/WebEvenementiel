@@ -1,6 +1,6 @@
 <?php
 
-class Photo {
+class PhotoGalerieEvent {
     private $idEventGalerie;
     private $idPhotoGalerie;
 

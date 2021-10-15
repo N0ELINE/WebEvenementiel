@@ -4,7 +4,7 @@ require_once 'User.php';
 require_once 'singleton.php';
 
  
-Class DAOUser {
+Class DAOUser {//
     
     private $cnx;
     

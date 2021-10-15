@@ -4,7 +4,7 @@ require_once 'Photo.php';
 require_once 'singleton.php';
 
  
-Class DAOPhotoGalerieEvent {
+Class DAOPhotoGalerieEvent {//
     
     private $cnx;
     
