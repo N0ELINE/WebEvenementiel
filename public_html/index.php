@@ -12,7 +12,6 @@ require_once("../src/controlleur/AccueilControlleur.php");
 require_once("../src/controlleur/AvisControlleur.php");
 require_once("../src/controlleur/FormationControlleur.php");
 
-
 if (isset($_SERVER["PATH_INFO"])) {
 } else {
         $path = "";
@@ -24,6 +23,7 @@ $fragments = explode("/", $path);
 
   $control = array_shift($fragments);
   switch ($control) {
+    
     case "site" : {
       accueilroutes($fragments);
       break;
@@ -80,35 +80,30 @@ $fragments = explode("/", $path);
         // }
         break;
     }  
-    case "opinon" : {
-      var_dump("bhkcbzsjnfejdnjkfnjehufic");
-      // opinionroutes($fragments);
-      
-    // if($_SESSION["role"]->getNom()=='client'){
-    //   var_dump($_SESSION["role"]->getNom());
-    //   opinionroutes($fragments);
-    // }
-    // else {
-    //     header('Location: /connexion/interdit');
-    // }
-    // break;
-    //commit
-  }   
+    case "avis" : {
+        // if($_SESSION["role"]->getNom()=='admin'){
+        //   var_dump($_SESSION["role"]->getNom());
+         opinionroutes($fragments);
+      // }
+        // else {
+        //     header('Location: /connexion/interdit');
+        // }
+       break;
+   } 
   case "notif" : {
-  
-    // if($_SESSION["role"]->getNom()=='client'){
-    //   var_dump($_SESSION["role"]->getNom());
-    //   notifroutes($fragments);
-    // }
-    // else {
-    //     header('Location: /connexion/interdit');
-    // }
-    break;
-  }     
-  default : {
-      header('Location: /connexion/404');
+      // if($_SESSION["role"]->getNom()=='client'){
+      //   var_dump($_SESSION["role"]->getNom());
+        notifroutes($fragments);
+      // }
+      // else {
+      //     header('Location: /connexion/interdit');
+      // }
       break;
-  }
+  }     
+    default : {
+        header('Location: /connexion/404');
+        break;
+    }
   }
 
 
@@ -239,7 +234,8 @@ function formationroutes($fragments) {
 
   switch ($action) {
       case "all" : {
-              call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
+        call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
+              // call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
               break;
       }
       case "one":{
@@ -415,3 +411,5 @@ function notifroutes($fragments) {
       }
   }  
 }
+
+
