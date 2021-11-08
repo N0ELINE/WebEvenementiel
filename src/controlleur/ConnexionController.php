@@ -27,29 +27,30 @@ class ConnexionController {
         // $mdp=$hashed_password = password_hash($mdp, PASSWORD_DEFAULT); //hash non fonctionnel TODO
         $daoUser = new DAOUser();
         
-        $User = $daoUser->findByIdMail($mail);
-        var_dump($User);
-
-            // if (!empty($User) && $User->getMdp() == $mdp) {
-        //         // Save le log TODO BDD
-        //         // $daoLogs = new DAOLogs();
-        //         // $log = new Logs();
-        //         // $log->setIdUser($Userid);
-        //         // $log->setDate(date("Y/m/d"));
-        //         // $log->setHeure(date("H:i"));
-        //         // $daoLogs->saveLogs($Log);
+        $Users = $daoUser->findByMail($mail);
+        var_dump($Users);
+        exit;
+        if ($User!=NULL && $User->getMdp() == $mdp) {
+            var_dump("jcbujidfvnbjkivfdnjkfdvnbji");
+        //     // Save le log TODO BDD
+        //     $daoLogs = new DAOLogs();
+        //     $monlog = new Logs();
+        //     $monlog->setIdUser($User->getMail());
+        //     $monlog->setDate(date("Y/m/d"));
+        //     $monlog->setHeure(date("H:i"));
+        //     var_dump($monlog);
+        //     // $daoLogs->saveLogs($Log);
 
         //         //Session TODO
         //         // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
                 
         //         header('Location: /site/accueil');
         //         exit();
-        //     } else {
-        //         echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
-        //         header('Location: /connexion/accueil');
-        //         exit();
-            // }
-            exit();
+            } else {
+                echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
+                header('Location: /connexion/accueil');
+                exit();
+        }
     }
 
     public function newInscriptionClient() {

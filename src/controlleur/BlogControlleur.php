@@ -5,7 +5,7 @@ require_once '../src/model/DAOUser.php';
 
 require_once '../src/model/User.php';
 
-class BlogController {//
+class BlogControlleur {//
     public function displayArticles() {
         $page= Renderer::render('blogAccueil.php');
         

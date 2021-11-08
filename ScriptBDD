@@ -37,15 +37,15 @@ INSERT INTO DROITS (libelleDroit) VALUES ('admin');
 -- droit 1 = client 2 = salarie 3= admin
 
 CREATE TABLE USER(
-    -- idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    IdUserMail VARCHAR(100) PRIMARY KEY NOT NULL,
+    idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Mail VARCHAR(100),
     hashMdp VARCHAR(255),
     droit INT,
     FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
 );
-INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('client1@gmail.com', '',1);
-INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('salarie2@gmail.com', '123+aze',2);
-INSERT INTO USER (IdUserMail,hashMdp,droit) VALUES ('admin3@gmail.com', '123+aze',3);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('client1@gmail.com', '',1);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('salarie2@gmail.com', '123+aze',2);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('admin3@gmail.com', '123+aze',3);
 
 
 
@@ -183,11 +183,11 @@ CREATE TABLE AVISATELIER(
 );
 
 CREATE TABLE LOGS(
-    idUserLogs VARCHAR(100) NOT NULL,
+    idUserLogs INT NOT NULL,
     dateu DATE NOT NULL,
     heure TIME NOT NULL,
     PRIMARY KEY (idUserLogs, dateu, heure),
-    FOREIGN KEY (idUserLogs) REFERENCES USER(IdUserMail)
+    FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
     );
 
 

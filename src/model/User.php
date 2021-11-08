@@ -1,7 +1,8 @@
 <?php
 
 class User {
-    private $IdUserMail;
+    private $Id;
+    private $UserMail;
     private $Mdp;
     private $Droit;
 

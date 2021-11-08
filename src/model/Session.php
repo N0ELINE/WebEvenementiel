@@ -33,7 +33,6 @@ class Session {
         self::ajouter("id", $id);
         self::ajouter('mail', $mail);
         self::ajouter("role", $role); 
-        var_dump(self);
     }
     
     
