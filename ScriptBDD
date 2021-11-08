@@ -189,7 +189,21 @@ CREATE TABLE LOGS(
     PRIMARY KEY (idUserLogs, dateu, heure),
     FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
     );
+    
+CREATE TABLE QUESTIONS(
+    idQuestion INT PRIMARY KEY  NOT NULL,
+    idQuestionFormation INT NOT NULL,
+    libelle VARCHAR(500) NOT NULL,
+    FOREIGN KEY (idQuestionFormation) REFERENCES FORMATION(idFormation)
+    );
 
+CREATE TABLE REPONSES(
+    idReponses INT PRIMARY KEY NOT NULL,
+    idReponseQuestion INT NOT NULL,
+    libelle VARCHAR(500) NOT NULL,
+    bonne_rep BOOLEAN,
+    FOREIGN KEY (idReponseQuestion) REFERENCES QUESTIONS(idQuestion)
+    );
 
 
 -- CREATE TABLE CONTACT(
