@@ -255,6 +255,10 @@ function formationroutes($fragments) {
         call_user_func_array(["FormationControlleur","mesformations"], $fragments);
         break;
       }
+      case "quizz":{
+        call_user_func_array(["FormationControlleur","displayQuizzformations"], $fragments);
+        break;
+      }
       default :{
         header('Location: /connexion/404');
         break;

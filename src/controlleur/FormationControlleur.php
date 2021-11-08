@@ -21,4 +21,10 @@ class FormationControlleur {
 
     }
 
+    public function displayQuizzformations() {
+        $page= Renderer::render('formationQuizz.php');
+        echo $page;
+
+    }
+
 }
