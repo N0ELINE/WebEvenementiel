@@ -7,9 +7,8 @@
  */
 require_once '../src/model/User.php';
 
-class Session {
-    
-    
+class Session {    
+
     static function existe($nomSession){
         return isset($_SESSION[$nomSession])?true:false;
     }
@@ -34,6 +33,8 @@ class Session {
         self::ajouter('mail', $mail);
         self::ajouter("role", $role); 
     }
+
+
     
     
 }

@@ -1,9 +1,9 @@
 <?php
 
 require_once '../src/utils/Renderer.php';
-require_once '../src/model/DAOUser.php';
+require_once '../src/model/DAOAvis.php';
 
-require_once '../src/model/User.php';
+require_once '../src/model/Avis.php';
 
 class AvisControlleur {//
     public function displayAvis() {
@@ -49,8 +49,19 @@ class AvisControlleur {//
         }
     }
 
-    public function ajouteravisformation() {
-        //TODO
+    public function ajouteravisformation($id) {
+        $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
+        $etoiles = htmlspecialchars(isset($_POST["etoiles"]) ? $_POST["etoiles"] : NULL);
+        $daoavis = new DAOAvis();
+        $avis = new Avis();
+        $avis->setContenu($content);
+        $avis->setEtoiles($id);
+        $avis->setIdUserAvis($_SESSION["id"]);
+        $article=$daoavis->save($commantaire);
+        header('Location: /blog/article/'.$id);
+        //TODO !! fonction last dans avis pour avis formation
+        //AVIS(idAvis, contenu, etoiles, #idUserAvis)
+// -- AVISFORMATION(#idFormationAvis, #idAvisFormation)
     }
 
 

@@ -21,25 +21,22 @@ class ConnexionController {
     }
 
     public function newconnexion() {
-        
+// -----RECUPERATION DONNÉES-----------------------------------------------------------------------------
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
         // $mdp=$hashed_password = password_hash($mdp, PASSWORD_DEFAULT); //hash non fonctionnel TODO
         $daoUser = new DAOUser();
-        
+
+// -----FIND USER-----------------------------------------------------------------------------
         $Users = $daoUser->findByMail($mail);
-        var_dump($Users);
-        exit;
         if ($User!=NULL && $User->getMdp() == $mdp) {
-            var_dump("jcbujidfvnbjkivfdnjkfdvnbji");
-        //     // Save le log TODO BDD
-        //     $daoLogs = new DAOLogs();
-        //     $monlog = new Logs();
-        //     $monlog->setIdUser($User->getMail());
-        //     $monlog->setDate(date("Y/m/d"));
-        //     $monlog->setHeure(date("H:i"));
-        //     var_dump($monlog);
-        //     // $daoLogs->saveLogs($Log);
+// -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
+            $daoLogs = new DAOLogs();
+            $monlog = new Logs();
+            $monlog->setIdUser($User->getMail());
+            $monlog->setDate(date("Y/m/d"));
+            $monlog->setHeure(date("H:i"));
+            $daoLogs->saveLogs($Log);
 
         //         //Session TODO
         //         // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
