@@ -56,7 +56,7 @@ CREATE TABLE NOTIF(
     contenu VARCHAR(100)
 );
 
-CREATE TABLE NOTIFIE(
+CREATE TABLE NOTIFIE(
     idUserNotifie INT NOT NULL, 
     idNotifNotifie INT NOT NULL, 
     consulte BOOLEAN DEFAULT false,
@@ -83,6 +83,7 @@ CREATE TABLE ARTICLE(
 
 CREATE TABLE COMMENTAIRE(
     idCommentaire INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    idArticleCommentaire INT NOT NULL,
     contenu VARCHAR(1000),
     idPhotoArticle int,
     IdUserCommentaire int,
@@ -143,7 +144,7 @@ CREATE TABLE FORMATION(
     description VARCHAR(500),
     dureeHeure INT,
     idTypeFormation INT,
-    idDifficulteeFormation INT,
+    idDifficultéeFormation INT,
     FOREIGN KEY (idTypeFormation) REFERENCES TYPEFORMATION(idType),
     FOREIGN KEY (idDifficultéeFormation) REFERENCES DIFFICULTEE(idDifficultée)
 );
