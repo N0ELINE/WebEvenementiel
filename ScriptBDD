@@ -132,12 +132,15 @@ CREATE TABLE GALERIEATELIER(
 CREATE TABLE TYPEFORMATION(
     idType INT PRIMARY KEY NOT NULL,
     libelleFormation VARCHAR(100)
+
 );
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (1,"Rapide");
+
 CREATE TABLE DIFFICULTEE(
     idDifficultée INT PRIMARY KEY NOT NULL,
     libelleDifficultée VARCHAR(100)
 );
-
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (1,"facile");
 CREATE TABLE FORMATION(
     idFormation INT PRIMARY KEY NOT NULL,
     nom VARCHAR(200),
@@ -148,6 +151,8 @@ CREATE TABLE FORMATION(
     FOREIGN KEY (idTypeFormation) REFERENCES TYPEFORMATION(idType),
     FOREIGN KEY (idDifficultéeFormation) REFERENCES DIFFICULTEE(idDifficultée)
 );
+
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (1,"Formation fête","Formation d'organisation de fête",3,1,1);
 
 CREATE TABLE COMMENCE(
     idFormationCommence INT NOT NULL,
@@ -205,8 +210,9 @@ CREATE TABLE REPONSES(
     bonne_rep BOOLEAN,
     FOREIGN KEY (idReponseQuestion) REFERENCES QUESTIONS(idQuestion)
     );
-
-
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (1,1,"Comment organiser un mariage?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (2,2,"Comment organiser un enterrement?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (3,3,"Quelle est le nom de ce site?");
 -- CREATE TABLE CONTACT(
 --     idAtelier INT PRIMARY KEY NOT NULL,
 --     mail VARCHAR(500),
