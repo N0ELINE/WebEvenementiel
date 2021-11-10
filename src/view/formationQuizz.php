@@ -17,6 +17,7 @@
             <button class="nxtBtn" onclick="checkAnswer()">next ></button>
             </div>
         </div>
+        <php? test-api='http://127.0.0.4:8080/' ?>
         <script src="../Js/data.js"></script>
         <script src="../Js/quizz.js"></script>  
    
