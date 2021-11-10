@@ -26,11 +26,11 @@ class Logs {
     }
 
     function getHeure() {
-        return $this->dateu;
+        return $this->heure;
     }
     
-    function setHeure($dateu) {
-        $this->dateu = $dateu;
+    function setHeure($heure) {
+        $this->heure = $heure;
     }
     
 }

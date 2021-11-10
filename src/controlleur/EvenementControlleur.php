@@ -2,8 +2,10 @@
 
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOUser.php';
+require_once '../src/model/DAOParticipe.php';
 
 require_once '../src/model/User.php';
+require_once '../src/model/Participe.php';
 
 class EvenementControlleur {//
     
@@ -37,7 +39,7 @@ class EvenementControlleur {//
     public function desinscrireEvent($idEvent) {
         $daoparticipe= new DAOParticipe();
         $participe=new Participe();
-        $participe->remove($idEvent,$_SESSION["id"]->getId());
+        $daoparticipe->remove($idEvent,$_SESSION["id"]->getId());
         $daoparticipe->save($participe);
 
         header('Location: /');
