@@ -135,12 +135,17 @@ CREATE TABLE TYPEFORMATION(
 
 );
 INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (1,"Rapide");
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (2,"Medium");
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (3,"Longue");
+
 
 CREATE TABLE DIFFICULTEE(
     idDifficultée INT PRIMARY KEY NOT NULL,
     libelleDifficultée VARCHAR(100)
 );
 INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (1,"facile");
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (2,"moyen");
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (3,"difficile");
 CREATE TABLE FORMATION(
     idFormation INT PRIMARY KEY NOT NULL,
     nom VARCHAR(200),
@@ -153,6 +158,8 @@ CREATE TABLE FORMATION(
 );
 
 INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (1,"Formation fête","Formation d'organisation de fête",3,1,1);
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (2,"Formation Enterrement","Formation d'organisation d'enterrement'",5,2,2);
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (3,"Formation truc&Astuce","Formation d'aide de déco",23,3,3);
 
 CREATE TABLE COMMENCE(
     idFormationCommence INT NOT NULL,
@@ -202,6 +209,10 @@ CREATE TABLE QUESTIONS(
     libelle VARCHAR(500) NOT NULL,
     FOREIGN KEY (idQuestionFormation) REFERENCES FORMATION(idFormation)
     );
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (1,1,"Comment organiser un mariage?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (2,2,"Comment organiser un enterrement?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (3,3,"Quelle est le nom de ce site?");
+
 
 CREATE TABLE REPONSES(
     idReponses INT PRIMARY KEY NOT NULL,
@@ -210,9 +221,20 @@ CREATE TABLE REPONSES(
     bonne_rep BOOLEAN,
     FOREIGN KEY (idReponseQuestion) REFERENCES QUESTIONS(idQuestion)
     );
-INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (1,1,"Comment organiser un mariage?");
-INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (2,2,"Comment organiser un enterrement?");
-INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (3,3,"Quelle est le nom de ce site?");
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (1,1,"Avec de la patience",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (2,1,"Avec des coups de poingts",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (3,1,"Avec des des crêpes",false);
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (4,2,"Avec de la finesse",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (5,2,"Avec des des blagues pas drôle",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (6,2,"Avec des des chamignons",false);
+
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (7,3,"StarEvent",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (8,3,"MoonEvent",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (9,3,"SunEvent",false);
+
+
 -- CREATE TABLE CONTACT(
 --     idAtelier INT PRIMARY KEY NOT NULL,
 --     mail VARCHAR(500),
