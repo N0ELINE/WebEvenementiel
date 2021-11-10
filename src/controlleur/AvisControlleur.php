@@ -16,8 +16,8 @@ class AvisControlleur {//
     }
 
     public function ajouterAvisAtelier() {
-        $daoavis=new DAOEvent();
-        $avis=new Event();
+        $daoavis=new DAOAvis();
+        $avis = new Avis();
         $vide=false;
         
         $_avis = htmlspecialchars(isset($_POST['avis']) ? $_POST['avis'] : NULL);
@@ -25,14 +25,14 @@ class AvisControlleur {//
             $_avis="";
             $vide=true;
         }
-        $avis->setLogin($_avis);
+        $avis->setContenu($_avis);
         
         $_etoiles = htmlspecialchars(isset($_POST['etoiles']) ? $_POST['etoiles'] : NULL);
         if ($_etoiles==NULL){
             $_etoiles="";
             $vide=true;
         }
-        $avis->setMdp($_etoiles);
+        $avis->setEtoiles($_etoiles);
 
         if($vide==false){
             $daoavis->save($avis);
@@ -56,7 +56,7 @@ class AvisControlleur {//
         $avis->setContenu($content);
         $avis->setEtoiles($id);
         $avis->setIdUserAvis($_SESSION["id"]);
-        $article=$daoavis->save($commantaire);
+        $article=$daoavis->save($avis);
         header('Location: /blog/article/'.$id);
     }
 

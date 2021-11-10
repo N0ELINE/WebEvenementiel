@@ -60,13 +60,13 @@ Class DAOParticipe{
             return $Participe;  
     }  
     
-    public function remove($id){
+    public function remove($idEvent,$idUser){
             $requete = $this->cnx -> prepare("DELETE FROM EVENT WHERE idEventParticipe=:id");
             $requete->bindValue("id", $id,PDO::PARAM_INT);
             $requete -> execute();
     }
     
-   public function save(Event $Event){
+   public function save(Participe $Participe){
        
         $cnx=$this->cnx;
        
@@ -85,7 +85,7 @@ Class DAOParticipe{
         $prepareStatementSave->execute();
     }
 
-    public function update(User $User){
+    public function update(Participe $User){
         
         $cnx=$this->cnx;
        

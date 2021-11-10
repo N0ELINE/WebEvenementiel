@@ -1,43 +1,34 @@
 <?php
 
-class Logs {
-    private $idAvis;
-    private $contenu;
-    private $etoiles;
+class Avis {
+    private $Id;
+    private $Contenu;
+    private $Etoiles;
     private $idUserAvis;
 
-    
-    function Logs() {
-        
-    }
-    
-    function getId() {
-        return $this-> idAvis;
-    }
+    function Avis(){}
 
-    function getContenu() {
-        return $this->contenu;
+    function getId(){
+        return $this->Id;
     }
-    
-    function setContenu($contenu) {
-        $this->contenu = $contenu;
+    function getContenu(){
+        return $this->Contenu;
     }
-
-    function getEtoiles() {
-        return $this->etoiles;
+    function getEtoiles(){
+        return $this->Etoiles;
     }
-    
-    function setEtoiles($etoiles) {
-        $this->etoiles = $etoiles;
-    }
-
-    function getidUserAvis() {
+    function getidUserAvis(){
         return $this->idUserAvis;
     }
-    
+
+    function setContenu($Contenu) {
+        $this->Contenu = $Contenu;
+    }
+    function setEtoiles($Etoiles) {
+        $this->Etoiles = $Etoiles;
+    }
     function setidUserAvis($idUserAvis) {
         $this->idUserAvis = $idUserAvis;
     }
-    
-}
 
+}

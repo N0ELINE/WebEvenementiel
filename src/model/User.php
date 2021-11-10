@@ -2,7 +2,7 @@
 
 class User {
     private $Id;
-    private $UserMail;
+    private $Mail;
     private $Mdp;
     private $Droit;
 
@@ -13,7 +13,7 @@ class User {
         return $this->Id;
     }
     function getMail() {
-        return $this->UserMail;
+        return $this->Mail;
     }
 
     function getMdp() {
@@ -25,7 +25,7 @@ class User {
     }
     
     function setMail($mail) {
-        $this->IdUserMail = $mail;
+        $this->Mail = $mail;
     }
 
     function setMdp($mdp) {
