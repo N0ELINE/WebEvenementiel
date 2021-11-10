@@ -179,7 +179,6 @@ function blogroutes($fragments)
       }
     case "comment": {
         call_user_func_array(["BlogController", "commenter"], $fragments);
-      }
         break;
       }
     case "share": {
