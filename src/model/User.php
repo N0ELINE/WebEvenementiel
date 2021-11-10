@@ -9,9 +9,11 @@ class User {
     function User(){
         
     }
-
+    function getId() {
+        return $this->Id;
+    }
     function getMail() {
-        return $this->IdUserMail;
+        return $this->UserMail;
     }
 
     function getMdp() {

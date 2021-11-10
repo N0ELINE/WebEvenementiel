@@ -19,7 +19,6 @@ class AccueilController {
     public function envoiContact() {
         $retour = mail('noelinenoeline@gmail.com', 'Envoi depuis la page Contact', $_POST['message'], $_POST['mail']);
         header('Location: /site/contact');
-        echo $page;
         echo("votre message à été envoyé");
     }
 }

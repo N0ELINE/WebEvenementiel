@@ -6,6 +6,10 @@ require_once 'singleton.php';
  
 Class DAOAvis{
     
+//TODO !! fonction last dans avis pour avis formation
+        //AVIS(idAvis, contenu, etoiles, #idUserAvis)
+// -- AVISFORMATION(#idFormationAvis, #idAvisFormation)
+
     private $cnx;
     
     public function __construct() {

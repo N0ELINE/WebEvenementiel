@@ -1,24 +1,23 @@
 <?php
 
 require_once '../src/utils/Renderer.php';
-require_once '../src/model/DAOUser.php';
+require_once '../src/model/DAOAvis.php';
+require_once '../src/model/DAOEvent.php';
 
-require_once '../src/model/User.php';
+require_once '../src/model/Avis.php';
 
 class AvisControlleur {//
     public function displayAvis() {
-        // $daoavis = new DAOAvis();    
-        // $avisformation=$daoavis->findAllFormation();
-        // $avisatelier=$daoavis->findAllAtelier();
-        // $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
-        $page= Renderer::render('avisAccueil.php');
-
+        $daoavis = new DAOAvis();    
+        $avisformation=$daoavis->findAllFormation();
+        $avisatelier=$daoavis->findAllAtelier();
+        $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
         echo $page;
     }
 
-    public function ajouteravisatelier() {
-        $daoavis=new DAOAtelier();
-        $avis=new Avis();
+    public function ajouterAvisAtelier() {
+        $daoavis=new DAOEvent();
+        $avis=new Event();
         $vide=false;
         
         $_avis = htmlspecialchars(isset($_POST['avis']) ? $_POST['avis'] : NULL);
@@ -49,8 +48,16 @@ class AvisControlleur {//
         }
     }
 
-    public function ajouteravisformation() {
-        //TODO
+    public function ajouterAvisFormation($id) {
+        $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
+        $etoiles = htmlspecialchars(isset($_POST["etoiles"]) ? $_POST["etoiles"] : NULL);
+        $daoavis = new DAOAvis();
+        $avis = new Avis();
+        $avis->setContenu($content);
+        $avis->setEtoiles($id);
+        $avis->setIdUserAvis($_SESSION["id"]);
+        $article=$daoavis->save($commantaire);
+        header('Location: /blog/article/'.$id);
     }
 
 
