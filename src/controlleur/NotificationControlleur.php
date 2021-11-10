@@ -23,7 +23,7 @@ class NotificationController {
     }
 
     public function newnotif() {
-
+        
     }
 
 }

@@ -9,7 +9,7 @@ Class DAOUser {//
     private $cnx;
     
     public function __construct() {
-        $this->cnx = Singleton::getInstance() -> cnx; //ressort comme null TODO
+        $this->cnx = Singleton::getInstance() -> cnx; 
     }    
     
     function findById($id) : object {
@@ -77,7 +77,7 @@ Class DAOUser {//
         $cnx=$this->cnx;
        
         $id=$User->getId();
-        $Login=$User->getMail();
+        $Mail=$User->getMail();
         $Mdp=$User->getMdp();
 
         //requete sql

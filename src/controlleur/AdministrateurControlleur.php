@@ -14,7 +14,7 @@ include("class/pIndicator.class.php");
 
 class AdministrateurControlleur {
 
-    public function tableaudebord() {
+    public function tableauDeBord() {
 // -----RECUPERATION DES LOGS--------------------------------------------------------------------------
         $daolog = new Logs();
         $mesLogs = $daolog->findAll();
@@ -60,14 +60,14 @@ class AdministrateurControlleur {
         echo $page;
     }
 
-    public function displayusers() {
+    public function displayUsers() {
         $daouser = new DAOUser();    
         $users=$daouser->findAll();
         $page= Renderer::render('adminUsers.php', compact('users'));
         echo $page;
     }
 
-    public function displayuser() {
+    public function displayUser($id) {
         $daouser = new DAOUser();
         $monUser = new User();
         $monUser = $daouser->find($id);
@@ -76,7 +76,7 @@ class AdministrateurControlleur {
         echo $page;
     }
 
-    public function creeruser() {
+    public function creerUser() {
         $daouser=new DAOUser();
         $user=new User();
         $vide=false;
@@ -111,7 +111,7 @@ class AdministrateurControlleur {
         }
     }
 
-    public function suppruser($id) {
+    public function supprUser($id) {
         $daouser=new DAOUser();
         $true=$daouser->remove(id);
         if ($true==NULL){
@@ -123,7 +123,7 @@ class AdministrateurControlleur {
         
     }
 
-    public function modifieruser($id) {
+    public function modifierUser($id) {
         $daoinscrit = new DAOInscrit();
         $inscrit=new Inscrit();
         $inscrit=$daoinscrit->find($id);
@@ -141,7 +141,7 @@ class AdministrateurControlleur {
         if ($mdp!=NULL){
             $inscrit->setMsp((string)$mdp);
         }
-        
+        v
         $modifier=null;
         //todo mettre dans $modifier la valeur du bouton
         if ($modifier==true){
@@ -152,13 +152,6 @@ class AdministrateurControlleur {
         $daoinscrit->update($inscrit);
         header('Location: /admin/users');
         exit();
-    }
-
-    public function afficherlogs() {
-        $daologs = new DAOLogs();    
-        $logs=$daologs->findAll();
-        $page= Renderer::render('adminLogs.php', compact('logs'));
-        echo $page;
     }
 
 }

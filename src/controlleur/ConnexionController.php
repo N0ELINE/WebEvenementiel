@@ -20,7 +20,7 @@ class ConnexionController {
         echo $page;
     }
 
-    public function newconnexion() {
+    public function newConnexion() {
 // -----RECUPERATION DONNÉES-----------------------------------------------------------------------------
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
@@ -76,7 +76,7 @@ class ConnexionController {
         }
     }
 
-    public function delconnexion() {
+    public function delConnexion() {
         Session::detruireSession();
         header('Location: /connexion/accueil');
     }

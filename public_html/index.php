@@ -8,417 +8,343 @@
  */
 
 $path = trim($_SERVER["PATH_INFO"], "/");
+
 require_once("../src/controlleur/AccueilControlleur.php");
-require_once("../src/controlleur/ConnexionController.php");
-require_once("../src/controlleur/BlogControlleur.php");
-require_once("../src/controlleur/ClientControlleur.php");
-require_once("../src/controlleur/FormationControlleur.php");
-require_once("../src/controlleur/EvenementControlleur.php");
-require_once("../src/controlleur/CollaborateurControlleur.php");
 require_once("../src/controlleur/AdministrateurControlleur.php");
 require_once("../src/controlleur/AvisControlleur.php");
+require_once("../src/controlleur/BlogControlleur.php");
+require_once("../src/controlleur/ConnexionController.php");
+require_once("../src/controlleur/EvenementControlleur.php");
+require_once("../src/controlleur/FormationControlleur.php");
 require_once("../src/controlleur/NotificationControlleur.php");
-
 
 
 if (isset($_SERVER["PATH_INFO"])) {
 } else {
-        $path = "";
+  $path = "";
 }
 
 $fragments = explode("/", $path);
 
-  session_start();
+session_start();
 
-  $control = array_shift($fragments);
-  switch ($control) {
-    
-    case "site" : {
+$control = array_shift($fragments);
+switch ($control) {
+
+  case "site": {
       accueilroutes($fragments);
       break;
     }
-    case "connexion" : {
-        connexionroutes($fragments);
-        break;
-    }
-    case "blog" : {
-        blogroutes($fragments);
-        break;
-    }
-    case "espaceclient" : {
-        // if($_SESSION["role"]->getNom()=='client'){
-        //   var_dump($_SESSION["role"]->getNom());
-        clientroutes($fragments);
-         // }
-          // else {
-          //   header('Location: /connexion/interdit');
-          // }
-         break;
-    }
-    case "formation" : {
-      // if($_SESSION["role"]->getNom()=='client'){
-      //     var_dump($_SESSION["role"]->getNom());
-      formationroutes($fragments);
-      // }
-      // else {
-      //     header('Location: /connexion/interdit');
-      //     }
-      break;
-    }
-    case "evenement" : {
-       eventsroute($fragments);
-       break;
-    }
-    case "collaborateur" : {
-      // if($_SESSION["role"]->getNom()=='collaborateur'){
-      //     var_dump($_SESSION["role"]->getNom());
-          collabroutes($fragments);
-      // }
-      // else {
-      //   header('Location: /connexion/interdit');
-      // }
-      break;
-    }
-    case "admin" : {
-       // if($_SESSION["role"]->getNom()=='admin'){
-        //   var_dump($_SESSION["role"]->getNom());
-          adminroutes($fragments);
-       // }
-        // else {
-       //     header('Location: /connexion/interdit');
-        // }
-        break;
-    }  
-    case "avis" : {
-        // if($_SESSION["role"]->getNom()=='admin'){
-        //   var_dump($_SESSION["role"]->getNom());
-         opinionroutes($fragments);
-      // }
-        // else {
-        //     header('Location: /connexion/interdit');
-        // }
-       break;
-   } 
-  case "notif" : {
-      // if($_SESSION["role"]->getNom()=='client'){
+  case "admin": {
       //   var_dump($_SESSION["role"]->getNom());
-        notifroutes($fragments);
-      // }
-      // else {
-      //     header('Location: /connexion/interdit');
-      // }
+      // if($_SESSION["role"]->getNom()=='admin'){
+      adminroutes($fragments);
+      // }else { header('Location: /connexion/interdit'); }
       break;
-  }     
-    default : {
+    }
+  case "avis": {
+      opinionroutes($fragments);
+      break;
+    }
+  case "blog": {
+      blogroutes($fragments);
+      break;
+    }
+  case "connexion": {
+      connexionroutes($fragments);
+      break;
+    }
+  case "evenement": {
+      evenementroutes($fragments);
+      break;
+    }
+  case "formation": {
+      formationroutes($fragments);
+      break;
+    }
+  case "notif": { //doit etre connecté pour avoir des notifs
+      notifroutes($fragments);
+      break;
+    }
+  default: {
+      header('Location: /connexion/404');
+      break;
+    }
+}
+
+
+
+function accueilroutes($fragments)
+{
+  $action = array_shift($fragments);
+
+  switch ($action) {
+    case "accueil": {
+        call_user_func_array(["AccueilController", "display"], $fragments);
+        break;
+      }
+    case "contact": {
+        call_user_func_array(["AccueilController", "displayPageContact"], $fragments);
+        break;
+      }
+    case "sendContact": {
+        call_user_func_array(["AccueilController", "envoiContact"], $fragments);
+        break;
+      }
+    default: {
         header('Location: /connexion/404');
         break;
-    }
+      }
   }
+}
 
-
-function accueilroutes($fragments) {
+function adminroutes($fragments)
+{
   $action = array_shift($fragments);
 
   switch ($action) {
-      case "accueil" : {
-              call_user_func_array(["AccueilController", "display"], $fragments);
-              break;
-      }
-      case "contact":{
-        call_user_func_array(["AccueilController","displayPageContact"], $fragments);
+    case "board": {
+        call_user_func_array(["AdministrateurController", "tableauDeBord"], $fragments);
         break;
       }
-      case "sendContact":{
-        call_user_func_array(["AccueilController","envoiContact"], $fragments);
+    case "users": {
+        call_user_func_array(["AdministrateurController", "displayUsers"], $fragments);
         break;
       }
-      default :{
+    case "user": {
+        call_user_func_array(["AdministrateurController", "displayUser"], $fragments);
+        break;
+      }
+    case "adduser": {
+        call_user_func_array(["AdministrateurController", "creerUser"], $fragments);
+        break;
+      }
+    case "deluser": {
+        call_user_func_array(["AdministrateurController", "supprUser"], $fragments);
+        break;
+      }
+    case "modifyuser": {
+        call_user_func_array(["AdministrateurController", "modifierUser"], $fragments);
+        break;
+      }
+    default: {
         header('Location: /connexion/404');
         break;
       }
-  }  
+  }
 }
 
-function connexionroutes($fragments) {
-    $action = array_shift($fragments);
-
-    switch ($action) {
-        case "accueil" : {
-                call_user_func_array(["ConnexionController", "display"], $fragments);
-                break;
-        }
-        case "inscription":{
-            call_user_func_array(["ConnexionController","displayinscription"], $fragments);
-            break;
-        }
-        case "connexion":{
-          call_user_func_array(["ConnexionController","newconnexion"], $fragments);
-          break;
-        }
-        case "sinscrire":{
-          call_user_func_array(["ConnexionController","newinscription"], $fragments);
-          break;
-        }
-        case "sedeconnecter" : {
-                call_user_func_array(["ConnexionController","delconnexion"], $fragments);
-                break;
-        }
-        case "hellouser" : {
-                call_user_func_array(["ConnexionController","helloUser"], $fragments);
-                break;
-        }    
-        
-        case "404":{
-            call_user_func_array(["ConnexionController","quatrecentquatre"], $fragments);
-            break;
-        }
-        case "permissiondenided":{
-          call_user_func_array(["ConnexionController","interdit"], $fragments);
-          break;
-        }
-        default :{
-          header('Location: /connexion/404');
-          break;
-        }
-    }  
-}
-
-function blogroutes($fragments) {
+function opinionroutes($fragments)
+{
   $action = array_shift($fragments);
 
   switch ($action) {
-      case "all" : {
-              call_user_func_array(["BlogController", "displayArticles"], $fragments);
-              break;
-      }
-      case "one":{
-          call_user_func_array(["BlogController","displayArticle"], $fragments);
-          break;
-      }
-      case "like":{
-        call_user_func_array(["BlogController","aimerArticle"], $fragments);
+    case "all": {
+        call_user_func_array(["AvisControlleur", "displayAvis"], $fragments);
         break;
       }
-      case "comment":{
-        call_user_func_array(["BlogController","commenter"], $fragments);
+    case "atelier": {
+        call_user_func_array(["AvisControlleur", "ajouterAvisAtelier"], $fragments);
         break;
       }
-      case "share":{
-        call_user_func_array(["BlogController","partagereseaux"], $fragments);
+    case "formation": {
+        call_user_func_array(["AvisControlleur", "ajouterAvisFormation"], $fragments);
         break;
       }
-      default :{
+    default: {
         header('Location: /connexion/404');
         break;
       }
-  }  
+  }
 }
 
-function clientroutes($fragments) {
+function blogroutes($fragments)
+{
   $action = array_shift($fragments);
 
   switch ($action) {
-      case "accueil" : {
-        call_user_func_array(["ClientController", "displayclient"], $fragments);
+      //fonction générales
+    case "all": {
+        call_user_func_array(["BlogController", "displayArticles"], $fragments);
         break;
       }
-      case "myevents":{
-        call_user_func_array(["ClientController","displayevenements"], $fragments);
+    case "one": {
+        call_user_func_array(["BlogController", "displayArticle"], $fragments);
         break;
       }
-      case "eventgalery":{
-        call_user_func_array(["ClientController","galerie"], $fragments);
+      //fonctions clients connectés
+    case "like": {
+        call_user_func_array(["BlogController", "aimerArticle"], $fragments);
         break;
       }
-      
-      default :{
+    case "comment": {
+        call_user_func_array(["BlogController", "commenter"], $fragments);
+        break;
+      }
+    case "share": {
+        call_user_func_array(["BlogController", "partagereseaux"], $fragments);
+        break;
+      }
+      //fonctions collaborateur
+    case "new": {
+        call_user_func_array(["BlogController", "creerarticleCollaborateur"], $fragments);
+        break;
+      }
+    case "edition": {
+        call_user_func_array(["BlogController", "editionArticleCollaborateur"], $fragments);
+        break;
+      }
+    case "addpicture": {
+        call_user_func_array(["BlogController", "importPhotoArticleCollaborateur"], $fragments);
+        break;
+      }
+    default: {
         header('Location: /connexion/404');
         break;
       }
-  }  
+  }
 }
 
-function formationroutes($fragments) {
+function connexionroutes($fragments)
+{
   $action = array_shift($fragments);
 
   switch ($action) {
-      case "all" : {
+    case "accueil": {
+        call_user_func_array(["ConnexionController", "display"], $fragments);
+        break;
+      }
+    case "inscription": {
+        call_user_func_array(["ConnexionController", "displayInscription"], $fragments);
+        break;
+      }
+    case "connexion": {
+        call_user_func_array(["ConnexionController", "newConnexion"], $fragments);
+        break;
+      }
+    case "sinscrire": {
+        call_user_func_array(["ConnexionController", "newInscriptionClient"], $fragments);
+        break;
+      }
+    case "sedeconnecter": {
+        call_user_func_array(["ConnexionController", "delConnexion"], $fragments);
+        break;
+      }
+      // case "hellouser": {
+      //     call_user_func_array(["ConnexionController", "helloUser"], $fragments);
+      //     break;
+      //   }
+    case "404": {
+        call_user_func_array(["ConnexionController", "quatrecentquatre"], $fragments);
+        break;
+      }
+    case "403": {
+        call_user_func_array(["ConnexionController", "interdit"], $fragments);
+        break;
+      }
+    default: {
+        header('Location: /connexion/404');
+        break;
+      }
+  }
+}
+
+function evenementroutes($fragments)
+{
+  $action = array_shift($fragments);
+
+  switch ($action) {
+      //fonctions générales
+    case "all": {
+        call_user_func_array(["EvenementControlleur", "displayEvenements"], $fragments);
+        break;
+      }
+    case "one": {
+        call_user_func_array(["EvenementControlleur", "displayEvenement"], $fragments);
+        break;
+      }
+      //fonctions clients connectés
+    case "subscribe": {
+        call_user_func_array(["EvenementControlleur", "sinscrireEvent"], $fragments);
+        break;
+      }
+    case "unsubscribe": {
+        call_user_func_array(["EvenementControlleur", "desinscrireEvent"], $fragments);
+        break;
+      }
+    case "mine": {
+        call_user_func_array(["EvenementControlleur", "displaymesevenement"], $fragments);
+        break;
+      }
+      //fonctions collaborateurs
+    case "new": {
+        call_user_func_array(["EvenementControlleur", "ajouterEvenementCollaborateur"], $fragments);
+        break;
+      }
+    case "galerieAdd": {
+        call_user_func_array(["EvenementControlleur", "galerieEvenementAddCollaborateur"], $fragments);
+        break;
+      }
+    case "edition": {
+        call_user_func_array(["EvenementControlleur", "editionEvenementCollaborateur"], $fragments);
+        break;
+      }
+    default: {
+        header('Location: /connexion/404');
+        break;
+      }
+  }
+}
+
+function formationroutes($fragments)
+{
+  $action = array_shift($fragments);
+
+  switch ($action) {
+    case "all": {
         call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
-              // call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
-              break;
-      }
-      case "one":{
-          call_user_func_array(["FormationControlleur","displayformation"], $fragments);
-          break;
-      }
-      case "myformations":{
-        call_user_func_array(["FormationControlleur","mesformations"], $fragments);
+        // call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
         break;
       }
-      default :{
+    case "one": {
+        call_user_func_array(["FormationControlleur", "displayformation"], $fragments);
+        break;
+      }
+    case "myformations": {
+        call_user_func_array(["FormationControlleur", "mesformations"], $fragments);
+        break;
+      }
+    default: {
         header('Location: /connexion/404');
         break;
       }
-  }  
+  }
 }
 
-function ateliersroutes($fragments) {
+function notifroutes($fragments)
+{
   $action = array_shift($fragments);
 
   switch ($action) {
-      case "all" : {
-              call_user_func_array(["AteliersController", "displayateliers"], $fragments);
-              break;
-      }
-      case "one":{
-          call_user_func_array(["AteliersController","displayatelier"], $fragments);
-          break;
-      }
-      case "subscribe":{
-        call_user_func_array(["AteliersController","sinscrireatelier"], $fragments);
+    case "all": {
+        call_user_func_array(["NotifControlleur", "mesnotifs"], $fragments);
         break;
       }
-      case "unsubscribe":{
-        call_user_func_array(["AteliersController","desinscrireatelier"], $fragments);
+    case "lu": {
+        call_user_func_array(["NotifControlleur", "read"], $fragments);
         break;
       }
-      default :{
+    case "allnotifs": {
+        call_user_func_array(["NotifControlleur", "touteslesnotifs"], $fragments);
+        break;
+      }
+    case "newnotif": {
+        call_user_func_array(["NotifControlleur", "creernotif"], $fragments);
+        break;
+      }
+    default: {
         header('Location: /connexion/404');
         break;
       }
-  }  
+  }
 }
-
-function collabroutes($fragments) {
-  $action = array_shift($fragments);
-
-  switch ($action) {
-      case "board" : {
-              call_user_func_array(["CollaborateurController", "tableaudebord"], $fragments);
-              break;
-      }
-      case "allarticles":{
-          call_user_func_array(["CollaborateurController","articles"], $fragments);
-          break;
-      }
-      case "addarticle":{
-        call_user_func_array(["CollaborateurController","creerarticle"], $fragments);
-        break;
-      }
-      case "modifarticle":{
-        call_user_func_array(["CollaborateurController","ecrirearticle"], $fragments);
-        break;
-      }
-      case "events":{
-        call_user_func_array(["CollaborateurController","afficherevements"], $fragments);
-        break;
-      }
-      case "addevent":{
-        call_user_func_array(["CollaborateurController","ajouterevenement"], $fragments);
-        break;
-      }
-      case "modifyevent":{
-        call_user_func_array(["CollaborateurController","afficherevenement"], $fragments);
-        break;
-      }
-      case "downloadpicture":{
-        call_user_func_array(["CollaborateurController","importphoto"], $fragments);
-        break;
-      }
-      default :{
-        header('Location: /connexion/404');
-        break;
-      }
-  }  
-}
-
-function adminroutes($fragments) {
-  $action = array_shift($fragments);
-
-  switch ($action) {
-      case "board" : {
-              call_user_func_array(["AdministrateurController", "tableaudebord"], $fragments);
-              break;
-      }
-      case "users":{
-          call_user_func_array(["AdministrateurController","displayusers"], $fragments);
-          break;
-      }
-      case "user":{
-        call_user_func_array(["AdministrateurController","displayuser"], $fragments);
-        break;
-    }
-      case "adduser":{
-        call_user_func_array(["AdministrateurController","creeruser"], $fragments);
-        break;
-      }
-      case "deluser":{
-        call_user_func_array(["AdministrateurController","suppruser"], $fragments);
-        break;
-      }
-      case "modifyuser":{
-        call_user_func_array(["AdministrateurController","modifieruser"], $fragments);
-        break;
-      }
-      case "logs":{
-        call_user_func_array(["AdministrateurController","afficherlogs"], $fragments);
-        break;
-      }
-      default :{
-        header('Location: /connexion/404');
-        break;
-      }
-  }  
-}
-
-function opinionroutes($fragments) {
-  $action = array_shift($fragments);
-
-    switch ($action) {
-      case "all":{
-        call_user_func_array(["AvisControlleur","displayAvis"], $fragments);
-        break;
-    }
-      case "atelier":{
-        call_user_func_array(["AvisControlleur","ajouteravisatelier"], $fragments);
-        break;
-      }
-      case "formation":{
-        call_user_func_array(["AvisControlleur","ajouteravisformation"], $fragments);
-        break;
-      }
-      default :{
-        header('Location: /connexion/404');
-        break;
-      }
-  }  
-}
-
-function notifroutes($fragments) {
-  $action = array_shift($fragments);
-
-    switch ($action) {
-      case "all":{
-        call_user_func_array(["NotifControlleur","mesnotifs"], $fragments);
-        break;
-    }
-      case "lu":{
-        call_user_func_array(["NotifControlleur","read"], $fragments);
-        break;
-      }
-      case "allnotifs":{
-        call_user_func_array(["NotifControlleur","touteslesnotifs"], $fragments);
-        break;
-      }
-      case "newnotif":{
-        call_user_func_array(["NotifControlleur","creernotif"], $fragments);
-        break;
-      }
-      default :{
-        header('Location: /connexion/404');
-        break;
-      }
-  }  
-}
-
-

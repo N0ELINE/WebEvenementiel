@@ -10,6 +10,7 @@ require_once '../src/model/Favori.php';
 require_once '../src/model/Commentaire.php';
 
 class BlogControlleur {
+// -----PARTIE FONCTION GENERALES--------------------------------------------------------------------------
     public function displayArticles() {
         $daoblog=new DAOBlog();
         $articles=$daoblog->findAll();
@@ -24,6 +25,7 @@ class BlogControlleur {
         echo $page;
     }
 
+// -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
     public function aimerArticle($id) {
         $daofavori=new DAOFavori();
         $favori=new Favori();
@@ -47,4 +49,19 @@ class BlogControlleur {
     public function partagereseaux() {
 
     }
+
+
+// -----PARTIE FONCTION COLLABORATEUR--------------------------------------------------------------------------
+     public function creerarticleCollaborateur() {
+
+    }
+
+    public function editionArticleCollaborateur() {
+
+    }
+
+    public function importPhotoArticleCollaborateur() {
+
+    }
+    
 }
