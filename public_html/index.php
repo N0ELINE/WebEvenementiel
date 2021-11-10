@@ -306,7 +306,7 @@ function formationroutes($fragments)
         // call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
         break;
       }
-    case "one": {
+    case "quizz": {
         call_user_func_array(["FormationControlleur", "displayformation"], $fragments);
         break;
       }
