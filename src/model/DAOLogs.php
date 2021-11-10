@@ -33,8 +33,8 @@ Class DAOLogs {
     public function saveLogs(Logs $Log){
        
         $cnx=$this->cnx;
-        $Id=$Log->getId();
-        $Date=$Log->getDate();
+        $Id=$Log->getIdUser();
+        $Dateu=$Log->getDate();
         $Heure=$Log->getHeure();
         
         //requete sql

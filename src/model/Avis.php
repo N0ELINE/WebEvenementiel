@@ -5,6 +5,7 @@ class Avis {
     private $Contenu;
     private $Etoiles;
     private $idUserAvis;
+    private $idConcerneFormaEvent;
 
     function Avis(){}
 
@@ -20,6 +21,9 @@ class Avis {
     function getidUserAvis(){
         return $this->idUserAvis;
     }
+    function getidConcerne(){
+        return $this->idConcerneFormaEvent;
+    }
 
     function setContenu($Contenu) {
         $this->Contenu = $Contenu;
@@ -29,6 +33,9 @@ class Avis {
     }
     function setidUserAvis($idUserAvis) {
         $this->idUserAvis = $idUserAvis;
+    }
+    function setidConcerne($idConcerneFormaEvent) {
+        $this->idConcerneFormaEvent = $idConcerneFormaEvent;
     }
 
 }

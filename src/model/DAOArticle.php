@@ -1,10 +1,10 @@
 <?php
 
-require_once 'Blog.php';
+require_once 'Article.php';
 require_once 'singleton.php';
 
 
-class DAOBlog
+class Article
 {
 
     private $cnx;
