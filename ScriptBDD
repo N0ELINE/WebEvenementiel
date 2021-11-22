@@ -1,4 +1,4 @@
--- USER(idUserMail, hashMdp, #droit)
+-- USER(idUser, Mail, hashMdp, #droit)
 -- DROITS(idDroits, libelleDroit)
 -- NOTIF(idNotif, date,heure, contenu)
 -- NOTIFIE (idUserNotifie, idNotifNotifie, consulte)
@@ -75,7 +75,6 @@ CREATE TABLE PHOTOSITE(
 CREATE TABLE ARTICLE(
     idArticle INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nom VARCHAR(100),
-    prenom VARCHAR(100),
     description VARCHAR(500),
     contenu VARCHAR(10000),
     date DATE,
@@ -101,8 +100,8 @@ CREATE TABLE FAVORI(
     FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
 );
 
-CREATE TABLE ATELIER(
-    idAtelier INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+CREATE TABLE EVENEMENT(
+    idEvent INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nom VARCHAR(100),
     description VARCHAR(1000),
     date DATE,
@@ -110,25 +109,25 @@ CREATE TABLE ATELIER(
     dureeMinute INT,
     effectifMax INT,
     localisation VARCHAR(1000),
-    idPhotoAtelier INT,
-    FOREIGN KEY (idPhotoAtelier) REFERENCES PHOTOSITE(idPhoto)
+    idPhotoEvent INT,
+    FOREIGN KEY (idPhotoEvent) REFERENCES PHOTOSITE(idPhoto)
 );
 
 CREATE TABLE PARTICIPE(
-    idAtelierParticipe INT NOT NULL,
+    idEventParticipe INT NOT NULL,
     idUserParticipe INT NOT NULL,
     nbrPersonnes INT,
-    PRIMARY KEY (idUserParticipe, idAtelierParticipe),
+    PRIMARY KEY (idUserParticipe, idEventParticipe),
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
-    FOREIGN KEY (idAtelierParticipe) REFERENCES ATELIER(idAtelier)
+    FOREIGN KEY (idEventParticipe) REFERENCES Event(idEvent)
 );
 
-CREATE TABLE GALERIEATELIER(
-    idAtelierGalerie INT NOT NULL,
+CREATE TABLE GALERIEEvent(
+    idEventGalerie INT NOT NULL,
     idPhotoGalerie INT NOT NULL,
-    PRIMARY KEY (idAtelierGalerie, idPhotoGalerie),
+    PRIMARY KEY (idEventGalerie, idPhotoGalerie),
     FOREIGN KEY (idPhotoGalerie) REFERENCES PHOTOSITE(idPhoto),
-    FOREIGN KEY (idAtelierGalerie) REFERENCES ATELIER(idAtelier)
+    FOREIGN KEY (idEventGalerie) REFERENCES Event(idEvent)
 );
 
 CREATE TABLE TYPEFORMATION(
@@ -189,12 +188,12 @@ CREATE TABLE AVISFORMATION(
     FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
 );
 
-CREATE TABLE AVISATELIER(
-    idAtelierAvis INT NOT NULL,
-    idAvisAtelier INT NOT NULL,
-    PRIMARY KEY (idAtelierAvis, idAvisAtelier),
-    FOREIGN KEY (idAtelierAvis) REFERENCES ATELIER(idAtelier),
-    FOREIGN KEY (idAvisAtelier) REFERENCES AVIS(idAvis)
+CREATE TABLE AVISEVENT(
+    idEventAvis INT NOT NULL,
+    idAvisEvent INT NOT NULL,
+    PRIMARY KEY (idEventAvis, idAvisEvent),
+    FOREIGN KEY (idEventAvis) REFERENCES EVENT(idEvent),
+    FOREIGN KEY (idAvisEvent) REFERENCES AVIS(idAvis)
 );
 
 CREATE TABLE LOGS(
@@ -238,7 +237,7 @@ INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (9,
 
 
 -- CREATE TABLE CONTACT(
---     idAtelier INT PRIMARY KEY NOT NULL,
+--     idEvent INT PRIMARY KEY NOT NULL,
 --     mail VARCHAR(500),
 --     nom VARCHAR(100),
 --     prenom VARCHAR(100),

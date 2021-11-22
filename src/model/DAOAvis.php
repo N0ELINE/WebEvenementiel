@@ -3,111 +3,171 @@
 require_once 'Avis.php';
 require_once 'singleton.php';
 
- 
-Class DAOAvis{
-    
-//TODO !! fonction last dans avis pour avis formation
-        //AVIS(idAvis, contenu, etoiles, #idUserAvis)
-// -- AVISFORMATION(#idFormationAvis, #idAvisFormation)
+
+class DAOAvis
+{
+
+    //TODO !! fonction last dans avis pour avis formation
+    //AVIS(idAvis, contenu, etoiles, #idUserAvis)
+    // -- AVISFORMATION(#idFormationAvis, #idAvisFormation)
 
     private $cnx;
-    
-    public function __construct() {
-        $this->cnx = Singleton::getInstance() -> cnx;
-    }    
-    
-    function find($id) : object {
-            $requete = $this->cnx -> prepare("SELECT * FROM AVIS WHERE IdDroits=:id");
-            $requete -> bindValue(':id', $id, PDO::PARAM_INT);
-            $requete -> execute();
-            $result = $requete->fetchObject('Avis');
-            return $result;
-    }
-    
-    public function findAll() :Array {
-            $requete = $this->cnx -> prepare("SELECT * FROM AVIS");
-            $requete -> execute();      
-            $Droits = array();
-            while ( $result = $requete->fetchObject('Avis') ){
-                $Avis[] = $result; 
-            };
-            return $Avis;       
+
+    public function __construct()
+    {
+        $this->cnx = Singleton::getInstance()->cnx;
     }
 
-    public function findAllFormation() :Array {
-        $requete = $this->cnx -> prepare("SELECT * FROM AVIS,AVISFORMATION WHERE idAvis=idAvisFormation");
-        $requete -> execute();      
-        $Droits = array();
-        while ( $result = $requete->fetchObject('Avis') ){
-            $Avis[] = $result; 
+    function findAvis($id): object
+    {
+        $requete = $this->cnx->prepare("SELECT * FROM AVIS WHERE IdAvis=:id");
+        $requete->bindValue(':id', $id, PDO::PARAM_INT);
+        $requete->execute();
+        $result = $requete->fetchObject('Avis');
+        return $result;
+    }
+
+    
+
+    public function findAllAvis(): array
+    {
+        $requete = $this->cnx->prepare("SELECT * FROM AVIS");
+        $requete->execute();
+        while ($result = $requete->fetchObject('Avis')) {
+            $Avis[] = $result;
         };
-        return $Avis;       
-}
-
-public function findAllAtelier() :Array {
-    $requete = $this->cnx -> prepare("SELECT * FROM AVIS,AVISATELIER WHERE idAvis=idAtelierAvis");
-    $requete -> execute();      
-    $Droits = array();
-    while ( $result = $requete->fetchObject('Avis') ){
-        $Avis[] = $result; 
-    };
-    return $Avis;       
-}
-    
-    
-    public function removeFormation($id){
-        $requete2= $this->cnx -> prepare("DELETE FROM AVISFORMATION WHERE idAvisFormation=:id");
-        $requete2->bindValue("id", $id,PDO::PARAM_INT);
-        $requete2 -> execute();
-        $requete = $this->cnx -> prepare("DELETE FROM AVIS WHERE idAvis=:id");
-        $requete->bindValue("id", $id,PDO::PARAM_INT);
-        $requete -> execute();
+        return $Avis;
     }
 
-    public function removeAtelier($id){
-            $requete2= $this->cnx -> prepare("DELETE FROM AVISATELIER WHERE idAvisAtelier=:id");
-            $requete2->bindValue("id", $id,PDO::PARAM_INT);
-            $requete2 -> execute();
-            $requete = $this->cnx -> prepare("DELETE FROM AVIS WHERE idAvis=:id");
-            $requete->bindValue("id", $id,PDO::PARAM_INT);
-            $requete -> execute();
+    public function findAllAvisFormation(): array
+    {
+        $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, f.idFormationAvis FROM AVIS a,AVISFORMATION f WHERE idAvis=idAvisFormation");
+        $requete->execute();
+        while ($result = $requete->fetchObject('Avis')) {
+            $Avis[] = $result;
+        };
+        return $Avis;
     }
-    
-    public function save(Avis $Avis){
 
-        //TODO save spacial pour formation & atelier
-        
-        $cnx=$this->cnx;
-        
-        $contenu=$Avis->getContenu();
-        $etoiles=$Avis->getEtoiles();
-        
+    public function findAllAvisEvent(): array
+    {
+        $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, e.idEventAvis FROM AVIS a,AVISEVENT e WHERE idAvis=idAvisEvent");
+        $requete->execute();
+        while ($result = $requete->fetchObject('Avis')) {
+            $Avis[] = $result;
+        };
+        return $Avis;
+    }
+
+
+    public function removeAvisFormation($id)
+    {
+        $requete2 = $this->cnx->prepare("DELETE FROM AVISFORMATION WHERE idAvisFormation=:id");
+        $requete2->bindValue("id", $id, PDO::PARAM_INT);
+        $requete2->execute();
+        $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
+        $requete->bindValue("id", $id, PDO::PARAM_INT);
+        $requete->execute();
+    }
+
+    public function removeAvisEvent($id)
+    {
+        $requete2 = $this->cnx->prepare("DELETE FROM AVISATELIER WHERE idAvisAtelier=:id");
+        $requete2->bindValue("id", $id, PDO::PARAM_INT);
+        $requete2->execute();
+        $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
+        $requete->bindValue("id", $id, PDO::PARAM_INT);
+        $requete->execute();
+    }
+
+    public function saveAvisFormation(Avis $Avis)
+    {
+        $cnx = $this->cnx;
+
+        $contenu = $Avis->getContenu();
+        $etoiles = $Avis->getEtoiles();
+        $user = $Avis->getidUserAvis();
+        $concerne = $Avis->getidConcerne();
+
         //requete sql
-        $SQLS="INSERT INTO AVIS (contenu,etoiles) VALUES (:contenu,:etoiles)";
+        $SQLS = "INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES (:contenu,:etoiles,:user)";
         //prepare statement
-        $prepareStatementSave=$cnx->prepare($SQLS);
-        $prepareStatementSave->bindValue(":contenu",$contenu, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":etoiles",$etoiles, PDO::PARAM_STR);
+        $prepareStatementSave = $cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":contenu", $contenu, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":etoiles", $etoiles, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":user", $user, PDO::PARAM_STR);
+        $prepareStatementSave->execute();
 
+        $LastOneAvis=$this->findAvisLastOne();
+        foreach($LastOneAvis as $last){
+            $idAvis=$last->getId();
+        }
+        //requete sql
+        $SQLS = "INSERT INTO AVISFORMATION (idFormationAvis,idAvisFormation) VALUES (:idFormation,:idAvis)";
+        //prepare statement
+        $prepareStatementSave = $cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":idFormation", $concerne, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":idAvis", $idAvis, PDO::PARAM_STR);
         $prepareStatementSave->execute();
     }
-    
-    public function update(Avis $Avis){
-        
-        $cnx=$this->cnx;
-       
-        $id=$Avis->getId();
-        $Login=$Avis->getLibelle();
-       
-        //requete sql
-        $SQLU="UPDATE AVIS SET contenu=:contenu,etoiles=:etoiles WHERE idAvis=:id";
-       
-        //prepare statement
-        $prepareStatementUpdate=$cnx->prepare($SQLU);
-        $prepareStatementUpdate->bindValue(":id",$contenu, PDO::PARAM_INT);
-        $prepareStatementUpdate->bindValue(":Libelle",$etoiles, PDO::PARAM_STR);
 
-        $prepareStatementUpdate->execute();
+    public function saveAvisEvent(Avis $Avis)
+    {
+        $cnx = $this->cnx;
+
+        $contenu = $Avis->getContenu();
+        $etoiles = $Avis->getEtoiles();
+        $user = $Avis->getidUserAvis();
+        $concerne = $Avis->getidConcerne();
+
+        //requete sql
+        $SQLS = "INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES (:contenu,:etoiles,:user)";
+        //prepare statement
+        $prepareStatementSave = $cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":contenu", $contenu, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":etoiles", $etoiles, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":user", $user, PDO::PARAM_STR);
+        $prepareStatementSave->execute();
+
+        $LastOneAvis=$this->findAvisLastOne();
+        foreach($LastOneAvis as $last){
+            $idAvis=$last->getId();
+        }
+        //requete sql
+        $SQLS = "INSERT INTO AVISEVENT (idAvisEvent,idAvisEvent) VALUES (:idEvent,:idAvis)";
+        //prepare statement
+        $prepareStatementSave = $cnx->prepare($SQLS);
+        $prepareStatementSave->bindValue(":idEvent", $concerne, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":idAvis", $idAvis, PDO::PARAM_STR);
+        $prepareStatementSave->execute();
     }
-    
+
+    private function findAvisLastOne(): array
+    {
+        $requete = $this->cnx->prepare("SELECT * FROM AVIS ORDER BY idAvis  DESC LIMIT 1");
+        $requete->execute();
+        while ($result = $requete->fetchObject('Avis')) {
+            $Avis[] = $result;
+        };
+        return $Avis;
+    }
+
+    // public function update(Avis $Avis)
+    // {
+
+    //     $cnx = $this->cnx;
+
+    //     $id = $Avis->getId();
+    //     $Login = $Avis->getLibelle();
+
+    //     //requete sql
+    //     $SQLU = "UPDATE AVIS SET contenu=:contenu,etoiles=:etoiles WHERE idAvis=:id";
+
+    //     //prepare statement
+    //     $prepareStatementUpdate = $cnx->prepare($SQLU);
+    //     $prepareStatementUpdate->bindValue(":id", $contenu, PDO::PARAM_INT);
+    //     $prepareStatementUpdate->bindValue(":Libelle", $etoiles, PDO::PARAM_STR);
+
+    //     $prepareStatementUpdate->execute();
+    // }
 }

@@ -1,6 +1,7 @@
 <?php
 
-class Event {
+class Event
+{
     private $idEvent;
     private $nom;
     private $description;
@@ -10,72 +11,81 @@ class Event {
     private $effectifMax;
     private $localisation;
     private $photoPath;
-    private $participants;
 
-    
-    function Event(){
-        
-    }
-    
-    function getId() {
-        return $this-> idEvent;
+
+    function Event()
+    {
     }
 
-    function getNom() {
+    function getId()
+    {
+        return $this->idEvent;
+    }
+
+    function getNom()
+    {
         return $this->nom;
     }
-    
-    function setDescription($description) {
-        $this->description = $description;
+    function getDescription()
+    {
+        return $this->description;
     }
-
-    function getDate() {
+    function getDate()
+    {
         return $this->date;
     }
-    
-    function setDate($date) {
-        $this->date = $date;
-    }
-
-    function getHeure() {
+    function getHeure()
+    {
         return $this->heure;
     }
-    
-    function setHeure($heure) {
-        $this->heure = $heure;
-    }
-
-    function getDureeMinute() {
+    function getDureeMinute()
+    {
         return $this->dureeMinute;
     }
-    
-    function setDureeMinute($dureeMinute) {
-        $this->dureeMinute = $dureeMinute;
-    }
-
-    function getEffectifMax() {
+    function getEffectifMax()
+    {
         return $this->effectifMax;
     }
-    
-    function setEffectifMax($effectifMax) {
-        $this->effectifMax = $effectifMax;
-    }
-
-    function getLocalisation() {
+    function getLocalisation()
+    {
         return $this->localisation;
     }
-    
-    function setLocalisation($localisation) {
-        $this->localisation = $localisation;
-    }
-
-    function getPhotoPath() {
+    function getPhotoPath()
+    {
         return $this->photoPath;
     }
-    
-    function setPhotoPath($photoPath) {
+
+
+    function setNom($nom)
+    {
+        $this->nom = $nom;
+    }
+    function setDescription($description)
+    {
+        $this->description = $description;
+    }
+    function setDate($date)
+    {
+        $this->date = $date;
+    }
+    function setHeure($heure)
+    {
+        $this->heure = $heure;
+    }
+    function setDureeMinute($dureeMinute)
+    {
+        $this->dureeMinute = $dureeMinute;
+    }
+    function setEffectifMax($effectifMax)
+    {
+        $this->effectifMax = $effectifMax;
+    }
+    function setLocalisation($localisation)
+    {
+        $this->localisation = $localisation;
+    }
+    function setPhotoPath($photoPath)
+    {
         $this->photoPath = $photoPath;
     }
-    
 }
-
