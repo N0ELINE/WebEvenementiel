@@ -33,11 +33,11 @@
         </div>
         <div class="menu">
             <nav class="nav">
-                <a href="#" class="nav-item is-active" active-color="orange">Accueil</a>
-                <a href="#" class="nav-item" active-color="green">Atelier</a>
-                <a href="#" class="nav-item" active-color="blue">Formation</a>
-                <a href="#" class="nav-item" active-color="rebeccapurple">Contact</a>
-                <a href="#" class="nav-item" active-color="red">Blog</a>
+                <a href="../site/accueil" class="nav-item is-active" active-color="orange">Accueil</a>
+                <a href="../evenement/all" class="nav-item" active-color="green">Event</a>
+                <a href="../formation/all" class="nav-item" active-color="blue">Formation</a>
+                <a href="../site/contact" class="nav-item" active-color="rebeccapurple">Contact</a>
+                <a href="../blog/all" class="nav-item" active-color="red">Blog</a>
                 <span class="nav-indicator"></span>
             </nav>
 
