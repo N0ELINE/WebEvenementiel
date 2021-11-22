@@ -19,7 +19,7 @@ class ConnexionController
 
     public function displayInscription()
     {
-        $page = Renderer::render('inscription.php');
+        $page = Renderer::render('inscriptionConnexion.php');
         echo $page;
     }
 
