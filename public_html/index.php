@@ -173,7 +173,7 @@ function blogroutes($fragments)
         call_user_func_array(["BlogController", "aimerArticle"], $fragments);
         break;
       }
-      case "like": {
+      case "favori": {
         call_user_func_array(["BlogController", "articleAime"], $fragments);
         break;
       }
