@@ -2,6 +2,8 @@
 
 require_once 'Avis.php';
 require_once 'singleton.php';
+require_once 'AvisEvent.php';
+require_once 'AvisFormation.php';
 
 
 class DAOAvis
