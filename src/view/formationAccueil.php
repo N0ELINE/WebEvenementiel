@@ -2,7 +2,7 @@
 <body> 
     <div class="formation_head">
         <div class="img_cours"><img src="../image/cadre.png" alt="cadre" id="cadre"> </div>
-        <p class="formation">Mes Formations <br><br> Toutes les formation</p>
+        <p class="formation">Mes Formations <br><br> Toutes les formations</p>
         <h1 id="title_formation">Toutes les formations !</h1>
 
     </div> <br><br><br><br><br><br>
@@ -16,6 +16,7 @@
     </div><br><br><br>
 
     <div class="cours">
+        <form action="http://127.0.0.4:8080/" method="POST">
         <img src="../image/cour1.jpg" alt="img_cours" id="img_cours"> 
         <p id="info_cours">Titre Formation <br><b>Nom Cours</b> <br>Description</p>
     </div> <br><br>

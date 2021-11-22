@@ -13,7 +13,7 @@ class EvenementControlleur {//
     public function displayEvenements() {
         $daoevent = new DAOEvent();  
         $events=$daoevent->findAll();
-        $page= Renderer::render('Evenements.php', compact('events'));
+        $page= Renderer::render('clientEvenements.php', compact('events'));
         echo $page;
     }
 
