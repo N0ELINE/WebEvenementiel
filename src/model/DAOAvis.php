@@ -41,7 +41,7 @@ class DAOAvis
         return $Avis;
     }
 
-    public function findAllAvisFormation(): array
+    public function findAllFormation(): array
     {
         $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, f.idFormationAvis FROM AVIS a,AVISFORMATION f WHERE idAvis=idAvisFormation");
         $requete->execute();
@@ -51,7 +51,7 @@ class DAOAvis
         return $Avis;
     }
 
-    public function findAllAvisEvent(): array
+    public function findAllAtelier(): array
     {
         $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, e.idEventAvis FROM AVIS a,AVISEVENT e WHERE idAvis=idAvisEvent");
         $requete->execute();

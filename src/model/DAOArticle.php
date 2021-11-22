@@ -4,7 +4,7 @@ require_once 'Article.php';
 require_once 'singleton.php';
 
 
-class Article
+class DAOArticle
 {
 
     private $cnx;
@@ -14,7 +14,7 @@ class Article
         $this->cnx = Singleton::getInstance()->cnx;
     }
 
-    function findById($id) : object {
+    function find($id) : object {
         $requete = $this->cnx -> prepare("SELECT * FROM ARTICLE WHERE idArticle = :id");
         $requete -> bindValue(':id', $id, PDO::PARAM_INT);
         $j = $requete -> execute();
@@ -35,7 +35,7 @@ class Article
         $requete->bindValue("id", $id,PDO::PARAM_INT);
         $requete -> execute();
     }
-    public function saveArticle(Article $Article){
+    public function save(Article $Article){
        
         $cnx=$this->cnx;
 
