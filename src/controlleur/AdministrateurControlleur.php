@@ -13,9 +13,13 @@ class AdministrateurControlleur {
 // -----RECUPERATION DES LOGS--------------------------------------------------------------------------
         $daolog = new DAOLogs();
         $mesLogs = $daolog->findAll(); 
+
+        $daouser = new DAOUser();
+        $Users = $daouser->findAll();
+        
        
 // -----AFFICHAGE PAGE-----------------------------------------------------------------------------
-        $page= Renderer::render('adminTDB.php', compact('mesLogs'));
+        $page= Renderer::render('adminTDB.php', compact('mesLogs,Users'));
         echo $page;
     }
 

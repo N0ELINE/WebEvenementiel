@@ -39,10 +39,10 @@ class ConnexionController
                 // $monlog->setHeure(date("H:i"));
                 // $daoLogs->saveLogs($monlog);
 
-         Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
-
-                //         header('Location: /site/accueil');
-                //         exit();
+                Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
+                var_dump($_SESSION["mail"]);
+                        header('Location: /site/accueil');
+                        exit();
             // } else {
             //     echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
             //     header('Location: /connexion/accueil');
@@ -68,12 +68,12 @@ class ConnexionController
         //hash mdp TODO
         $User->setMdp($password);
         $User->setDroit(1);
-
         $daoUser = new DAOUser();
+        $daoUser->saveUser($User);
         $users = $daoUser->findAll();
         foreach ($users as $key => $user) {
             if ($user->getMail() == $User->getMail() && $user->getMdp() == $User->getMdp()) {
-                Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(), $user->getIdRole());
+                Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(), $user->getIdRole());
                 header('Location: /site/accueil');
                 exit();
             } else {
