@@ -20,7 +20,7 @@ function append(parent, el) {
   return parent.appendChild(el);
 }
 
-const ul = document.getElementById('QUESTIONS');
+const ul = document.getElementById(1);
 const url = 'http://127.0.0.4:8080/?results=2';
 
 fetch(url)
