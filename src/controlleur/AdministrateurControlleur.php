@@ -13,17 +13,6 @@ class AdministrateurControlleur {
 // -----RECUPERATION DES LOGS--------------------------------------------------------------------------
         $daolog = new DAOLogs();
         $mesLogs = $daolog->findAll(); 
-
-// -----TRAITEMENT DES DONNÉES POUR GRAPHIQUE----------------------------------------------------------
-//         $dataArray;  
-//         for($i = 9; $i <= 12; $i++){    
-//             foreach ($mesLogs as $monLog){
-//                 list($month, $day, $year) = split('[-.-]', $monLog->getDate());
-//                 if($i == $year){
-//                     $dataArrayy[i-9]+=1;
-//                 }
-//             }
-//         }
        
 // -----AFFICHAGE PAGE-----------------------------------------------------------------------------
         $page= Renderer::render('adminTDB.php', compact('mesLogs'));
