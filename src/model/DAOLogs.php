@@ -29,23 +29,29 @@ Class DAOLogs {
             };
             return $Logs;       
     }
-    
+
     public function saveLogs(Logs $Log){
        
         $cnx=$this->cnx;
-        $Id=$Log->getIdUser();
-        $Dateu=$Log->getDate();
+       
+        $idUser=$Log->getIdUser();
+        $Date=$Log->getDate();
         $Heure=$Log->getHeure();
         
         //requete sql
         $SQLS="INSERT INTO LOGS (idUserLogs,dateu,heure) VALUES (:idUserLogs,:dateu,:heure)";
         //prepare statement
         $prepareStatementSave=$cnx->prepare($SQLS);
-        $prepareStatementSave->bindValue(":idUserLogs",$Id, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":dateu",$Dateu, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":idUserLogs",$idUser, PDO::PARAM_INT);
+        $prepareStatementSave->bindValue(":dateu",$Date, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":heure",$Heure, PDO::PARAM_STR);
-
-        $prepareStatementSave->execute();
+        var_dump("nodenkovfe");
+        $result=$prepareStatementSave->execute();
+        if($result===false){
+            var_dump($result);
+            var_dump($prepareStatementSave->errorInfo());
+        }
     }
+
     
 }

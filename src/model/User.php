@@ -1,7 +1,7 @@
 <?php
 
 class User {
-    private $Id;
+    private $idUser;
     private $Mail;
     private $hashMdp;
     private $Droit;
@@ -10,7 +10,7 @@ class User {
         
     }
     function getId() {
-        return $this->Id;
+        return $this->idUser;
     }
     function getMail() {
         return $this->Mail;

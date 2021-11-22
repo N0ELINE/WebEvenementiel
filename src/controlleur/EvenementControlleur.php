@@ -60,6 +60,24 @@ class EvenementControlleur {//
 
 // -----PARTIE FONCTION COLLABORATEUR--------------------------------------------------------------------------
     public function ajouterEvenementCollaborateur() {
+        $titre = htmlspecialchars(isset($_POST["titre"]) ? $_POST["titre"] : NULL);
+        $monEvent = new Event();
+        $monEvent->setNom($titre);
+        $monEvent->setDate(date("Y/m/d"));
+        $monEvent->setHeure(date("H:i"));
+        $daoEvent=new DAOEvent();
+        $daoEvent->save($monEvent);
+
+        $lastones=$daoEvent->findEventLastOne();
+        $last=$lastones[0];
+        $idlast=$last->getId();
+
+        header('Location: /evenement/save',$idlast);
+
+    }
+
+    public function saveEventModify() {
+        //recuperer les choses des champs des articles et save grace à modifier
 
     }
 

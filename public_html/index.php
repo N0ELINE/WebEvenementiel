@@ -289,6 +289,10 @@ function evenementroutes($fragments)
         call_user_func_array(["EvenementControlleur", "editionEvenementCollaborateur"], $fragments);
         break;
       }
+      case "save": {
+        call_user_func_array(["EvenementControlleur", "saveEventModify"], $fragments);
+        break;
+      }
     default: {
         header('Location: /connexion/404');
         break;
