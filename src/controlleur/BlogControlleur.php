@@ -29,6 +29,14 @@ class BlogControlleur
         echo $page;
     }
 
+    public function articleAime($id)
+    {
+        $daoarticle = new DAOArticle();
+        $article = $daoarticle->find($id);
+        $page = Renderer::render('blogAccueil.php', compact('articleAime'));
+        echo $page;
+    }
+
     // -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
     public function aimerArticle($id)
     {
