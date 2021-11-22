@@ -21,7 +21,8 @@
             <h1 id="titre_head">Star Event</h1>
         </div>
 
-        <div class="icon">
+        <div class="icon"> 
+            
             <a href="../connexion/accueil"><img src="../image/connection.png" alt="ecrou" id="icon"></a>
             <img src="../image/ecrou.png" alt="ecrou" id="icon">
             <img src="../image/calendar.png" alt="ecrou" id="icon">

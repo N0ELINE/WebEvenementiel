@@ -3,7 +3,7 @@
 class User {
     private $Id;
     private $Mail;
-    private $Mdp;
+    private $hashMdp;
     private $Droit;
 
     function User(){
@@ -17,7 +17,7 @@ class User {
     }
 
     function getMdp() {
-        return $this->Mdp;
+        return $this->hashMdp;
     }
 
     function getDroit() {
@@ -29,7 +29,7 @@ class User {
     }
 
     function setMdp($mdp) {
-        $this->Mdp = $mdp;
+        $this->hashMdp = $mdp;
     }
     
     function setDroit($droit) {
