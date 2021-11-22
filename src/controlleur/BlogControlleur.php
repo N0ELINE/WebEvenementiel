@@ -3,7 +3,7 @@
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOFavori.php';
 // require_once '../src/model/DAOCommentaire.php';
-// require_once '../src/model/DAOArticle.php';
+require_once '../src/model/DAOArticle.php';
 
 // require_once '../src/model/Blog.php';
 // require_once '../src/model/Favori.php';
@@ -36,7 +36,7 @@ class BlogControlleur
         $favori = new Favori();
         $favori->setIdUserFavori($_SESSION["id"]);
         $favori->setIdArticleFavori($id);
-        $article = $daofavori->save($favori);
+        $article = $daofavori->saveFavoris($favori);
         echo ("Article ajouté aux Favoris");
     }
 
@@ -48,6 +48,7 @@ class BlogControlleur
         $commentaire->setContenu($content);
         $commentaire->setIdArticleCommentaire($id);
         $commentaire->setIdUserCommentaire($_SESSION["id"]);
+        //DAO COMMENTAIRE TODO
         $article = $daoarticle->save($commentaire);
         header('Location: /blog/article/' . $id);
     }
@@ -75,7 +76,7 @@ class BlogControlleur
         $page = Renderer::render('blogEdition.php');
         echo $page;
     }
-
+s
     public function importPhotoArticleCollaborateur()
     {
     }

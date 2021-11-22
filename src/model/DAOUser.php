@@ -12,7 +12,7 @@ Class DAOUser {//
         $this->cnx = Singleton::getInstance() -> cnx; 
     }    
     
-    function findById($id) : object {
+    function find($id) : object {
             $requete = $this->cnx -> prepare("SELECT * FROM USER WHERE idUser = :id");
             $requete -> bindValue(':id', $id, PDO::PARAM_INT);
             $j = $requete -> execute();
