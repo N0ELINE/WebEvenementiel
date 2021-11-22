@@ -4,7 +4,7 @@ require_once 'Droits.php';
 require_once 'singleton.php';
 
 
-class DAOUser
+class DAODroits
 {
 
     private $cnx;

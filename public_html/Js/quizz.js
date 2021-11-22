@@ -1,6 +1,48 @@
 var i = 0;
 var correctCount = 0 ;
+var question ;
 //initialize the first question
+
+
+
+//appele api todo recup data puis i mettre dans jsonData +generate
+
+
+// var api =fetch('http://127.0.0.4:8080/') 
+//     .then(response => response.text())
+//     .then(data => console.log(data));
+
+function createNode(element) {
+    return document.createElement(element);
+}
+
+function append(parent, el) {
+  return parent.appendChild(el);
+}
+
+const ul = document.getElementById('QUESTIONS');
+const url = 'http://127.0.0.4:8080/?results=2';
+
+fetch(url)
+.then((resp) => resp.json())
+.then(function(data) {
+  let question = data.results;
+  return question.map(function(question) {
+    let li = createNode('li');
+    let img = createNode('img');
+    let span = createNode('span');
+    img.src = question.picture.medium;
+    span.innerHTML = `${question.id.first} ${question.id.last}`;
+    append(li, img);
+    append(li, span);
+    append(ul, li);
+  })
+})
+.catch(function(error) {
+  console.log(error);
+});
+
+
 generate(0);
 // generate from json array data with index
 function generate(index) {

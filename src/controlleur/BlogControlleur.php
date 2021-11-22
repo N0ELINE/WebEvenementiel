@@ -2,13 +2,13 @@
 
 require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOFavori.php';
-require_once '../src/model/DAOCommentaire.php';
-require_once '../src/model/DAOArticle.php';
+// require_once '../src/model/DAOCommentaire.php';
+// require_once '../src/model/DAOArticle.php';
 
-require_once '../src/model/Blog.php';
-require_once '../src/model/Favori.php';
-require_once '../src/model/Commentaire.php';
-require_once '../src/model/Article.php';
+// require_once '../src/model/Blog.php';
+// require_once '../src/model/Favori.php';
+// require_once '../src/model/Commentaire.php';
+// require_once '../src/model/Article.php';
 
 class BlogControlleur
 {

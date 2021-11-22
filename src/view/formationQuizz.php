@@ -1,6 +1,6 @@
 <?php include "header.php";?>
    <body>
-   <div class="qPanel">
+   <div class="Quizz">
             <div style="font-size:20pt;">Quiz</div>
              <div class="ques" id="question"> 
              </div>
@@ -17,8 +17,20 @@
             <button class="nxtBtn" onclick="checkAnswer()">next ></button>
             </div>
         </div>
-        <php? test-api='http://127.0.0.4:8080/' ?>
-        <script src="../Js/data.js"></script>
+        <?php 
+            // $test=JSON_decode(file_get_contents("http://127.0.0.4:8080/")); 
+            // $t=file_get_contents("http://127.0.0.4:8080/");
+            // var_dump($t);
+            // var_dump($test); 
+           
+        ?>
+       
+        
+        
+
+
+
+        <!--<script src="../Js/data.js"></script>-->
         <script src="../Js/quizz.js"></script>  
    
 <?php include "footer.php";?>s
