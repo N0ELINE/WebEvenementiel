@@ -16,12 +16,7 @@ class ConnexionController
         $page = Renderer::render('connexion.php');
         echo $page;
     }
-
-    public function displayInscription()
-    {
-        $page = Renderer::render('inscription.php');
-        echo $page;
-    }
+  
 
     public function newConnexion()
     {
@@ -33,27 +28,33 @@ class ConnexionController
 
         // -----FIND USER-----------------------------------------------------------------------------
         $Users = $daoUser->findByMail($mail);
-        foreach ($Users as $User) {
-            if ($User != NULL && $User->getMdp() == $mdp) {
-                // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
-                $daoLogs = new DAOLogs();
-                $monlog = new Logs();
-                $monlog->setIdUser($User->getMail());
-                $monlog->setDate(date("Y/m/d"));
-                $monlog->setHeure(date("H:i"));
-                $daoLogs->saveLogs($monlog);
 
-                //         //Session TODO
-                //         // Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
+        foreach ($Users as $User) {
+            if ($User!=NULL && $User->getMdp()==$mdp) {
+                // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
+                // $daoLogs = new DAOLogs();
+                // $monlog = new Logs();
+                // $monlog->setIdUser($User->getMail());
+                // $monlog->setDate(date("Y/m/d"));
+                // $monlog->setHeure(date("H:i"));
+                // $daoLogs->saveLogs($monlog);
+
+         Session::initialiserSessionGlobale($User->getMail(), $User->getMdp(),$User->getDroit()); //ajouter $roles dans les parenthèses
 
                 //         header('Location: /site/accueil');
                 //         exit();
-            } else {
-                echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
-                header('Location: /connexion/accueil');
-                exit();
+            // } else {
+            //     echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
+            //     header('Location: /connexion/accueil');
+            //     exit();
             }
         }
+    }
+
+    public function displayInscription()
+    {
+        $page = Renderer::render('inscription.php');
+        echo $page;
     }
 
     public function newInscriptionClient()

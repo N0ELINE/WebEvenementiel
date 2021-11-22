@@ -76,7 +76,7 @@ class BlogControlleur
         $page = Renderer::render('blogEdition.php');
         echo $page;
     }
-s
+
     public function importPhotoArticleCollaborateur()
     {
     }

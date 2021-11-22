@@ -104,27 +104,23 @@ function adminroutes($fragments)
 
   switch ($action) {
     case "board": {
-        call_user_func_array(["AdministrateurController", "tableauDeBord"], $fragments);
-        break;
-      }
-    case "users": {
-        call_user_func_array(["AdministrateurController", "displayUsers"], $fragments);
+        call_user_func_array(["AdministrateurControlleur", "tableauDeBord"], $fragments);
         break;
       }
     case "user": {
-        call_user_func_array(["AdministrateurController", "displayUser"], $fragments);
+        call_user_func_array(["AdministrateurControlleur", "displayUser"], $fragments);
         break;
       }
     case "adduser": {
-        call_user_func_array(["AdministrateurController", "creerUser"], $fragments);
+        call_user_func_array(["AdministrateurControlleur", "creerUser"], $fragments);
         break;
       }
     case "deluser": {
-        call_user_func_array(["AdministrateurController", "supprUser"], $fragments);
+        call_user_func_array(["AdministrateurControlleur", "supprUser"], $fragments);
         break;
       }
     case "modifyuser": {
-        call_user_func_array(["AdministrateurController", "modifierUser"], $fragments);
+        call_user_func_array(["AdministrateurControlleur", "modifierUser"], $fragments);
         break;
       }
     default: {
