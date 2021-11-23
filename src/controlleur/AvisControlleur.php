@@ -10,12 +10,12 @@ class AvisControlleur {//
     public function displayAvis() {
         $daoavis = new DAOAvis();    
         $avisformation=$daoavis->findAllFormation();
-        $avisatelier=$daoavis->findAllAtelier();
-        $page= Renderer::render('accueilAvis.php', compact('avisformation,avisatelier'));
+        $avisevent=$daoavis->findAllEvent();
+        $page= Renderer::render('accueilAvis.php', compact('avisformation,avisevent'));
         echo $page;
     }
 
-    public function ajouterAvisAtelier() {
+    public function ajouterAvisEvent() {
         $daoavis=new DAOAvis();
         $avis = new Avis();
         $vide=false;
@@ -35,16 +35,16 @@ class AvisControlleur {//
         $avis->setEtoiles($_etoiles);
 
         if($vide==false){
-            $daoavis->save($avis);
+            $daoavis->saveAvisEvent($avis);
 
             //TODO enregistrer dans table avisatelier dans DAO
             
-            header('Location: /atelier/all');
+            header('Location: /evenement/all');
             exit();
         }
         else{
             echo("problème dans la création de l'avis");
-            header('Location: /atelier/all');
+            header('Location: /evenement/all');
         }
     }
 
@@ -56,7 +56,7 @@ class AvisControlleur {//
         $avis->setContenu($content);
         $avis->setEtoiles($id);
         $avis->setIdUserAvis($_SESSION["id"]);
-        $article=$daoavis->save($avis);
+        $article=$daoavis->saveAvisFormation($avis);
         header('Location: /blog/article/'.$id);
     }
 

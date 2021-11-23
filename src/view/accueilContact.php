@@ -6,7 +6,7 @@
         
     <h1 id="title_contact">Nous contacter !</h1> <br><br><br><br> <br> <br> <br> <br> <br> 
         <div class="contact1">
-            <input type="text" id="name" name="name" value="Name" class="contact"required>
+            <input type="text" id="name" name="name" value="name" class="contact"required>
             <input type="text" id="societe" name="societe" value="société" class="contact"required> <br> <br> <br>
         </div> <br> <br>
 
@@ -17,7 +17,7 @@
         <br> <br>
 
         <div> 
-        <input type="text" id="contact" name="sujet" value="sujet" class="contact_suj" required> <br><br> 
+        <input type="text" id="sujet" name="sujet" value="sujet" class="contact_suj" required> <br><br> 
         </div>  <br><br>  <br><br> 
         
         <div><textarea id="contact" name="corp" rows="5" cols="33" class="contact_corp"></textarea></div><br> <br> <br> <br> <br> <br> <br> <br> <br> <br>

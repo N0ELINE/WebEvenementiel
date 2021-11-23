@@ -51,7 +51,7 @@ class DAOAvis
         return $Avis;
     }
 
-    public function findAllAtelier(): array
+    public function findAllEvent(): array
     {
         $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, e.idEventAvis FROM AVIS a,AVISEVENT e WHERE idAvis=idAvisEvent");
         $requete->execute();
@@ -62,25 +62,25 @@ class DAOAvis
     }
 
 
-    public function removeAvisFormation($id)
-    {
-        $requete2 = $this->cnx->prepare("DELETE FROM AVISFORMATION WHERE idAvisFormation=:id");
-        $requete2->bindValue("id", $id, PDO::PARAM_INT);
-        $requete2->execute();
-        $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
-        $requete->bindValue("id", $id, PDO::PARAM_INT);
-        $requete->execute();
-    }
+    // public function removeAvisFormation($id)
+    // {
+    //     $requete2 = $this->cnx->prepare("DELETE FROM AVISFORMATION WHERE idAvisFormation=:id");
+    //     $requete2->bindValue("id", $id, PDO::PARAM_INT);
+    //     $requete2->execute();
+    //     $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
+    //     $requete->bindValue("id", $id, PDO::PARAM_INT);
+    //     $requete->execute();
+    // }
 
-    public function removeAvisEvent($id)
-    {
-        $requete2 = $this->cnx->prepare("DELETE FROM AVISATELIER WHERE idAvisAtelier=:id");
-        $requete2->bindValue("id", $id, PDO::PARAM_INT);
-        $requete2->execute();
-        $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
-        $requete->bindValue("id", $id, PDO::PARAM_INT);
-        $requete->execute();
-    }
+    // public function removeAvisEvent($id)
+    // {   //non fonctionnel
+    //     $requete2 = $this->cnx->prepare("DELETE FROM AVISEVENT WHERE idAvisAtelier=:id");
+    //     $requete2->bindValue("id", $id, PDO::PARAM_INT);
+    //     $requete2->execute();
+    //     $requete = $this->cnx->prepare("DELETE FROM AVIS WHERE idAvis=:id");
+    //     $requete->bindValue("id", $id, PDO::PARAM_INT);
+    //     $requete->execute();
+    // }
 
     public function saveAvisFormation(Avis $Avis)
     {

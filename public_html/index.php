@@ -139,8 +139,8 @@ function opinionroutes($fragments)
         call_user_func_array(["AvisControlleur", "displayAvis"], $fragments);
         break;
       }
-    case "atelier": {
-        call_user_func_array(["AvisControlleur", "ajouterAvisAtelier"], $fragments);
+    case "add": {
+        call_user_func_array(["AvisControlleur", "ajouterAvisEvent"], $fragments);
         break;
       }
     case "formation": {
