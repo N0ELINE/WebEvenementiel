@@ -11,9 +11,12 @@ require_once '../src/model/Logs.php';
 class ConnexionController
 {
 
-    public function display()     { //ok
+    public function display()     { //ok  + md5 hashage change pas
+        // $pwd_peppered="pep";
+        // $pwd_hashed =md5($pwd_peppered);
+        //echo($pwd_hashed);
         $page = Renderer::render('connexion.php');
-        echo $page;
+       echo $page;
     }
   
 
