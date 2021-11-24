@@ -14,12 +14,11 @@ include "DAOUser.php"?>
 // echo $obj->getMail();  // Affiche : 'ciao'
 var_dump($userT->User->getMail());
 
-// foreach ($user as $users){
-//     $user = array( array($user->User->getId(), $user->User->getMail() , $user->User->getMdp(),
-//     $user->User->getDroit())); 
-//     var_dump($user);
-//     //echo("hola");
-// }
+foreach ($user as $users){
+    $user = array( array($user->User->getId(), $user->User->getMail() , $user->User->getMdp(),
+    $user->User->getDroit())); 
+}
+
 ?>
 <table>
      <tr>

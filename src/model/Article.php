@@ -1,46 +1,46 @@
 <?php
 
 class Article {
-    private $Id;
-    private $Nom;
-    private $Description;
-    private $Contenu;
-    private $Date;
+    private $idArticle;
+    private $nom;
+    private $description;
+    private $contenu;
+    private $date;
     private $idPhotoArticle;
 
 
     function Article(){}
 
     function getNom(){
-        return $this->Nom;
+        return $this->nom;
     }
     function getDescription(){
-        return $this->Description;
+        return $this->description;
     }
     function getContenu(){
-        return $this->Contenu;
+        return $this->contenu;
     }
     function getDate(){
-        return $this->Date;
+        return $this->date;
     }
     function getidPhotoArticle(){
         return $this->idPhotoArticle;
     }
     function getId(){
-        return $this->Id;
+        return $this->idArticle;
     }
 
-    function setNom($Nom) {
-        $this->Nom = $Nom;
+    function setNom($nom) {
+        $this->nom = $nom;
     }
     function setDescription($Description) {
-        $this->Description = $Description;
+        $this->description = $Description;
     }
     function setContenu($Contenu) {
-        $this->Contenu = $Contenu;
+        $this->contenu = $Contenu;
     }
     function setDate($Date) {
-        $this->Date = $Date;
+        $this->date = $Date;
     }
     function setidPhotoArticle($idPhotoArticle) {
         $this->idPhotoArticle = $idPhotoArticle;

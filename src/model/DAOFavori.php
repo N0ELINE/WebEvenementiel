@@ -6,12 +6,22 @@ require_once 'singleton.php';
  
 Class DAOFavori{
 
-    function findById($id) : object {
+    private $cnx;
+
+    public function __construct() {
+        $this->cnx = Singleton::getInstance() -> cnx; 
+    }  
+
+
+    public function findById($id) :Array {
         $requete = $this->cnx -> prepare("SELECT * FROM FAVORI WHERE idUserFavori = :id");
         $requete -> bindValue(':id', $id, PDO::PARAM_INT);
-        $j = $requete -> execute();
-        $result = $requete->fetchObject('Favori'); 
-        return $result;
+        $requete -> execute();
+        $Favoris = array();
+        while ( $result = $requete->fetchObject('Favori') ){
+            $Favoris[] = $result; 
+        };
+        return $Favoris;       
     }
 
     public function findAll() :Array {
@@ -23,6 +33,7 @@ Class DAOFavori{
         };
         return $Favoris;       
     }
+
     public function remove($idUser,$idArticle){
         $requete = $this->cnx -> prepare("DELETE FROM FAVORI WHERE idUserFavori=:idUser AND idArticleFavori=:idFavori");
         $requete->bindValue("idUser", $idUser,PDO::PARAM_INT);
@@ -31,38 +42,26 @@ Class DAOFavori{
     
     }
 
-    public function saveFavoris(Favori $Favori){
+    public function saveFavori(Favori $Favori){
        
         $cnx=$this->cnx;
        
-        $idUser=$Favori->getIdUserFavori();
-        $idArticle=$Favori->getIdArticleFavori();
+        $idUserFavori=$Favori->getIdUserFavori();
+        $idArticleFavori=$Favori->getIdArticleFavori();
         
         //requete sql
-        $SQLS="INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (:idUserFavori,:idArticleFavori";
+        $SQLS="INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (:idUserFavori,:idArticleFavori)";
         //prepare statement
         $prepareStatementSave=$cnx->prepare($SQLS);
-        $prepareStatementSave->bindValue(":idUserFavori",$idUser, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":idArticleFavori",$idArticle, PDO::PARAM_STR);
-        $prepareStatementSave->execute();
+        $prepareStatementSave->bindValue(":idUserFavori",$idUserFavori, PDO::PARAM_INT);
+        $prepareStatementSave->bindValue(":idArticleFavori",$idArticleFavori, PDO::PARAM_INT);
+        $result=$prepareStatementSave->execute();
+        if($result===false){
+            var_dump($result);
+            var_dump($prepareStatementSave->errorInfo());
+        }
     }
 
-    public function update(Favori $Favori){
-        
-        $cnx=$this->cnx;
-
-        $idUser=$Favori->getIdUserFavori();
-        $idArticle=$Favori->getIdArticleFavori();
-
-        //requete sql
-        $SQLU="UPDATE FAVORI SET idArticleFavori=:idArticle, idUserFavori=:idUserFavori WHERE idArticleFavori=:idArticle";
-       
-        //prepare statement
-        $prepareStatementUpdate=$cnx->prepare($SQLU);
-        $prepareStatementSave->bindValue(":idUserFavori",$idUser, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":idArticle",$idArticle, PDO::PARAM_STR);
-        $prepareStatementUpdate->execute();
-    }
     
 
 }
