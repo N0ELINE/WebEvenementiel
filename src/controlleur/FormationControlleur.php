@@ -19,7 +19,8 @@ class FormationControlleur {
     }
 
     public function mesformations() {
-
+        $page= Renderer::render('formationOne.php');
+        echo $page;
     }
 
     public function displayQuizzformations() {

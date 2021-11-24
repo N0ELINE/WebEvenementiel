@@ -7,6 +7,7 @@ var jsonData;
 const f = fetch("http://127.0.0.4:8080/")
   .then(response => response.json())
   .then(data => {
+      console.log(data);
     jsonData=data;
     generate(0);
  });
@@ -15,9 +16,9 @@ const f = fetch("http://127.0.0.4:8080/")
 // generate from json array data with index
 function generate(index) {
     console.log("après", jsonData);
-    console.log("opt1",jsonData[index].opt1);
-    document.getElementById("question").innerHTML = jsonData[index].libelle;
+    document.getElementById("question").innerHTML = jsonData[index].question;
     document.getElementById("optt1").innerHTML = jsonData[index].opt1;
+    console.log("opt1",jsonData[index].opt1);
     document.getElementById("optt2").innerHTML = jsonData[index].opt2;
     document.getElementById("optt3").innerHTML = jsonData[index].opt3;
 }

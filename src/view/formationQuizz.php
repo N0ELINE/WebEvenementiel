@@ -1,5 +1,6 @@
 <?php include "header.php";?>
    <body>
+  
    <div class="Quizz">
             <div style="font-size:20pt;">Quiz</div>
              <div class="ques" id="question"> 
