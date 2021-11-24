@@ -18,20 +18,7 @@
             <button class="nxtBtn" onclick="checkAnswer()">next ></button>
             </div>
         </div>
-        <?php 
-            // $test=JSON_decode(file_get_contents("http://127.0.0.4:8080/")); 
-            // $t=file_get_contents("http://127.0.0.4:8080/");
-            // var_dump($t);
-            // var_dump($test); 
-           
-        ?>
-       
         
-        
-
-
-
-        <!--<script src="../Js/data.js"></script>-->
         <script src="/Js/quizz.js"></script>  
    
 <?php include "footer.php";?>s

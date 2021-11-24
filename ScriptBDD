@@ -214,6 +214,9 @@ INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (1,1,"Comm
 INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (2,2,"Comment organiser un enterrement?");
 INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (3,3,"Quelle est le nom de ce site?");
 
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (4,1,"Comment on fait?");
+
+
 
 CREATE TABLE REPONSES(
     idReponses INT PRIMARY KEY NOT NULL,
@@ -234,6 +237,10 @@ INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (6,
 INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (7,3,"StarEvent",true);
 INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (8,3,"MoonEvent",false);
 INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (9,3,"SunEvent",false);
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (10,4,"JSP",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (11,4,"comme ça",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (12,4,"bloup",false);
 
 
 -- CREATE TABLE CONTACT(
