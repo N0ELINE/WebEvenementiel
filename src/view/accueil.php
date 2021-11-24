@@ -28,19 +28,13 @@
 
         <div id="client">
 
-            <p id="cli1"> La Split Agency nous à offert une expérience<br> exceptionnelle pour notre team building
-                montagnard<br>
-                <br> <em>Helène - Capgémini</em>
+            <p id="cli1"> <?php $avisevent[0]->getContenu(); ?><br>
             </p>
 
-            <p id="cli2"> La Split Agency nous à offert une expérience<br> exceptionnelle pour notre team building
-                montagnard<br>
-                <br> <em>Helène - Capgémini</em>
+            <p id="cli2"><?php $avisevent[1]->getContenu(); ?><br>
             </p>
 
-            <p id="cli3"> La Split Agency nous à offert une expérience<br> exceptionnelle pour notre team building
-                montagnard<br>
-                <br> <em>Helène - Capgémini</em>
+            <p id="cli3"><?php $avisevent[2]->getContenu(); ?><br>
             </p>
 
         </div>
