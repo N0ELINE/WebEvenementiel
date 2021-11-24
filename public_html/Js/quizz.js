@@ -48,7 +48,7 @@ function checkAnswer() {
     var keys = Object.keys( jsonData);
 
     for (j=0;j<keys.length;j++){
-        if (jsonData[i].reponses[j].bonne_rep==1) {
+        if (jsonData[i].reponses[j].bonne_rep==1 && document.getElementById("opt1").checked ||document.getElementById("opt2").checked || document.getElementById("opt3").checked) {
             correctCount++;
             console.log("correct",correctCount);
             console.log("the j is",j);
@@ -71,8 +71,9 @@ function checkAnswer() {
     // increment i for next question
     i++;
     if(jsonData.length-1 < i){
-        document.write("<body style='background-color:#348322;'>");
-        document.write("<div style='color:#ffffff;font-size:18pt;text-align:center;'>*****Your score is : "+correctCount+"*****</div>");
+        document.write("<body style='background-color:#EFE4F2;'>");
+        document.write("<div style='color:#BC70D1;font-size:18pt;text-align:center;'>*****Your score is : "+correctCount+"*****</div>");
+        document.write("<input type='button' value='return' onclick='history.back()'/>");
         document.write("</body>");
     }
     // callback to generate
