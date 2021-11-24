@@ -5,9 +5,9 @@
         
             <br>
             <div class="social">
-                <i><img src="../image/facebook.png" alt="facebook" id="picto"></i></a>
-                <i><img src="../image/insta.png" alt="insta" id="picto"></i>
-                <i><img src="../image/twitter.png" alt="twitter" id="picto"></i>
+                <i><img src="/image/facebook.png" alt="facebook" id="picto"></i></a>
+                <i><img src="/image/insta.png" alt="insta" id="picto"></i>
+                <i><img src="/image/twitter.png" alt="twitter" id="picto"></i>
 
             </div>
 

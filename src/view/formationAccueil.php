@@ -1,6 +1,8 @@
-<?php include "header.php";?>
+<?php include "header.php";?>  <!---erreur 404-->
 <body> 
 <h1 id="title_formation">Toutes les formations !</h1>
+
+
 
     <div class="filter">
         <select name="filter" id="filtre">
@@ -13,8 +15,12 @@
 
     <div class="cours">
         <img src="../image/cour1.jpg" alt="img_cours" id="img_cours"> 
-        <p id="info_cours">Titre Formation <br><b>Nom Cours</b> <br>Description
-        <a href="../formation/quizz/?id=1" > <br>allez au quizz</a>  
+        <p id="info_cours">Titre Formation <br><b>Nom Cours </b> <br>Description
+        
+        <!-- <a href="../formation/quizz/?id= <?php //+$id?>"> allez au quizz</a>   -->
+
+        <?php echo '<a href="' . htmlspecialchars("../formation/quizz/" .urlencode($id)),'">'; 
+        ?> quizz</a>
     </p>
     </div> <br><br>
 <?php include "footer.php";?>

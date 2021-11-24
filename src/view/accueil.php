@@ -28,14 +28,14 @@
 
         <div id="client">
 
-            <p id="cli1"> <?php $avisevent[0]->getContenu(); ?><br>
+            <!-- <p id="cli1"> <?php $avisevent[0]->getContenu(); ?><br>
             </p>
 
             <p id="cli2"><?php $avisevent[1]->getContenu(); ?><br>
             </p>
 
             <p id="cli3"><?php $avisevent[2]->getContenu(); ?><br>
-            </p>
+            </p> -->
 
         </div>
         <br><br>
