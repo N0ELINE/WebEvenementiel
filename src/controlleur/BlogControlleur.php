@@ -13,7 +13,7 @@ require_once '../src/model/DAOArticle.php';
 class BlogControlleur
 {
     // -----PARTIE FONCTION GENERALES--------------------------------------------------------------------------
-    public function displayArticles() // a tester
+    public function displayArticles() // OK
     {
         $daoarticle = new DAOArticle();
         $articles = $daoarticle->findAll();
@@ -21,7 +21,7 @@ class BlogControlleur
         echo $page;
     }
 
-    public function displayArticle($id) // a tester
+    public function displayArticle($id) //OK
     {
         $daoarticle = new DAOArticle();
         $article = $daoarticle->find($id);
@@ -29,63 +29,58 @@ class BlogControlleur
         echo $page;
     }
 
-    public function articleAime($id) // a tester
+    public function articleAime() //OK
     {
+        Session::initialiserSessionGlobale(1,"", "",1);
         $daoarticle = new DAOArticle();
-        $article = $daoarticle->find($id);
-        $page = Renderer::render('blogAccueil.php', compact('articleAime'));
+        $daofavori = new DAOFavori();
+        $favoris = $daofavori->findById($_SESSION["id"]);
+        $articlesfavori =[];
+        foreach($favoris as $favori){
+            $article=$daoarticle->find($favori->getIdArticleFavori());
+            array_push($articlesfavori,$article);
+        }
+        $page = Renderer::render('blogAccueil.php', compact('articlesfavori'));
         echo $page;
     }
 
     // -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
-    public function aimerArticle($id) //a tester
-    {
+    public function aimerArticle($id) {//ok
         $daofavori = new DAOFavori();
-        $favori = new Favori();
-        $favori->setIdUserFavori($_SESSION["id"]);
-        $favori->setIdArticleFavori($id);
-        $article = $daofavori->saveFavoris($favori);
-        echo ("Article ajouté aux Favoris");
+        $favoris=$daofavori->findById($_SESSION["id"]);
+        $flag=false;
+        foreach($favoris as $favori){
+            if ($favori->getIdArticleFavori()==$id){
+                $flag=true;
+            }
+        }
+        if ($flag==true){
+            $daofavori->remove($_SESSION["id"],$id);
+            echo ("Article retiré des Favoris");
+        }else{
+            $favori = new Favori();
+            $favori->setIdUserFavori($_SESSION["id"]);
+            $favori->setIdArticleFavori($id);
+            $daofavori->saveFavori($favori);
+            echo ("Article ajouté aux Favoris");
+        }
     }
 
-    public function commenter($id) // a tester
-    {
-        $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
-        $daoarticle = new DAOArticle();
-        $commentaire = new Commentaire();
-        $commentaire->setContenu($content);
-        $commentaire->setIdArticleCommentaire($id);
-        $commentaire->setIdUserCommentaire($_SESSION["id"]);
-        //DAO COMMENTAIRE TODO
-        $article = $daoarticle->save($commentaire);
-        header('Location: /blog/article/' . $id);
-    }
+    // public function commenter($id)
+    // {
+    //     $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
+    //     $daoarticle = new DAOArticle();
+    //     $commentaire = new Commentaire();
+    //     $commentaire->setContenu($content);
+    //     $commentaire->setIdArticleCommentaire($id);
+    //     $commentaire->setIdUserCommentaire($_SESSION["id"]);
+    //     //DAO COMMENTAIRE TODO
+    //     $article = $daoarticle->save($commentaire);
+    //     header('Location: /blog/article/' . $id);
+    // }
 
     // public function partagereseaux()
     // {
     // }
 
-
-    // -----PARTIE FONCTION COLLABORATEUR--------------------------------------------------------------------------
-    public function creerarticleCollaborateur() // à tester
-    {
-        $nomArticle = htmlspecialchars(isset($_POST["nomArticle"]) ? $_POST["nomArticle"] : NULL);
-        $article = new Article();
-        $article->getNom($nomArticle);
-        $article->setDate(date('d-m-y h:i:s'));
-        $daoarticle = new DAOArticle();
-        $daoarticle->create($article);
-
-
-    }
-
-    public function editionArticleCollaborateur() // a tester
-    {
-        $page = Renderer::render('blogEdition.php');
-        echo $page;
-    }
-
-    public function importPhotoArticleCollaborateur() // TO DO demander à  alexandre
-    {
-    }
 }

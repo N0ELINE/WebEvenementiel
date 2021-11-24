@@ -33,16 +33,15 @@ class ConnexionController
                     // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
                     $daoLogs = new DAOLogs();
                     $monlog = new Logs();
-                    var_dump($User);
                     $monlog->setIdUser($User->getId());
                     $monlog->setDate(date("Y/m/d"));
                     $monlog->setHeure(date("H:i"));
                     $daoLogs->saveLogs($monlog);
 
-                    // Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
+                    Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
                         
-                    // header('Location: /site/accueil');
-                    // exit();
+                    header('Location: /site/accueil');
+                    exit();
 
                 }else{ var_dump("mauvais MDP");}
                 
@@ -73,7 +72,7 @@ class ConnexionController
         $daoUser = new DAOUser();
         $daoUser->saveUser($User);
         $users = $daoUser->findAll();
-        foreach ($users as $key => $user) {
+        foreach ($users as $user) {
             if ($user->getMail() == $User->getMail() && $user->getMdp() == $User->getMdp()) {
                 Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(), $user->getIdRole());
                 header('Location: /site/accueil');
@@ -91,17 +90,12 @@ class ConnexionController
         header('Location: /connexion/accueil');
     }
 
-    // public function helloUser() {
-    //     $page = Renderer::render('vousetesconnecte.php');
-    //     echo $page;
-    // }
-
     public function quatrecentquatre()    { //ok
         $page = Renderer::render('404.php');
         echo $page;
     }
 
-    public function interdit()    { // a tester quand gestion de route ok
+    public function interdit()    { //ok
         $page = Renderer::render('403.php');
         echo $page;
     }

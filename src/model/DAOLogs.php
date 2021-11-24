@@ -45,7 +45,6 @@ Class DAOLogs {
         $prepareStatementSave->bindValue(":idUserLogs",$idUser, PDO::PARAM_INT);
         $prepareStatementSave->bindValue(":dateu",$Date, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":heure",$Heure, PDO::PARAM_STR);
-        var_dump("nodenkovfe");
         $result=$prepareStatementSave->execute();
         if($result===false){
             var_dump($result);

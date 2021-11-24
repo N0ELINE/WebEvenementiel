@@ -17,6 +17,8 @@ require_once("../src/controlleur/ConnexionController.php");
 require_once("../src/controlleur/EvenementControlleur.php");
 require_once("../src/controlleur/FormationControlleur.php");
 require_once("../src/controlleur/NotificationControlleur.php");
+require_once("../src/controlleur/RightAccessContolleur.php");
+
 
 
 if (isset($_SERVER["PATH_INFO"])) {
@@ -28,6 +30,8 @@ $fragments = explode("/", $path);
 
 session_start();
 
+
+
 $control = array_shift($fragments);
 switch ($control) {
 
@@ -36,10 +40,7 @@ switch ($control) {
       break;
     }
   case "admin": {
-      //   var_dump($_SESSION["role"]->getNom());
-      // if($_SESSION["role"]->getNom()=='admin'){
       adminroutes($fragments);
-      // }else { header('Location: /connexion/interdit'); }
       break;
     }
   case "avis": {
@@ -161,28 +162,28 @@ function blogroutes($fragments)
   switch ($action) {
       //fonction générales
     case "all": {
-        call_user_func_array(["BlogController", "displayArticles"], $fragments);
+        call_user_func_array(["BlogControlleur", "displayArticles"], $fragments);
         break;
       }
     case "one": {
-        call_user_func_array(["BlogController", "displayArticle"], $fragments);
+        call_user_func_array(["BlogControlleur", "displayArticle"], $fragments);
         break;
       }
       //fonctions clients connectés
     case "like": {
-        call_user_func_array(["BlogController", "aimerArticle"], $fragments);
+        call_user_func_array(["BlogControlleur", "aimerArticle"], $fragments);
         break;
       }
       case "favori": {
-        call_user_func_array(["BlogController", "articleAime"], $fragments);
+        call_user_func_array(["BlogControlleur", "articleAime"], $fragments);
         break;
       }
     case "comment": {
-        call_user_func_array(["BlogController", "commenter"], $fragments);
+        call_user_func_array(["BlogControlleur", "commenter"], $fragments);
         break;
       }
     case "share": {
-        call_user_func_array(["BlogController", "partagereseaux"], $fragments);
+        call_user_func_array(["BlogControlleur", "partagereseaux"], $fragments);
         break;
       }
       //fonctions collaborateur

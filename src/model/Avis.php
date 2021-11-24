@@ -1,22 +1,22 @@
 <?php
 
 class Avis {
-    private $Id;
-    private $Contenu;
-    private $Etoiles;
+    private $idAvis;
+    private $contenu;
+    private $etoiles;
     private $idUserAvis;
     private $idConcerneFormaEvent;
 
     function Avis(){}
 
     function getId(){
-        return $this->Id;
+        return $this->idAvis;
     }
     function getContenu(){
-        return $this->Contenu;
+        return $this->contenu;
     }
     function getEtoiles(){
-        return $this->Etoiles;
+        return $this->etoiles;
     }
     function getidUserAvis(){
         return $this->idUserAvis;
@@ -26,10 +26,10 @@ class Avis {
     }
 
     function setContenu($Contenu) {
-        $this->Contenu = $Contenu;
+        $this->contenu = $Contenu;
     }
     function setEtoiles($Etoiles) {
-        $this->Etoiles = $Etoiles;
+        $this->etoiles = $Etoiles;
     }
     function setidUserAvis($idUserAvis) {
         $this->idUserAvis = $idUserAvis;

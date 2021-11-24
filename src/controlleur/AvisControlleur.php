@@ -15,7 +15,8 @@ class AvisControlleur {
     //     echo $page;
     // }
 
-    public function ajouterAvisEvent() { // a tester
+    public function ajouterAvisEvent($idEvent) { //OK
+       
         $daoavis=new DAOAvis();
         $avis = new Avis();
         $vide=false;
@@ -34,31 +35,19 @@ class AvisControlleur {
         }
         $avis->setEtoiles($_etoiles);
 
+        $avis->setidConcerne($idEvent);
+
         if($vide==false){
             $daoavis->saveAvisEvent($avis);
-
-            //TODO enregistrer dans table avisatelier dans DAO
             
-            header('Location: /evenement/all');
+            echo("Avis ajouté avec succès");
+            header('Location: /evenement/one/'.$idEvent);
             exit();
         }
         else{
             echo("problème dans la création de l'avis");
-            header('Location: /evenement/all');
+            header('Location: /evenement/one/'.$idEvent);
         }
     }
-
-    public function ajouterAvisFormation($id) { // a tester
-        $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
-        $etoiles = htmlspecialchars(isset($_POST["etoiles"]) ? $_POST["etoiles"] : NULL);
-        $daoavis = new DAOAvis();
-        $avis = new Avis();
-        $avis->setContenu($content);
-        $avis->setEtoiles($id);
-        $avis->setIdUserAvis($_SESSION["id"]);
-        $article=$daoavis->saveAvisFormation($avis);
-        header('Location: /blog/article/'.$id);
-    }
-
 
 }
