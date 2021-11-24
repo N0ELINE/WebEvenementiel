@@ -4,10 +4,10 @@ var jsonData;
 //initialize the first question
 
 //Promise asynchrone
-const f = fetch("http://127.0.0.4:8080/")
+const f = fetch("http://127.0.0.4:8080/?id=3")
   .then(response => response.json())
   .then(data => {
-      console.log(data);
+    //console.log("elp",data);
     jsonData=data;
     generate(0);
  });
@@ -16,11 +16,10 @@ const f = fetch("http://127.0.0.4:8080/")
 // generate from json array data with index
 function generate(index) {
     console.log("après", jsonData);
-    document.getElementById("question").innerHTML = jsonData[index].question;
-    document.getElementById("optt1").innerHTML = jsonData[index].opt1;
-    console.log("opt1",jsonData[index].opt1);
-    document.getElementById("optt2").innerHTML = jsonData[index].opt2;
-    document.getElementById("optt3").innerHTML = jsonData[index].opt3;
+    document.getElementById("question").innerHTML = jsonData[index]['libelle'];
+    document.getElementById("optt1").innerHTML = jsonData["rep"][0]["libelle"];
+    document.getElementById("optt2").innerHTML = jsonData["rep"][1]["libelle"];
+    document.getElementById("optt3").innerHTML = jsonData["rep"][2]["libelle"];
 }
 
 function checkAnswer() {

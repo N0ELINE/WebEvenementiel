@@ -32,6 +32,6 @@
 
 
         <!--<script src="../Js/data.js"></script>-->
-        <script src="../Js/quizz.js"></script>  
+        <script src="/Js/quizz.js"></script>  
    
 <?php include "footer.php";?>s

@@ -30,7 +30,7 @@
             <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>
         </div>
         <div class="bleu">
-            <img src="../image/bleu.png" alt="ecrou" id="bleu">
+            <img src="/image/bleu.png" alt="ecrou" id="bleu">
         </div>
         <div class="menu">
             <nav class="nav">
