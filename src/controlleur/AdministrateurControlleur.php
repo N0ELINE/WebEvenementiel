@@ -17,7 +17,6 @@ class AdministrateurControlleur {
         $daouser = new DAOUser();
         $Users = $daouser->findAll();
         
-       
 // -----AFFICHAGE PAGE-----------------------------------------------------------------------------
         $page= Renderer::render('adminTDB.php', compact('mesLogs,Users'));
         echo $page;
