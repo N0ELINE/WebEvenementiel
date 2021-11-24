@@ -60,14 +60,18 @@ Class DAOUser {//
         $Droit=$User->getDroit();
         
         //requete sql
-        $SQLS="INSERT INTO USER (adresseMail,hashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
+        $SQLS="INSERT INTO USER (Mail,hashMdp,droit) VALUES (:Mail,:Mdp,:droit)";
         //prepare statement
         $prepareStatementSave=$cnx->prepare($SQLS);
         $prepareStatementSave->bindValue(":Mail",$Mail, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":Mdp",$Mdp, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":droit",$Droit, PDO::PARAM_STR);
 
-        $prepareStatementSave->execute();
+        $result=$prepareStatementSave->execute();
+        if($result===false){
+            var_dump($result);
+            var_dump($prepareStatementSave->errorInfo());
+        }
     }
 
     

@@ -56,7 +56,7 @@
     <!--Actualité-->
     <div id="actu">
         <h1 class="titre_actu">Actualitées</h1> <br>
-        <p class="intro_actu">Split Agency propose une actualité régulière sur les ateliers, les nouvelles formations et
+        <p class="intro_actu">Split Agency propose une actualité régulière sur les evenements, les nouvelles formations et
             la vie de l'agence.
             <br>Nous partageons notre expérience, nos coups de cœur et aussi notre fierté de travailler dans un domaine
             aussi

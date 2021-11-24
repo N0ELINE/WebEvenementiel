@@ -60,10 +60,10 @@ Class DAOEvent{
         $prepareStatementSave->bindValue(":description",$description, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":date",$date, PDO::PARAM_STR);
         $prepareStatementSave->bindValue(":heure",$heure, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":dureeMinute",$dureeMinute, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":effectifMax",$effectifMax, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":dureeMinute",$dureeMinute, PDO::PARAM_INT);
+        $prepareStatementSave->bindValue(":effectifMax",$effectifMax, PDO::PARAM_INT);
         $prepareStatementSave->bindValue(":localisation",$localisation, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":idPhotoEvent",$photoIdPath, PDO::PARAM_STR);
+        $prepareStatementSave->bindValue(":idPhotoEvent",$photoIdPath, PDO::PARAM_INT);
 
         $prepareStatementSave->execute();
     }
@@ -100,5 +100,14 @@ Class DAOEvent{
         $prepareStatementUpdate->bindValue(":idPhotoEvent",$photoIdPath, PDO::PARAM_STR);
 
         $prepareStatementUpdate->execute();
+    }
+
+    public function findEventLastOne(){
+        $requete = $this->cnx->prepare("SELECT * FROM EVENEMENT ORDER BY idEvent  DESC LIMIT 1");
+        $requete->execute();
+        while ($result = $requete->fetchObject('Event')) {
+            $Event[] = $result;
+        };
+        return $Event;
     }
 }

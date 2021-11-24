@@ -11,7 +11,7 @@
     </div>
 
     <div class="blanc">
-        <h1 id="title_avis">Avis sur nos ateliers</h1>
+        <h1 id="title_avis">Avis sur nos evenements</h1>
         <br><br><br><br><br><br>
 
     </div>

@@ -30,30 +30,35 @@ class ConnexionController
         $Users = $daoUser->findByMail($mail);
 
         foreach ($Users as $User) {
-            if ($User!=NULL && $User->getMdp()==$mdp) {
-                // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
-                // $daoLogs = new DAOLogs();
-                // $monlog = new Logs();
-                // $monlog->setIdUser($User->getMail());
-                // $monlog->setDate(date("Y/m/d"));
-                // $monlog->setHeure(date("H:i"));
-                // $daoLogs->saveLogs($monlog);
+            if ($User!=NULL) {
+                if($User->getMdp()==$mdp){
+                    // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
+                    $daoLogs = new DAOLogs();
+                    $monlog = new Logs();
+                    var_dump($User);
+                    $monlog->setIdUser($User->getId());
+                    $monlog->setDate(date("Y/m/d"));
+                    $monlog->setHeure(date("H:i"));
+                    $daoLogs->saveLogs($monlog);
 
-                Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
-                var_dump($_SESSION["mail"]);
-                        header('Location: /site/accueil');
-                        exit();
-            // } else {
-            //     echo "Erreur de connexion, Veuillez réessayer avec des identifiants valides svp";
-            //     header('Location: /connexion/accueil');
-            //     exit();
+                    // Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
+                        
+                    // header('Location: /site/accueil');
+                    // exit();
+
+                }else{ var_dump("mauvais MDP");}
+                
+            } else {
+                echo "Erreur de connexion, mauvais Mail, Veuillez réessayer avec des identifiants valides svp";
+                header('Location: /connexion/accueil');
+                exit();
             }
         }
     }
 
     public function displayInscription()
     {
-        $page = Renderer::render('inscription.php');
+        $page = Renderer::render('connexionInscription.php');
         echo $page;
     }
 
@@ -61,13 +66,14 @@ class ConnexionController
     {
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
-        // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
+        // // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
 
         $User = new User();
         $User->setMail($mail);
         //hash mdp TODO
         $User->setMdp($password);
         $User->setDroit(1);
+        
         $daoUser = new DAOUser();
         $daoUser->saveUser($User);
         $users = $daoUser->findAll();
@@ -78,7 +84,7 @@ class ConnexionController
                 exit();
             } else {
                 echo "Erreur d'inscription, Veuillez réessayer svp";
-                header('Location: /connexion/accueil');
+                header('Location: /connexion/inscription');
                 exit();
             }
         }

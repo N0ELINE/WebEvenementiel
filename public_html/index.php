@@ -139,8 +139,8 @@ function opinionroutes($fragments)
         call_user_func_array(["AvisControlleur", "displayAvis"], $fragments);
         break;
       }
-    case "atelier": {
-        call_user_func_array(["AvisControlleur", "ajouterAvisAtelier"], $fragments);
+    case "add": {
+        call_user_func_array(["AvisControlleur", "ajouterAvisEvent"], $fragments);
         break;
       }
     case "formation": {
@@ -287,6 +287,10 @@ function evenementroutes($fragments)
       }
     case "edition": {
         call_user_func_array(["EvenementControlleur", "editionEvenementCollaborateur"], $fragments);
+        break;
+      }
+      case "save": {
+        call_user_func_array(["EvenementControlleur", "saveEventModify"], $fragments);
         break;
       }
     default: {
