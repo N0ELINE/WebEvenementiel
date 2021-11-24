@@ -10,14 +10,14 @@ require_once '../src/model/Participe.php';
 class EvenementControlleur {//
     
 // -----PARTIE FONCTION GENERALE--------------------------------------------------------------------------
-    public function displayEvenements() {
+    public function displayEvenements() { //a tester
         $daoevent = new DAOEvent();  
         $events=$daoevent->findAll();
         $page= Renderer::render('Evenements.php', compact('events'));
         echo $page;
     }
 
-    public function displayEvenement($id) {
+    public function displayEvenement($id) { // a tester
         $daoevent = new DAOEvent();
         $events=$daoevent->find($id);
         $page= Renderer::render('Evenement.php', compact('events'));
@@ -25,7 +25,7 @@ class EvenementControlleur {//
     }
 
 // -----PARTIE FONCTION CLIENT CONNECTES--------------------------------------------------------------------------
-    public function sinscrireEvent($idEvent) {
+    public function sinscrireEvent($idEvent) { // a tester
         $daoparticipe= new DAOParticipe();
         $participe=new Participe();
         $participe->setIdEventParticipe($idEvent);
@@ -36,7 +36,7 @@ class EvenementControlleur {//
         header('Location: /');
     }
 
-    public function desinscrireEvent($idEvent) {
+    public function desinscrireEvent($idEvent) { // a tester
         $daoparticipe= new DAOParticipe();
         $participe=new Participe();
         $daoparticipe->remove($idEvent,$_SESSION["id"]->getId());
@@ -45,7 +45,7 @@ class EvenementControlleur {//
         header('Location: /');
     }
 
-    public function displaymesevenement() {
+    public function displaymesevenement() { // a tester
         $daoparticipe= new DAOParticipe();
 
         $participes=$daoparticipe->findbyIdUserParticipe($_SESSION["id"]->getId());
@@ -59,7 +59,7 @@ class EvenementControlleur {//
     }
 
 // -----PARTIE FONCTION COLLABORATEUR--------------------------------------------------------------------------
-    public function ajouterEvenementCollaborateur() {
+    public function ajouterEvenementCollaborateur() { //a tester
         $titre = htmlspecialchars(isset($_POST["titre"]) ? $_POST["titre"] : NULL);
         $monEvent = new Event();
         $monEvent->setNom($titre);
@@ -76,16 +76,16 @@ class EvenementControlleur {//
 
     }
 
-    public function saveEventModify() {
+    public function saveEventModify() { //TODO
         //recuperer les choses des champs des articles et save grace à modifier
 
     }
 
-    public function galerieEvenementAddCollaborateur() {
+    public function galerieEvenementAddCollaborateur() { //TODO
 
     }
 
-    public function editionEvenementCollaborateur() {
+    public function editionEvenementCollaborateur() { //TODO
 
     }
 

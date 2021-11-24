@@ -6,16 +6,16 @@ require_once '../src/model/DAOEvent.php';
 
 require_once '../src/model/Avis.php';
 
-class AvisControlleur {//
-    public function displayAvis() {
-        $daoavis = new DAOAvis();    
-        $avisformation=$daoavis->findAllFormation();
-        $avisevent=$daoavis->findAllEvent();
-        $page= Renderer::render('accueilAvis.php', compact('avisformation,avisevent'));
-        echo $page;
-    }
+class AvisControlleur {
+    // public function displayAvis() {
+    //     $daoavis = new DAOAvis();    
+    //     $avisformation=$daoavis->findAllFormation();
+    //     $avisevent=$daoavis->findAllEvent();
+    //     $page= Renderer::render('accueilAvis.php', compact('avisformation,avisevent'));
+    //     echo $page;
+    // }
 
-    public function ajouterAvisEvent() {
+    public function ajouterAvisEvent() { // a tester
         $daoavis=new DAOAvis();
         $avis = new Avis();
         $vide=false;
@@ -48,7 +48,7 @@ class AvisControlleur {//
         }
     }
 
-    public function ajouterAvisFormation($id) {
+    public function ajouterAvisFormation($id) { // a tester
         $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
         $etoiles = htmlspecialchars(isset($_POST["etoiles"]) ? $_POST["etoiles"] : NULL);
         $daoavis = new DAOAvis();

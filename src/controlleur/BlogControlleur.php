@@ -13,7 +13,7 @@ require_once '../src/model/DAOArticle.php';
 class BlogControlleur
 {
     // -----PARTIE FONCTION GENERALES--------------------------------------------------------------------------
-    public function displayArticles()
+    public function displayArticles() // a tester
     {
         $daoarticle = new DAOArticle();
         $articles = $daoarticle->findAll();
@@ -21,7 +21,7 @@ class BlogControlleur
         echo $page;
     }
 
-    public function displayArticle($id)
+    public function displayArticle($id) // a tester
     {
         $daoarticle = new DAOArticle();
         $article = $daoarticle->find($id);
@@ -29,7 +29,7 @@ class BlogControlleur
         echo $page;
     }
 
-    public function articleAime($id)
+    public function articleAime($id) // a tester
     {
         $daoarticle = new DAOArticle();
         $article = $daoarticle->find($id);
@@ -38,7 +38,7 @@ class BlogControlleur
     }
 
     // -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
-    public function aimerArticle($id)
+    public function aimerArticle($id) //a tester
     {
         $daofavori = new DAOFavori();
         $favori = new Favori();
@@ -48,7 +48,7 @@ class BlogControlleur
         echo ("Article ajouté aux Favoris");
     }
 
-    public function commenter($id)
+    public function commenter($id) // a tester
     {
         $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
         $daoarticle = new DAOArticle();
@@ -61,13 +61,13 @@ class BlogControlleur
         header('Location: /blog/article/' . $id);
     }
 
-    public function partagereseaux()
-    {
-    }
+    // public function partagereseaux()
+    // {
+    // }
 
 
     // -----PARTIE FONCTION COLLABORATEUR--------------------------------------------------------------------------
-    public function creerarticleCollaborateur()
+    public function creerarticleCollaborateur() // à tester
     {
         $nomArticle = htmlspecialchars(isset($_POST["nomArticle"]) ? $_POST["nomArticle"] : NULL);
         $article = new Article();
@@ -79,13 +79,13 @@ class BlogControlleur
 
     }
 
-    public function editionArticleCollaborateur()
+    public function editionArticleCollaborateur() // a tester
     {
         $page = Renderer::render('blogEdition.php');
         echo $page;
     }
 
-    public function importPhotoArticleCollaborateur()
+    public function importPhotoArticleCollaborateur() // TO DO demander à  alexandre
     {
     }
 }

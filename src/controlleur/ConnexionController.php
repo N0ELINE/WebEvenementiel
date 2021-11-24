@@ -11,15 +11,13 @@ require_once '../src/model/Logs.php';
 class ConnexionController
 {
 
-    public function display()
-    {
+    public function display()     { //ok
         $page = Renderer::render('connexion.php');
         echo $page;
     }
   
 
-    public function newConnexion()
-    {
+    public function newConnexion()     { //ok
         // -----RECUPERATION DONNÉES-----------------------------------------------------------------------------
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
@@ -56,14 +54,12 @@ class ConnexionController
         }
     }
 
-    public function displayInscription()
-    {
+    public function displayInscription()    { //ok
         $page = Renderer::render('connexionInscription.php');
         echo $page;
     }
 
-    public function newInscriptionClient()
-    {
+    public function newInscriptionClient()    { // a tester
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
         // // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
@@ -90,8 +86,7 @@ class ConnexionController
         }
     }
 
-    public function delConnexion()
-    {
+    public function delConnexion()    { //a tester
         Session::detruireSession();
         header('Location: /connexion/accueil');
     }
@@ -101,14 +96,12 @@ class ConnexionController
     //     echo $page;
     // }
 
-    public function quatrecentquatre()
-    {
+    public function quatrecentquatre()    { //ok
         $page = Renderer::render('404.php');
         echo $page;
     }
 
-    public function interdit()
-    {
+    public function interdit()    { // a tester quand gestion de route ok
         $page = Renderer::render('403.php');
         echo $page;
     }
