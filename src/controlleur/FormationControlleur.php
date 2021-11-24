@@ -21,12 +21,27 @@ class FormationControlleur {
 
     }
 
+
     public function displayformation($id) { // question
         // requete api pour recup question reponse ??? TODO Athé
         $response = file_get_contents('http://127.0.0.4:8080/?id='.$id);
-        //var_dump($response);
-        $page= Renderer::render('formationQuizz.php',compact('response'));
+    
+        
+        // echo "<script> window.onload = function() {
+        //     promise($id)
+        // }; </script>";
+        
+
+        echo "<script > window.onload = function() {
+            promise($id);       
+        }; </script>";
+                
+       
+       $page= Renderer::render('formationQuizz.php',compact('response'));
         echo $page;
+        
     }
+
+
 
 }

@@ -24,7 +24,7 @@
         <div class="icon"> 
 
             <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
-            <img src="/image/ecrou.png" alt="ecrou" id="icon">
+            <a href="/admin/board"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
             <img src="/image/calendar.png" alt="ecrou" id="icon">
             <img src="/image/cloche.png" alt="ecrou" id="icon">
             <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>

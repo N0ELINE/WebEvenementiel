@@ -7,21 +7,37 @@ include "header.php";
 include "User.php";
 include "DAOUser.php"?>
 <body>
-   
+
 <?php
 
  $users = (User);
 // echo $obj->getMail();  // Affiche : 'ciao'
 var_dump($userT->User->getMail());
 
-foreach ($user as $users){
-    $user = array( array($user->User->getId(), $user->User->getMail() , $user->User->getMdp(),
-    $user->User->getDroit())); 
-    var_dump($user);
-    echo("hola");
-}
-
+// foreach ($user as $users){
+//     $user = array( array($user->User->getId(), $user->User->getMail() , $user->User->getMdp(),
+//     $user->User->getDroit())); 
+//     var_dump($user);
+//     //echo("hola");
+// }
 ?>
+<table>
+     <tr>
+       <td>title</td>
+       <td>price</td>
+       <td>number</td>
+     </tr>
+     <? foreach ($users as $row) : ?>
+     <tr>
+       <td><? echo $row[0]; ?></td>
+       <td><? echo $row[1]; ?></td>
+       <td><? echo $row[2]; ?></td>
+     </tr>
+     <? endforeach; ?>
+   </table>
+
+
+
     <table>
       <thead>
         <tr>
@@ -37,5 +53,5 @@ foreach ($user as $users){
       </tbody>
     </table>
 </body>
+<?php include "footer.php";?> 
 
-<?php include "footer.php";?>

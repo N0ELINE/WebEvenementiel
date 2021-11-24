@@ -605,3 +605,37 @@ position:absolute;
 .Quizz{
 	margin-left: 630px;
 }
+
+/*---------------------------*/
+  /*Page Event*/
+.event_head{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+#title_event{
+	color: #FADC1C;
+	font-size: 70px;
+	text-align: center;	
+	margin-right: 45px;
+	position: relative;
+	right: 535px; 
+}
+.event{
+	position: relative;
+	right: 535px; top:45px;
+	font-size: 24px;	
+}
+#img_event{
+	width: 500px;
+	height: 300px;
+	margin-left: 50px;
+}
+.event_Atelier{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+#info_event{
+	font-size: 35px;
+	margin-left: -250px;
+}

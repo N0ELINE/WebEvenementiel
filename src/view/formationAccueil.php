@@ -19,7 +19,8 @@
         
         <!-- <a href="../formation/quizz/?id= <?php //+$id?>"> allez au quizz</a>   -->
 
-        <?php echo '<a href="' . htmlspecialchars("../formation/quizz/" .urlencode($id)),'">'; 
+        <?php echo '<a href="' . htmlspecialchars("../formation/quizz/" .urlencode($id)),'">';
+        $idUrl=JSON_encode ($id);
         ?> quizz</a>
     </p>
     </div> <br><br>

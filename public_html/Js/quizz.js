@@ -1,16 +1,21 @@
 var i = 0;
 var correctCount = 0 ;
 var jsonData;
+var id=1;
+
 //initialize the first question
 
 //Promise asynchrone
-const f = fetch("http://127.0.0.4:8080/?id=3")
-  .then(response => response.json())
-  .then(data => {
-    //console.log("elp",data);
-    jsonData=data;
-    generate(0);
- });
+function promise(id){
+    const f = fetch("http://127.0.0.4:8080/?id="+id) 
+    .then(response => response.json())
+    .then(data => {
+      console.log("elp",data);
+      jsonData=data;
+      generate(0);
+   });
+}
+
 
 
 // generate from json array data with index
