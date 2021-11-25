@@ -28,10 +28,10 @@ class BlogControlleur
         $page = Renderer::render('blogArticle.php', compact('article'));
         echo $page;
     }
+    // -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
 
     public function articleAime() //OK
     {
-        Session::initialiserSessionGlobale(1,"", "",1);
         $daoarticle = new DAOArticle();
         $daofavori = new DAOFavori();
         $favoris = $daofavori->findById($_SESSION["id"]);
@@ -44,7 +44,6 @@ class BlogControlleur
         echo $page;
     }
 
-    // -----PARTIE FONCTION CLIENTS CONENCTES--------------------------------------------------------------------------
     public function aimerArticle($id) {//ok
         $daofavori = new DAOFavori();
         $favoris=$daofavori->findById($_SESSION["id"]);
@@ -65,22 +64,5 @@ class BlogControlleur
             echo ("Article ajouté aux Favoris");
         }
     }
-
-    // public function commenter($id)
-    // {
-    //     $content = htmlspecialchars(isset($_POST["commentaire"]) ? $_POST["commentaire"] : NULL);
-    //     $daoarticle = new DAOArticle();
-    //     $commentaire = new Commentaire();
-    //     $commentaire->setContenu($content);
-    //     $commentaire->setIdArticleCommentaire($id);
-    //     $commentaire->setIdUserCommentaire($_SESSION["id"]);
-    //     //DAO COMMENTAIRE TODO
-    //     $article = $daoarticle->save($commentaire);
-    //     header('Location: /blog/article/' . $id);
-    // }
-
-    // public function partagereseaux()
-    // {
-    // }
 
 }

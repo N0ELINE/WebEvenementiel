@@ -28,10 +28,9 @@ class Session {
         }
     }
     
-    static function initialiserSessionGlobale($id,$mail,$mdp,$role){
+    static function initialiserSessionGlobale($id,$mail,$role){
         self::ajouter("id", $id);
         self::ajouter("mail", $mail);
-        self::ajouter('mdp', $mdp);
         self::ajouter("role", $role); 
     }
 

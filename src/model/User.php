@@ -4,7 +4,7 @@ class User {
     private $idUser;
     private $Mail;
     private $hashMdp;
-    private $Droit;
+    private $droit;
 
     function User(){
         
@@ -21,7 +21,7 @@ class User {
     }
 
     function getDroit() {
-        return $this->Droit;
+        return $this->droit;
     }
     
     function setMail($mail) {
@@ -33,7 +33,7 @@ class User {
     }
     
     function setDroit($droit) {
-        $this->Droit = $droit;
+        $this->droit = $droit;
     }
 }
 

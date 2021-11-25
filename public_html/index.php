@@ -16,7 +16,6 @@ require_once("../src/controlleur/BlogControlleur.php");
 require_once("../src/controlleur/ConnexionController.php");
 require_once("../src/controlleur/EvenementControlleur.php");
 require_once("../src/controlleur/FormationControlleur.php");
-require_once("../src/controlleur/NotificationControlleur.php");
 require_once("../src/controlleur/RightAccessContolleur.php");
 
 
@@ -40,8 +39,8 @@ switch ($control) {
       break;
     }
   case "admin": {
-      adminroutes($fragments);
-      break;
+    call_user_func_array(["AdministrateurControlleur", "tableauDeBord"], $fragments);
+    break;
     }
   case "avis": {
       opinionroutes($fragments);
@@ -61,10 +60,6 @@ switch ($control) {
     }
   case "formation": {
       formationroutes($fragments);
-      break;
-    }
-  case "notif": { //doit etre connecté pour avoir des notifs
-      notifroutes($fragments);
       break;
     }
   default: {
@@ -99,53 +94,13 @@ function accueilroutes($fragments)
   }
 }
 
-function adminroutes($fragments)
-{
-  $action = array_shift($fragments);
-
-  switch ($action) {
-    case "board": {
-        call_user_func_array(["AdministrateurControlleur", "tableauDeBord"], $fragments);
-        break;
-      }
-    case "user": {
-        call_user_func_array(["AdministrateurControlleur", "displayUser"], $fragments);
-        break;
-      }
-    case "adduser": {
-        call_user_func_array(["AdministrateurControlleur", "creerUser"], $fragments);
-        break;
-      }
-    case "deluser": {
-        call_user_func_array(["AdministrateurControlleur", "supprUser"], $fragments);
-        break;
-      }
-    case "modifyuser": {
-        call_user_func_array(["AdministrateurControlleur", "modifierUser"], $fragments);
-        break;
-      }
-    default: {
-        header('Location: /connexion/404');
-        break;
-      }
-  }
-}
-
 function opinionroutes($fragments)
 {
   $action = array_shift($fragments);
 
   switch ($action) {
-    case "all": {
-        call_user_func_array(["AvisControlleur", "displayAvis"], $fragments);
-        break;
-      }
     case "add": {
         call_user_func_array(["AvisControlleur", "ajouterAvisEvent"], $fragments);
-        break;
-      }
-    case "formation": {
-        call_user_func_array(["AvisControlleur", "ajouterAvisFormation"], $fragments);
         break;
       }
     default: {
@@ -176,27 +131,6 @@ function blogroutes($fragments)
       }
       case "favori": {
         call_user_func_array(["BlogControlleur", "articleAime"], $fragments);
-        break;
-      }
-    case "comment": {
-        call_user_func_array(["BlogControlleur", "commenter"], $fragments);
-        break;
-      }
-    case "share": {
-        call_user_func_array(["BlogControlleur", "partagereseaux"], $fragments);
-        break;
-      }
-      //fonctions collaborateur
-    case "new": {
-        call_user_func_array(["BlogController", "creerarticleCollaborateur"], $fragments);
-        break;
-      }
-    case "edition": {
-        call_user_func_array(["BlogController", "editionArticleCollaborateur"], $fragments);
-        break;
-      }
-    case "addpicture": {
-        call_user_func_array(["BlogController", "importPhotoArticleCollaborateur"], $fragments);
         break;
       }
     default: {
@@ -231,10 +165,6 @@ function connexionroutes($fragments)
         call_user_func_array(["ConnexionController", "delConnexion"], $fragments);
         break;
       }
-      // case "hellouser": {
-      //     call_user_func_array(["ConnexionController", "helloUser"], $fragments);
-      //     break;
-      //   }
     case "404": {
         call_user_func_array(["ConnexionController", "quatrecentquatre"], $fragments);
         break;
@@ -269,10 +199,6 @@ function evenementroutes($fragments)
         call_user_func_array(["EvenementControlleur", "sinscrireEvent"], $fragments);
         break;
       }
-    case "unsubscribe": {
-        call_user_func_array(["EvenementControlleur", "desinscrireEvent"], $fragments);
-        break;
-      }
     case "mine": {
         call_user_func_array(["EvenementControlleur", "displaymesevenement"], $fragments);
         break;
@@ -280,10 +206,6 @@ function evenementroutes($fragments)
       //fonctions collaborateurs
     case "new": {
         call_user_func_array(["EvenementControlleur", "ajouterEvenementCollaborateur"], $fragments);
-        break;
-      }
-    case "galerieAdd": {
-        call_user_func_array(["EvenementControlleur", "galerieEvenementAddCollaborateur"], $fragments);
         break;
       }
     case "edition": {
@@ -308,7 +230,6 @@ function formationroutes($fragments)
   switch ($action) {
     case "all": {
         call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
-        // call_user_func_array(["FormationControlleur", "displayformations"], $fragments);
         break;
       }
     case "quizz": {
