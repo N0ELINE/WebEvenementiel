@@ -13,9 +13,9 @@ class EvenementControlleur {//
     public function displayEvenements() { //a tester
         $daoevent = new DAOEvent();  
         $events=$daoevent->findAll();
-        var_dump($events);
-        // $page= Renderer::render('Evenements.php', compact('events'));
-        // echo $page;
+        //var_dump($events);
+        $page= Renderer::render('editEvenement.php', compact('events'));
+        echo $page;
     }
 
     public function displayEvenement($id) { // a tester
