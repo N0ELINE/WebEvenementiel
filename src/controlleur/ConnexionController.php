@@ -71,7 +71,7 @@ class ConnexionController
         $User = new User();
         $User->setMail($mail);
         $User->setMdp($password);
-        $User->setDroit(1);
+        $User->setDroit(2);
 
         $daoUser = new DAOUser();
         $daoUser->saveUser($User);
