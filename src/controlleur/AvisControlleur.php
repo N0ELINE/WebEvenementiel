@@ -7,13 +7,6 @@ require_once '../src/model/DAOEvent.php';
 require_once '../src/model/Avis.php';
 
 class AvisControlleur {
-    // public function displayAvis() {
-    //     $daoavis = new DAOAvis();    
-    //     $avisformation=$daoavis->findAllFormation();
-    //     $avisevent=$daoavis->findAllEvent();
-    //     $page= Renderer::render('accueilAvis.php', compact('avisformation,avisevent'));
-    //     echo $page;
-    // }
 
     public function ajouterAvisEvent($idEvent) { //OK
        

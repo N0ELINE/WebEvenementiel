@@ -11,94 +11,103 @@ require_once '../src/model/Logs.php';
 class ConnexionController
 {
 
-    public function display()     { //ok  + md5 hashage change pas
-        // $pwd_peppered="pep";
-        // $pwd_hashed =md5($pwd_peppered);
-        //echo($pwd_hashed);
+    public function display()
+    { //ok 
         $page = Renderer::render('connexion.php');
-       echo $page;
+        echo $page;
     }
-  
 
-    public function newConnexion()     { //ok
+
+    public function newConnexion()
+    { //OK
         // -----RECUPERATION DONNÉES-----------------------------------------------------------------------------
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $mdp = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
-        // $mdp=$hashed_password = password_hash($mdp, PASSWORD_DEFAULT); //hash non fonctionnel TODO
-        $daoUser = new DAOUser();
+        $mdp = md5($mdp);
 
+        $daoUser = new DAOUser();
         // -----FIND USER-----------------------------------------------------------------------------
         $Users = $daoUser->findByMail($mail);
+        if (sizeof($Users) != 0) {
+            foreach ($Users as $User) {
+                if ($User != NULL) {
+                    if ($User->getMdp() == $mdp) {
+                        // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
+                        $daoLogs = new DAOLogs();
+                        $monlog = new Logs();
+                        $monlog->setIdUser($User->getId());
+                        $monlog->setDate(date("Y/m/d"));
+                        $monlog->setHeure(date("H:i"));
+                        $daoLogs->saveLogs($monlog);
 
-        foreach ($Users as $User) {
-            if ($User!=NULL) {
-                if($User->getMdp()==$mdp){
-                    // -----SAUVEGARDE DU LOG-----------------------------------------------------------------------------
-                    $daoLogs = new DAOLogs();
-                    $monlog = new Logs();
-                    $monlog->setIdUser($User->getId());
-                    $monlog->setDate(date("Y/m/d"));
-                    $monlog->setHeure(date("H:i"));
-                    $daoLogs->saveLogs($monlog);
+                        Session::initialiserSessionGlobale($User->getId(), $User->getMail(), $User->getDroit());
 
-                    Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(),$User->getDroit());
-                        
-                    header('Location: /site/accueil');
-                    exit();
-
-                }else{ var_dump("mauvais MDP");}
-                
-            } else {
-                echo "Erreur de connexion, mauvais Mail, Veuillez réessayer avec des identifiants valides svp";
-                header('Location: /connexion/accueil');
-                exit();
+                        header('Location: /site/accueil');
+                        exit();
+                    } else {
+                        var_dump("mauvais MDP");
+                    }
+                }
             }
+        } else {
+            echo "Erreur de connexion, mauvais Mail, Veuillez réessayer avec des identifiants valides svp";
+            header('Location: /connexion/accueil');
+            exit();
         }
     }
 
-    public function displayInscription()    { //ok
+    public function displayInscription()
+    { //ok
         $page = Renderer::render('connexionInscription.php');
         echo $page;
     }
 
-    public function newInscriptionClient()    { // a tester
+    public function newInscriptionClient()
+    { // ok
         $mail = htmlspecialchars(isset($_POST["email"]) ? $_POST["email"] : NULL);
         $password = htmlspecialchars(isset($_POST["password"]) ? $_POST["password"] : NULL);
-        // // $mdp=$hashed_password = password_hash($password, PASSWORD_DEFAULT); TODO
+        $password = md5($password);
 
         $User = new User();
         $User->setMail($mail);
-        //hash mdp TODO
         $User->setMdp($password);
-        $User->setDroit(1);
-        
+        $User->setDroit(2);
+
         $daoUser = new DAOUser();
         $daoUser->saveUser($User);
-        $users = $daoUser->findAll();
-        foreach ($users as $user) {
-            if ($user->getMail() == $User->getMail() && $user->getMdp() == $User->getMdp()) {
-                Session::initialiserSessionGlobale($User->getId(),$User->getMail(), $User->getMdp(), $user->getIdRole());
-                header('Location: /site/accueil');
-                exit();
-            } else {
-                echo "Erreur d'inscription, Veuillez réessayer svp";
-                header('Location: /connexion/inscription');
-                exit();
-            }
+        $user = $daoUser->findUserLastOne()[0];
+        $flag = false;
+        if ($user->getMail() == $User->getMail() && $user->getMdp() == $User->getMdp()) {
+            $daoLogs = new DAOLogs();
+            $monlog = new Logs();
+            $monlog->setIdUser($user->getId());
+            $monlog->setDate(date("Y/m/d"));
+            $monlog->setHeure(date("H:i"));
+            $daoLogs->saveLogs($monlog);
+            Session::initialiserSessionGlobale($user->getId(), $user->getMail(), $user->getMdp(), $user->getDroit());
+            header('Location: /site/accueil');
+            exit();
+        } else {
+            echo "Erreur d'inscription, Veuillez réessayer svp";
+            header('Location: /connexion/inscription');
+            exit();
         }
     }
 
-    public function delConnexion()    { //a tester
+    public function delConnexion()
+    { //ok
         Session::detruireSession();
         header('Location: /connexion/accueil');
     }
 
-    public function quatrecentquatre()    { //ok
+    public function quatrecentquatre()
+    { //ok
         $page = Renderer::render('404.php');
         echo $page;
     }
 
-    public function interdit()    { //ok
+    public function interdit()
+    { //ok
         $page = Renderer::render('403.php');
         echo $page;
     }

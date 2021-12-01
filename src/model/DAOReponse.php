@@ -59,25 +59,6 @@ Class DAOFormation {//
     }
 
     
-    
-    public function update(User $User){
-        
-        $cnx=$this->cnx;
 
-        $idReponses=$Reponse->getIdReponses();
-        $idReponseQuestion=$Reponse->getIdReponseQuestion();
-        $libelle=$Reponse->getLibelle();
-        $bonne_rep=$Reponse->getBonne_rep();
-        //requete sql
-        $SQLU="UPDATE QUESTIONS SET idReponseQuestion=:idReponseQuestion,bonne_rep=:bonne_rep,libelle=:libelle WHERE idReponses=:idReponses";
-       
-        //prepare statement
-        $prepareStatementUpdate=$cnx->prepare($SQLU);
-        $prepareStatementSave->bindValue(":idReponses",$idReponses, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":idReponseQuestion",$idReponseQuestion, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":libelle",$libelle, PDO::PARAM_STR);
-        $prepareStatementSave->bindValue(":bonne_rep",$bonne_rep, PDO::PARAM_STR);
-        $prepareStatementUpdate->execute();
-    }
     
 }
