@@ -127,7 +127,7 @@ CREATE TABLE PARTICIPE(
     nbrPersonnes INT,
     PRIMARY KEY (idUserParticipe, idEventParticipe),
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
-    FOREIGN KEY (idEventParticipe) REFERENCES Event(idEvent)
+    FOREIGN KEY (idEventParticipe) REFERENCES EVENEMENT(idEvent)
 );
 
 CREATE TABLE GALERIEEvent(
@@ -135,7 +135,7 @@ CREATE TABLE GALERIEEvent(
     idPhotoGalerie INT NOT NULL,
     PRIMARY KEY (idEventGalerie, idPhotoGalerie),
     FOREIGN KEY (idPhotoGalerie) REFERENCES PHOTOSITE(idPhoto),
-    FOREIGN KEY (idEventGalerie) REFERENCES Event(idEvent)
+    FOREIGN KEY (idEventGalerie) REFERENCES EVENEMENT(idEvent)
 );
 
 CREATE TABLE TYPEFORMATION(
@@ -186,7 +186,7 @@ CREATE TABLE AVIS(
     idUserAvis INT,
     FOREIGN KEY (idUserAvis) REFERENCES USER(idUser)
 );
-INSERT INTO FORMATION (contenu,etoiles,idUserAvis) VALUES ("azertyuio",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("azertyuio",5,1);
 
 
 CREATE TABLE AVISFORMATION(
