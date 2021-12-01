@@ -13,14 +13,14 @@ class EvenementControlleur {//
     public function displayEvenements() { //OK
         $daoevent = new DAOEvent();  
         $events=$daoevent->findAll();
-        $page= Renderer::render('Evenements.php', compact('events'));
+        $page= Renderer::render('clientEvenements.php', compact('events'));
         echo $page;
     }
 
     public function displayEvenement($id) { //OK
         $daoevent = new DAOEvent();
         $event=$daoevent->find($id);
-        $page= Renderer::render('Evenement.php', compact('event'));
+        $page= Renderer::render('oneEvenement.php', compact('event'));
         echo $page;
     }
 
@@ -85,7 +85,7 @@ class EvenementControlleur {//
     public function editionEvenementCollaborateur($idEvent) { //ok
         $daoevent = new DAOEvent();
         $event=$daoevent->find($idEvent);
-        $page= Renderer::render('EvenementEdition.php', compact('event'));
+        $page= Renderer::render('editEvenement.php', compact('event'));
         echo $page;
     }
     

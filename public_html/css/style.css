@@ -594,15 +594,12 @@ position:absolute;
 #img_cours{
 	width: 500px;
 	height: 300px;
-	margin-left: 50px;
+	margin-left: 10px;
 }
-.cours{
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-}
+
 #info_cours{
 	font-size: 35px;
-	margin-left: -250px;
+	margin-left: 250px;
 }
  /*---------------------------*/
   /*Page Formation QUIZZ*/
@@ -614,18 +611,12 @@ position:absolute;
 /*---------------------------*/
   /*Page Event*/
 
-.event_head{
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-}
 
-#title_event{
+.event_head{
 	color: #FADC1C;
 	font-size: 70px;
 	text-align: center;	
-	margin-right: 45px;
-	position: relative;
-	right: 535px; 
+	padding-bottom: 80px;
 }
 .event{
 	position: relative;

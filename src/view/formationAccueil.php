@@ -1,6 +1,9 @@
 <?php include "header.php";?>  <!---erreur 404-->
 <body> 
-<h1 id="title_formation">Toutes les formations !</h1>
+
+<div id="title_formation" >
+    <h1 >Toutes les formations !</h1>
+</div> <br>
 
 
 
@@ -14,14 +17,21 @@
     </div><br><br><br>
 
     <div class="cours">
-        <img src="../image/cour1.jpg" alt="img_cours" id="img_cours"> 
-        <p id="info_cours">Titre Formation <br><b>Nom Cours </b> <br>Description
-        
-        <!-- <a href="../formation/quizz/?id= <?php //+$id?>"> allez au quizz</a>   -->
+    <?php foreach($mesFormation as $formation){
+               $nom=$formation->getNom(); 
+               $description=$formation->getDescription();
+            $duree=$formation->getDureeHeure();
 
+            
+                ?>
+        <p id="info_cours"><?php echo($nom) ?> <br><b><?php echo($description) ?></b> <br> Durée <?php echo($duree) ?> H <br>
         <?php echo '<a href="' . htmlspecialchars("../formation/quizz/" .urlencode($id)),'">';
         $idUrl=JSON_encode ($id);
-        ?> quizz</a>
+        ?> quizz</a> <br><br>
+        <img src="../image/cour1.jpg" alt="img_cours" id="img_cours"> 
+    <?php } ?> 
+
+        
     </p>
     </div> <br><br>
 <?php include "footer.php";?>

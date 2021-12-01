@@ -9,11 +9,11 @@
 
     <div class="event_Atelier">
         <img src="/image/event.jpg" alt="img_event" id="img_event"> 
-        <p id="info_event">Titre Event <br><b>Nom event</b> <br>Description<br><br>      
+        <p id="info_event"><br><?php echo($event->getNom())?> </b> <br><?php echo($event->getDescription())?><br><br>      
     </p>
     </div>
     <div class="buttons">
-            <button class="btn-hover color-1" id="edit">Edit</button>
+           <a href="evenement/edition" ><button class="btn-hover color-1" id="edit">Edit</button></a>
             <button class="btn-hover color-2" onclick="remove()"id="suppr">Supprimer</button>  
     </div>
      <br><br>

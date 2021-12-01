@@ -39,7 +39,6 @@ INSERT INTO DROITS (libelleDroit) VALUES ('salarie');
 INSERT INTO DROITS (libelleDroit) VALUES ('admin');
 INSERT INTO DROITS (libelleDroit) VALUES ('special');
 
--- droit 1 = client 2 = salarie 3= admin
 
 CREATE TABLE USER(
     idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -48,9 +47,9 @@ CREATE TABLE USER(
     droit INT,
     FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
 );
-INSERT INTO USER (Mail,hashMdp,droit) VALUES ('client1@gmail.com', '',1);
-INSERT INTO USER (Mail,hashMdp,droit) VALUES ('salarie2@gmail.com', '123+aze',2);
-INSERT INTO USER (Mail,hashMdp,droit) VALUES ('admin3@gmail.com', '123+aze',3);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('client1@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',2);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('salarie2@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',3);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('admin3@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',4);
 
 
 
@@ -60,6 +59,10 @@ CREATE TABLE NOTIF(
     heure TIME,
     contenu VARCHAR(100)
 );
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2018-09-24","23:59:59.999","une notif d'article");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2016-03-21","12:43:52.988","une notif trop génial");
+
+
 
 CREATE TABLE NOTIFIE(
     idUserNotifie INT NOT NULL, 
@@ -69,11 +72,16 @@ CREATE TABLE NOTIFIE(
     FOREIGN KEY (idUserNotifie) REFERENCES USER(idUser) ,
     FOREIGN KEY (idNotifNotifie) REFERENCES NOTIF(idNotif)
 );
+INSERT INTO NOTIFIE (idUserNotifie,idNotifNotifie,consulte) VALUES (1,1,True);
+INSERT INTO NOTIFIE (idUserNotifie,idNotifNotifie,consulte) VALUES (2,2,False);
+
 
 CREATE TABLE PHOTOSITE(
     idPhoto INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     lien VARCHAR(200)
 );
+INSERT INTO PHOTOSITE (lien) VALUES ("url");
+
 
 CREATE TABLE ARTICLE(
     idArticle INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -99,6 +107,8 @@ CREATE TABLE COMMENTAIRE(
     FOREIGN KEY (idArticleCommentaire) REFERENCES ARTICLE(idArticle),
     FOREIGN KEY (idUserCommentaire) REFERENCES USER(idUser)
 );
+INSERT INTO COMMENTAIRE (idArticleCommentaire,contenu,idPhotoArticle,IdUserCommentaire) VALUES (1,"trop cool ce site",1,1);
+
 
 CREATE TABLE FAVORI(
     idUserFavori INT NOT NULL ,
@@ -107,6 +117,8 @@ CREATE TABLE FAVORI(
     FOREIGN KEY (idUserFavori) REFERENCES USER(idUser),
     FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
 );
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,1);
+
 
 CREATE TABLE EVENEMENT(
     idEvent INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -132,6 +144,8 @@ CREATE TABLE PARTICIPE(
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
     FOREIGN KEY (idEventParticipe) REFERENCES EVENEMENT(idEvent)
 );
+INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
+
 
 CREATE TABLE GALERIEEvent(
     idEventGalerie INT NOT NULL,
@@ -296,8 +310,8 @@ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/new"
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/edition",3,"EvenementControlleur","editionEvenementCollaborateur");
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/save",3,"EvenementControlleur","saveEventModify");
 
- INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("formation/all",1,"FormationControlleur","");
- INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/quizz",1,"FormationControlleur","");
- INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/myformations",1,"FormationControlleur","");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("formation/all",1,"FormationControlleur","displayformations");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/quizz",1,"FormationControlleur","displayformation");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/myformations",1,"FormationControlleur","displayformation");
 
 

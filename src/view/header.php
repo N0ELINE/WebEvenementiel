@@ -22,11 +22,16 @@
         </div>
 
         <div class="icon"> 
-
-            <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
-            <a href="/admin/board"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
-            <img src="/image/cloche.png" alt="ecrou" id="icon">
-            <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>
+            <?php if ($_SESSION["role"] ==4) { ?>
+                <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
+                <a href="/admin/board"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
+                <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>?>
+                <?php  
+                } else {?>
+                        <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
+                        <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>
+            <?php  } ?>
+            
         </div>
         <div class="bleu">
             <img src="/image/bleu.png" alt="ecrou" id="bleu">
