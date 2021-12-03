@@ -10,9 +10,8 @@ class AccueilController {
     public function display() { //ne trouve pas les avis
         $daoavis=new DAOAvis();
         $avisevent=$daoavis->findAllEvent();
-        var_dump($avisevent);
-        // $page = Renderer::render('accueil.php',compact('avisevent'));
-        // echo $page;
+        $page = Renderer::render('accueil.php',compact('avisevent'));
+        echo $page;
     } 
 
     public function displayPageContact() {  //ok
