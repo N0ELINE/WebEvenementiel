@@ -13,24 +13,17 @@ class FormationControlleur {
         $mesFormation=$daoform->findAll();
         
             foreach($mesFormation as $myForm){
-                $id=$myForm->getIdFormation();
-                //var_dump($id);    
-            }       
-        $page= Renderer::render('formationAccueil.php',compact('id'));
+                $id=$myForm->getIdFormation();   
+            }      
+        $page= Renderer::render('formationAccueil.php',compact('mesFormation','id'));
         echo $page;
 
     }
 
 
     public function displayformation($id) { // question
-        // requete api pour recup question reponse ??? TODO Athé
-        $response = file_get_contents('http://127.0.0.4:8080/?id='.$id);
-    
-        
-        // echo "<script> window.onload = function() {
-        //     promise($id)
-        // }; </script>";
-        
+        $url = parse_ini_file("configApi.ini");
+        $response = file_get_contents($url.$id);
 
         echo "<script > window.onload = function() {
             promise($id);       
