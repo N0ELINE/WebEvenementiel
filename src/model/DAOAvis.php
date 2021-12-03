@@ -9,9 +9,6 @@ require_once 'AvisFormation.php';
 class DAOAvis
 {
 
-    //TODO !! fonction last dans avis pour avis formation
-    //AVIS(idAvis, contenu, etoiles, #idUserAvis)
-    // -- AVISFORMATION(#idFormationAvis, #idAvisFormation)
 
     private $cnx;
 
@@ -53,7 +50,7 @@ class DAOAvis
 
     public function findAllEvent(): array
     {
-        $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, e.idEvent FROM AVIS a,AVISEVENT e WHERE a.idAvis=e.idAvis");
+        $requete = $this->cnx->prepare("SELECT a.idAvis, a.contenu, a.etoiles, a.idUserAvis, e.idEvent FROM AVIS a,AVISEVENT e ");
         $requete->execute();
         while ($result = $requete->fetchObject('Avis')) {
             $Avis[] = $result;
