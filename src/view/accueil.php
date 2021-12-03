@@ -34,10 +34,10 @@
             <p id="cli1"> <?php echo($av[0]) ?><br>
             </p>
 
-            <p id="cli2"><?php //echo($av[1]) ?><br>
+            <p id="cli2"><?php echo($av[1]) ?><br>
             </p>
 
-            <p id="cli3"><?php //echo($av[2]) ?><br>
+            <p id="cli3"><?php echo($av[2]) ?><br>
             </p>
 
         </div>

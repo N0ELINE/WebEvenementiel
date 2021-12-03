@@ -17,7 +17,10 @@
     <p id="info_event"><?php echo '<a href="' . htmlspecialchars("/evenement/one/" .urlencode($id)),'">';
         $idUrl=JSON_encode ($id);?>
     <?php echo($name)?> <br><b><?php echo($description)?> </b>  </a> </p>
-    </div> <br><br>
+    </div> 
+    <form method="POST" action="../../evenement/subscribe<?php print($event->getId()) ?>" id="btn-sub">
+        <button class="btn-hover color-2" id="inscrire">Inscrire</button> 
+    </form> 
 <?php } include "footer.php";?>
 
 

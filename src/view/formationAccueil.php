@@ -31,6 +31,7 @@
         ?> quizz</a> <br><br>
         <img src="../image/cour1.jpg" alt="img_cours" id="img_cours"> 
     <?php } ?> 
+   
 
         
     </p>
