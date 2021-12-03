@@ -19,7 +19,7 @@ class TypeFormation{
         $this->idType = $idType;
     }
     function setLibelleFormation($libelleFormation) {
-        $this->libelleFormation = $dalibelleFormationte;
+        $this->libelleFormation = $libelleFormation;
     }
    
 

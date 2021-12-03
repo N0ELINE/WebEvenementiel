@@ -4,6 +4,7 @@ require_once '../src/utils/Renderer.php';
 require_once '../src/model/DAOUser.php';
 require_once '../src/model/DAOFormation.php';
 require_once '../src/model/Formation.php';
+require_once '../src/model/TypeFormation.php';
 
 require_once '../src/model/User.php';
 
@@ -11,11 +12,15 @@ class FormationControlleur {
     public function displayformations() { //ok
         $daoform= new DAOFormation();
         $mesFormation=$daoform->findAll();
+        $type=$daoform->findAllTypeFormation();
+
         
             foreach($mesFormation as $myForm){
-                $id=$myForm->getIdFormation();   
-            }      
-        $page= Renderer::render('formationAccueil.php',compact('mesFormation','id'));
+                $id=$myForm->getIdFormation(); 
+                //$type[]=$daoform->findByTypeFormationFormation($id);          
+            }  
+            //var_dump($type); 
+        $page= Renderer::render('formationAccueil.php',compact('mesFormation','id','type'));
         echo $page;
 
     }

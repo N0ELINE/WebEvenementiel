@@ -1,21 +1,22 @@
-<?php include "header.php";?>  <!---erreur 404-->
+<?php include "header.php";?>  
 <body> 
 
 <div id="title_formation" >
     <h1 >Toutes les formations !</h1>
 </div> <br>
-
-
-
+<?php foreach ($type as $t) {
+    $ty[]=$t->getlibelleFormation();
+    //echo(var_dump($t->getlibelleFormation()));
+} ?>  
     <div class="filter">
         <select name="filter" id="filtre">
-            <option value="Filter1">Filter1</option>
-            <option value="Filter2">Filter2</option>
-            <option value="Filter3">Filter3</option>
-            <option value="Filter4">Filter4</option>
+            <option value="Filter"><?php echo($ty[0]); ?></option>
+            <option value="Filter"><?php echo($ty[1]); ?></option>
+            <option value="Filter"><?php echo($ty[2]); ?></option>
+
         </select>
     </div><br><br><br>
-
+ 
     <div class="cours">
     <?php foreach($mesFormation as $formation){
                $nom=$formation->getNom(); 
@@ -35,5 +36,3 @@
     </p>
     </div> <br><br>
 <?php include "footer.php";?>
-
-

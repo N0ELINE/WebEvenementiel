@@ -26,15 +26,18 @@
         <br><br>
         <h1 id="titre_cli">Nos Clients</h1> <br><br>
 
-        <div id="client">
+        <div id="client"> <?php foreach ($avisevent as $avi ){
+                $av[]=$avi->getContenu();
+                //echo(var_dump($av));
+        } ?>
 
-            <p id="cli1"> <?php //$avisevent[0]->getContenu(); ?><br>
+            <p id="cli1"> <?php echo($av[0]) ?><br>
             </p>
 
-            <p id="cli2"><?php //$avisevent[1]->getContenu(); ?><br>
+            <p id="cli2"><?php //echo($av[1]) ?><br>
             </p>
 
-            <p id="cli3"><?php //$avisevent[2]->getContenu(); ?><br>
+            <p id="cli3"><?php //echo($av[2]) ?><br>
             </p>
 
         </div>

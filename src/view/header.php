@@ -25,11 +25,10 @@
             <?php if ($_SESSION["role"] ==4) { ?>
                 <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
                 <a href="/admin/board"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
-                <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>?>
-                <?php  
+                <?php 
                 } else {?>
-                        <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
                         <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>
+                        <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
             <?php  } ?>
             
         </div>
