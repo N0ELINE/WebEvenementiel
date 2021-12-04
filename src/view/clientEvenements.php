@@ -23,8 +23,8 @@
 
     <?php echo($name)?> <br><b><?php echo($description)?> </b>  </a> </p>
     </div> 
-        <button class="btn-hover color-2" id="inscrire">Inscrire</button> 
-    </form> 
+        <button class="btn-hover color-1" id="inscrire">Inscrire</button> 
+    </form>  <br><br>
 <?php } include "footer.php";?>
 
 

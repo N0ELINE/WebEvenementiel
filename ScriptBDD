@@ -206,9 +206,9 @@ CREATE TABLE AVIS(
     FOREIGN KEY (idUserAvis) REFERENCES USER(idUser)
 );
 
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("azertyuio",5,1);
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("qsdfghjklm",5,1);
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("wxcvbn",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Ce site est incroyable !",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Il mérite 20/20 ce site tellement de bonne chose :)",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Trop bien fait et géniale",5,1);
 
 
 CREATE TABLE AVISFORMATION(

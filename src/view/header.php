@@ -32,7 +32,7 @@
 
                 <?php 
                 } else {
-                    ?><p id="mail"> <?php echo($_SESSION["mail"]) ?>
+                    ?><p id="mail"> <?php echo($_SESSION["mail"]) ?> <br>
                         <a href="/blog/favori"><img src="/image/heart.png" alt="ecrou" id="icon"></a>
                         <a href="/connexion/accueil"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
             <?php  } ?>
