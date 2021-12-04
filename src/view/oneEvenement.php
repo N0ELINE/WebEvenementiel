@@ -19,7 +19,7 @@
     </div>
     <?php if ($_SESSION["role"] ==3){ ?>
     <div class="buttons">
-        <a href="evenement/edition" ><button class="btn-hover color-1" id="edit">Edit</button></a>
+        <a href="/evenement/edition/<?php print($event->getId()) ?>" ><button class="btn-hover color-1" id="edit">Edit</button></a>
         <button class="btn-hover color-2" onclick="remove()"id="suppr">Supprimer</button>  
 </div>
 <?php } ?>

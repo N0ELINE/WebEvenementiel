@@ -21,8 +21,8 @@
     <?php foreach($mesFormation as $formation){
                $nom=$formation->getNom(); 
                $description=$formation->getDescription();
-            $duree=$formation->getDureeHeure();
-
+                $duree=$formation->getDureeHeure();
+                $id=$formation->getIdFormation();
             
                 ?>
         <p id="info_cours"><?php echo($nom) ?> <br><b><?php echo($description) ?></b> <br> Durée <?php echo($duree) ?> H <br>

@@ -118,6 +118,8 @@ CREATE TABLE FAVORI(
     FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
 );
 INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,1);
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,2);
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,3);
 
 
 CREATE TABLE EVENEMENT(

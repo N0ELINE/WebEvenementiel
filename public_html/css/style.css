@@ -578,10 +578,10 @@ position:absolute;
 #title_formation{
 	color: #FADC1C;
 	font-size: 70px;
-	text-align: right;	
+	text-align: center;	
 	margin-right: 45px;
 	position: relative;
-	right: 535px; 
+	
 }
 .formation{
 	position: relative;
@@ -697,7 +697,22 @@ position:absolute;
      color: #000000;
 	 width: 570px;
      border-style: solid;
-     border-radius: 16px;
-  
-    	 
+     border-radius: 16px;	    	 
 }
+/* page Article */
+#img_article{
+	height: 195px;
+	width: 290px;
+}
+#title_article{
+	font-size: 50px;
+	color: #FADC1C;
+	font-size: 70px;
+	text-align: center;
+}
+#fav{
+	margin-top: 115px;
+	margin-right: 175px;
+}
+
+

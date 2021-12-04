@@ -13,14 +13,9 @@ class FormationControlleur {
         $daoform= new DAOFormation();
         $mesFormation=$daoform->findAll();
         $type=$daoform->findAllTypeFormation();
-
         
-            foreach($mesFormation as $myForm){
-                $id=$myForm->getIdFormation(); 
-                //$type[]=$daoform->findByTypeFormationFormation($id);          
-            }  
-            //var_dump($type); 
-        $page= Renderer::render('formationAccueil.php',compact('mesFormation','id','type'));
+         
+        $page= Renderer::render('formationAccueil.php',compact('mesFormation','type'));
         echo $page;
 
     }
