@@ -714,5 +714,23 @@ position:absolute;
 	margin-top: 115px;
 	margin-right: 175px;
 }
+/* page admin */
 
+#tableau{
+	margin-left: 300px;
+}
+th{
+	background-color: #9E0785;
+}
 
+td{
+	width: 10%;
+}
+table {
+	border: medium solid #9E0785;
+	border-collapse: collapse;
+	font-size: 25px;
+	box-shadow: 7px 7px 25px rgba(198, 206, 237, .7);
+	font-family: sans-serif;
+	text-align: center;
+}

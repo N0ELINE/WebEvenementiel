@@ -59,8 +59,8 @@ CREATE TABLE NOTIF(
     heure TIME,
     contenu VARCHAR(100)
 );
-INSERT INTO NOTIF (date,heure,contenu) VALUES ("2018-09-24","23:59:59.999","une notif d'article");
-INSERT INTO NOTIF (date,heure,contenu) VALUES ("2016-03-21","12:43:52.988","une notif trop génial");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("1818-11-11","23:59:59.999","une notif d'article");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2008-09-11","12:43:52.988","une notif trop génial");
 
 
 
@@ -235,7 +235,10 @@ CREATE TABLE LOGS(
     PRIMARY KEY (idUserLogs, dateu, heure),
     FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
     );
-    
+ INSERT INTO LOGS (idUserLogs,dateu,heure) VALUES (2,"2008-11-11","21:09:59.999");
+INSERT INTO LOGS (idUserLogs,dateu,heure) VALUES (2,"2014-12-02","13:14:49.988");
+
+
 CREATE TABLE QUESTIONS(
     idQuestion INT PRIMARY KEY  NOT NULL,
     idQuestionFormation INT NOT NULL,
@@ -287,7 +290,7 @@ CREATE TABLE MANAGEACCESS(
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/contact",1,"AccueilController","displayPageContact");
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/sendContact",1,"AccueilController","envoiContact");
 
- INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("admin",4,"AdministrateurControlleur","tableauDeBord");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("admin/tab",4,"AdministrateurControlleur","tableauDeBord");
 
  INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("avis/add",2,"AvisControlleur","ajouterAvisEvent");
 
