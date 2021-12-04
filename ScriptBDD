@@ -146,7 +146,7 @@ CREATE TABLE PARTICIPE(
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
     FOREIGN KEY (idEventParticipe) REFERENCES EVENEMENT(idEvent)
 );
-INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
+-- INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
 
 
 CREATE TABLE GALERIEEvent(
@@ -311,6 +311,8 @@ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("evenement/min
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/new",3,"EvenementControlleur","ajouterEvenementCollaborateur");
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/edition",3,"EvenementControlleur","editionEvenementCollaborateur");
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/save",3,"EvenementControlleur","saveEventModify");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/suppr",3,"EvenementControlleur","removeEvenementCollaborateur");
+
 
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("formation/all",1,"FormationControlleur","displayformations");
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/quizz",1,"FormationControlleur","displayformation");

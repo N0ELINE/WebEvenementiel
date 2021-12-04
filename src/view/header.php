@@ -22,10 +22,10 @@
         </div>
 
         <div class="icon"> 
-            <?php if ($_SESSION["role"] ==4) { 
+            <?php if ($_SESSION["role"] == 4) { 
                 ?><p id="mail"> <?php echo($_SESSION["mail"]) ?></p>
                 <a href="/connexion/sedeconnecter"><img src="/image/connection.png" alt="ecrou" id="icon"></a>
-                <a href="/admin/board"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
+                <a href="/admin"><img src="/image/ecrou.png" alt="ecrou" id="icon"></a>
                 <?php 
                 } else {
                     ?><p id="mail"> <?php echo($_SESSION["mail"]) ?>

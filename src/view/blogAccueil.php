@@ -9,7 +9,6 @@
         $text=$art->getContenu();
         $description=$art->getDescription();
         $id=$art->getId();
-        var_dump($id);
         ?>
         
 <form method="POST" action="../../blog/like/<?php echo($id) ?>" id="form_edit_event">

@@ -32,7 +32,8 @@ class EvenementControlleur {//
         $participe->setIdUserParticipe($_SESSION["id"]);
         $participe->setNbrPersonnes(htmlspecialchars(isset($_POST["nbrpersonnes"]) ? $_POST["nbrpersonnes"] : NULL));
         $daoparticipe->save($participe);
-        header('Location: evenement/one/'.$idEvent);
+        echo("Inscrit !");
+        //header('Location: evenement/one/'.$idEvent);
     }
 
     public function displaymesevenement() { //ok
@@ -87,6 +88,14 @@ class EvenementControlleur {//
         $event=$daoevent->find($idEvent);
         $page= Renderer::render('editEvenement.php', compact('event'));
         echo $page;
+    }
+
+    public function removeEvenementCollaborateur($idEvent) { //ok
+        $daoevent = new DAOEvent();
+        $event=$daoevent->find($idEvent);
+        $daoevent->remove($_SESSION["id"],$idEvent);
+        echo ("Delete de cette event");
+        var_dump("supprimer");
     }
     
 
