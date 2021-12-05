@@ -1,24 +1,57 @@
+-- USER(idUser, Mail, hashMdp, #droit)
+-- DROITS(idDroits, libelleDroit)
+-- NOTIF(idNotif, date,heure, contenu)
+-- NOTIFIE (idUserNotifie, idNotifNotifie, consulte)
+-- PHOTOSITE(idPhoto, lien)
+-- ARTICLE(idArticle, nom, prenom, description, contenu, date, #idPhotoArticle)
+-- COMMENTAIRE(idCommentaire, contenu, #idArticleCommentaire, #idUserCommentaire)
+-- FAVORI(#idUserFavori, #idArticleFavori)
+-- EVENT(idEvent, nom, description, date, heure, dureeMinute, effectifMax, localisation, #idPhotoEvent)
+-- PARTICIPE(#idEventParticipe, #idUserParticipe, nbrPersonnes)
+-- GALERIEEVENT(#idEventGalerie, #idPhotoGalerie)
+-- TYPEFORMATION(idType, libelleFormation)
+-- DIFFICULTEE(idDifficultée, libelleDifficultée)
+-- FORMATION(idFormation, nom, description, #idTypeFormation, #idDifficulteeFormation)
+-- COMMENCE(#idFormationCommence, #idUserCommence, avancement, datedebut)
+-- AVIS(idAvis, contenu, etoiles, #idUserAvis)
+-- AVISFORMATION(#idFormationAvis, #idAvisFormation)
+-- AVISEVENT(#idEventAvis, #idAvisEvent)
+-- LOGS(#idUserLogs, dateu, heure)
+
+
+DROP DATABASE STAREVENT;
+
 CREATE DATABASE STAREVENT;
+use STAREVENT;
 
-
-CREATE TABLE USER(
-    idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    adresseMail VARCHAR(100),
-    hashMdp VARCHAR(255)
-);
+CREATE USER 'webuser'@'%' IDENTIFIED BY '123+aze';
+GRANT ALL PRIVILEGES ON STAREVENT TO 'webuser'@'%';
+GRANT ALL PRIVILEGES ON *.* TO 'webuser'@'%';
+FLUSH PRIVILEGES;
 
 CREATE TABLE DROITS(
     idDroits INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     libelleDroit VARCHAR(100)
 );
+INSERT INTO DROITS (libelleDroit) VALUES ('no');
+INSERT INTO DROITS (libelleDroit) VALUES ('client');
+INSERT INTO DROITS (libelleDroit) VALUES ('salarie');
+INSERT INTO DROITS (libelleDroit) VALUES ('admin');
+INSERT INTO DROITS (libelleDroit) VALUES ('special');
 
-CREATE TABLE ATTRIBUTION(
-    idUserAttribution INT NOT NULL,
-    idDroitsAttribution INT NOT NULL,
-    PRIMARY KEY (idUserAttribution,idDroitsAttribution),
-    FOREIGN KEY (idUserAttribution) REFERENCES USER(idUser),
-    FOREIGN KEY (idDroitsAttribution) REFERENCES DROITS(idDroits)
+
+CREATE TABLE USER(
+    idUser INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Mail VARCHAR(100),
+    hashMdp VARCHAR(255),
+    droit INT,
+    FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
 );
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('client1@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',2);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('salarie2@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',3);
+INSERT INTO USER (Mail,hashMdp,droit) VALUES ('admin3@gmail.com', 'd693b084ed2de11b14bfbdfdc65742e6',4);
+
+
 
 CREATE TABLE NOTIF(
     idNotif INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -26,8 +59,12 @@ CREATE TABLE NOTIF(
     heure TIME,
     contenu VARCHAR(100)
 );
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2018-09-24","23:59:59.999","une notif d'article");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2016-03-21","12:43:52.988","une notif trop génial");
 
-CREATE TABLE NOTIFIE(
+
+
+CREATE TABLE NOTIFIE(
     idUserNotifie INT NOT NULL, 
     idNotifNotifie INT NOT NULL, 
     consulte BOOLEAN DEFAULT false,
@@ -35,32 +72,43 @@ CREATE TABLE NOTIFIE(
     FOREIGN KEY (idUserNotifie) REFERENCES USER(idUser) ,
     FOREIGN KEY (idNotifNotifie) REFERENCES NOTIF(idNotif)
 );
+INSERT INTO NOTIFIE (idUserNotifie,idNotifNotifie,consulte) VALUES (1,1,True);
+INSERT INTO NOTIFIE (idUserNotifie,idNotifNotifie,consulte) VALUES (2,2,False);
+
 
 CREATE TABLE PHOTOSITE(
     idPhoto INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     lien VARCHAR(200)
 );
+INSERT INTO PHOTOSITE (lien) VALUES ("url");
+
 
 CREATE TABLE ARTICLE(
     idArticle INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nom VARCHAR(100),
-    prenom VARCHAR(100),
     description VARCHAR(500),
     contenu VARCHAR(10000),
     date DATE,
     idPhotoArticle INT,
     FOREIGN KEY (idPhotoArticle) REFERENCES PHOTOSITE(idPhoto)
 );
+INSERT INTO ARTICLE (nom,description,contenu) VALUES ("Todo list EVJF","comment ne rien coublier dans la préparation d'un EVJF","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+INSERT INTO ARTICLE (nom,description,contenu) VALUES ("Le mariage quelle mauvaise idée","les hommes viennent de mars et les hommes de venus","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+INSERT INTO ARTICLE (nom,description,contenu) VALUES ("Un anniversaire POKEMON","des idées de déco DIY","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
+
+
 
 CREATE TABLE COMMENTAIRE(
     idCommentaire INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    idArticleCommentaire INT NOT NULL,
     contenu VARCHAR(1000),
     idPhotoArticle int,
-    idArticleCommentaire INT,
     IdUserCommentaire int,
     FOREIGN KEY (idArticleCommentaire) REFERENCES ARTICLE(idArticle),
     FOREIGN KEY (idUserCommentaire) REFERENCES USER(idUser)
 );
+INSERT INTO COMMENTAIRE (idArticleCommentaire,contenu,idPhotoArticle,IdUserCommentaire) VALUES (1,"trop cool ce site",1,1);
+
 
 CREATE TABLE FAVORI(
     idUserFavori INT NOT NULL ,
@@ -69,9 +117,11 @@ CREATE TABLE FAVORI(
     FOREIGN KEY (idUserFavori) REFERENCES USER(idUser),
     FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
 );
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,1);
 
-CREATE TABLE ATELIER(
-    idAtelier INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+
+CREATE TABLE EVENEMENT(
+    idEvent INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nom VARCHAR(100),
     description VARCHAR(1000),
     date DATE,
@@ -79,37 +129,48 @@ CREATE TABLE ATELIER(
     dureeMinute INT,
     effectifMax INT,
     localisation VARCHAR(1000),
-    idPhotoAtelier INT,
-    FOREIGN KEY (idPhotoAtelier) REFERENCES PHOTOSITE(idPhoto)
+    idPhotoEvent INT,
+    FOREIGN KEY (idPhotoEvent) REFERENCES PHOTOSITE(idPhoto)
 );
+INSERT INTO EVENEMENT (nom,description) VALUES ("DIY Party","par la blogueuse Emilie");
+INSERT INTO EVENEMENT (nom,description) VALUES ("Soirée Karaoké","sur le dance floooor");
+
 
 CREATE TABLE PARTICIPE(
-    idAtelierParticipe INT NOT NULL,
+    idEventParticipe INT NOT NULL,
     idUserParticipe INT NOT NULL,
     nbrPersonnes INT,
-    PRIMARY KEY (idUserParticipe, idAtelierParticipe),
+    PRIMARY KEY (idUserParticipe, idEventParticipe),
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
-    FOREIGN KEY (idAtelierParticipe) REFERENCES ATELIER(idAtelier)
+    FOREIGN KEY (idEventParticipe) REFERENCES EVENEMENT(idEvent)
 );
+INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
 
-CREATE TABLE GALERIEATELIER(
-    idAtelierGalerie INT NOT NULL,
+
+CREATE TABLE GALERIEEvent(
+    idEventGalerie INT NOT NULL,
     idPhotoGalerie INT NOT NULL,
-    PRIMARY KEY (idAtelierGalerie, idPhotoGalerie),
+    PRIMARY KEY (idEventGalerie, idPhotoGalerie),
     FOREIGN KEY (idPhotoGalerie) REFERENCES PHOTOSITE(idPhoto),
-    FOREIGN KEY (idAtelierGalerie) REFERENCES ATELIER(idAtelier)
+    FOREIGN KEY (idEventGalerie) REFERENCES EVENEMENT(idEvent)
 );
 
 CREATE TABLE TYPEFORMATION(
     idType INT PRIMARY KEY NOT NULL,
     libelleFormation VARCHAR(100)
 );
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (1,"Rapide");
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (2,"Medium");
+INSERT INTO TYPEFORMATION (idType,libelleFormation) VALUES (3,"Longue");
+
 
 CREATE TABLE DIFFICULTEE(
     idDifficultée INT PRIMARY KEY NOT NULL,
     libelleDifficultée VARCHAR(100)
 );
-
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (1,"facile");
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (2,"moyen");
+INSERT INTO DIFFICULTEE (idDifficultée,libelleDifficultée) VALUES (3,"difficile");
 CREATE TABLE FORMATION(
     idFormation INT PRIMARY KEY NOT NULL,
     nom VARCHAR(200),
@@ -120,6 +181,10 @@ CREATE TABLE FORMATION(
     FOREIGN KEY (idTypeFormation) REFERENCES TYPEFORMATION(idType),
     FOREIGN KEY (idDifficultéeFormation) REFERENCES DIFFICULTEE(idDifficultée)
 );
+
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (1,"Formation fête","Formation d'organisation de fête",3,1,1);
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (2,"Formation Enterrement","Formation d'organisation d'enterrement'",5,2,2);
+INSERT INTO FORMATION (idFormation,nom,description,dureeHeure,idTypeFormation,idDifficultéeFormation) VALUES (3,"Formation truc&Astuce","Formation d'aide de déco",23,3,3);
 
 CREATE TABLE COMMENCE(
     idFormationCommence INT NOT NULL,
@@ -132,10 +197,17 @@ CREATE TABLE COMMENCE(
 );
 
 CREATE TABLE AVIS(
-    idAvis INT PRIMARY KEY NOT NULL,
+    idAvis INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     contenu VARCHAR(1000),
-    etoiles INT default 0
+    etoiles INT default 0,
+    idUserAvis INT,
+    FOREIGN KEY (idUserAvis) REFERENCES USER(idUser)
 );
+
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("azertyuio",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("qsdfghjklm",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("wxcvbn",5,1);
+
 
 CREATE TABLE AVISFORMATION(
     idFormationAvis INT  NOT NULL,
@@ -145,21 +217,101 @@ CREATE TABLE AVISFORMATION(
     FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
 );
 
-CREATE TABLE AVISATELIER(
-    idAtelierAvis INT NOT NULL,
-    idAvisFormation INT NOT NULL,
-    PRIMARY KEY (idAtelierAvis, idAvisFormation),
-    FOREIGN KEY (idAtelierAvis) REFERENCES ATELIER(idAtelier),
-    FOREIGN KEY (idAvisFormation) REFERENCES AVIS(idAvis)
+CREATE TABLE AVISEVENT(
+    idEvent INT NOT NULL,
+    idAvis INT NOT NULL,
+    PRIMARY KEY (idEvent, idAvis),
+    FOREIGN KEY (idEvent) REFERENCES EVENEMENT(idEvent),
+    FOREIGN KEY (idAvis) REFERENCES AVIS(idAvis)
 );
+INSERT INTO AVISEVENT (idEvent,idAvis) VALUES (1,1);
 
--- CREATE TABLE CONTACT(
---     idAtelier
---     mail VARCHAR(500),
---     nom VARCHAR(100),
---     prenom VARCHAR(100),
---     societe VARCHAR(100),
---     tel INT,
---     sujet VARCHAR(200),
---     message VARCHAR(50000)
--- );
+CREATE TABLE LOGS(
+    idUserLogs INT NOT NULL,
+    dateu DATE NOT NULL,
+    heure TIME NOT NULL,
+    PRIMARY KEY (idUserLogs, dateu, heure),
+    FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
+    );
+    
+CREATE TABLE QUESTIONS(
+    idQuestion INT PRIMARY KEY  NOT NULL,
+    idQuestionFormation INT NOT NULL,
+    libelle VARCHAR(500) NOT NULL,
+    FOREIGN KEY (idQuestionFormation) REFERENCES FORMATION(idFormation)
+    );
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (1,1,"Comment organiser un mariage?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (2,2,"Comment organiser un enterrement?");
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (3,3,"Quelle est le nom de ce site?");
+
+INSERT INTO QUESTIONS (idQuestion,idQuestionFormation,libelle) VALUES (4,1,"Comment on fait?");
+
+
+
+CREATE TABLE REPONSES(
+    idReponses INT PRIMARY KEY NOT NULL,
+    idReponseQuestion INT NOT NULL,
+    libelle VARCHAR(500) NOT NULL,
+    bonne_rep BOOLEAN,
+    FOREIGN KEY (idReponseQuestion) REFERENCES QUESTIONS(idQuestion)
+    );
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (1,1,"Avec de la patience",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (2,1,"Avec des coups de poingts",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (3,1,"Avec des des crêpes",false);
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (4,2,"Avec de la finesse",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (5,2,"Avec des des blagues pas drôle",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (6,2,"Avec des des chamignons",false);
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (7,3,"StarEvent",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (8,3,"MoonEvent",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (9,3,"SunEvent",false);
+
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (10,4,"JSP",true);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (11,4,"comme ça",false);
+INSERT INTO REPONSES (idReponses,idReponseQuestion,libelle,bonne_rep) VALUES (12,4,"bloup",false);
+
+
+CREATE TABLE MANAGEACCESS(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+     url VARCHAR(50),
+    droit INT,
+    controleur  VARCHAR(50),
+    fonction  VARCHAR(50),
+    FOREIGN KEY (droit) REFERENCES DROITS(idDroits)
+ );
+
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction) VALUES ("site/accueil",1,"AccueilController","display");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/contact",1,"AccueilController","displayPageContact");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/sendContact",1,"AccueilController","envoiContact");
+
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("admin",4,"AdministrateurControlleur","tableauDeBord");
+
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("avis/add",2,"AvisControlleur","ajouterAvisEvent");
+
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("blog/all",1,"BlogControlleur","displayArticles");
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("blog/one",1,"BlogControlleur","displayArticle");
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("blog/like",2,"BlogControlleur","aimerArticle");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("blog/favori",2,"BlogControlleur","articleAime");
+
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("connexion/accueil",1,"ConnexionController","display");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("connexion/inscription",1,"ConnexionController","displayInscription");
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("connexion/connexion",1,"ConnexionController","newConnexion");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("connexion/sinscrire",1,"ConnexionController","newInscriptionClient");
+ INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("connexion/sedeconnecter",5,"ConnexionController","delConnexion");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("connexion/404",1,"ConnexionController","quatrecentquatre");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("connexion/403",1,"ConnexionController","interdit");
+
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/all",1,"EvenementControlleur","displayEvenements");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/one",1,"EvenementControlleur","displayEvenement");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("evenement/subscribe",2,"EvenementControlleur","sinscrireEvent");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("evenement/mine",2,"EvenementControlleur","displaymesevenement");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/new",3,"EvenementControlleur","ajouterEvenementCollaborateur");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/edition",3,"EvenementControlleur","editionEvenementCollaborateur");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/save",3,"EvenementControlleur","saveEventModify");
+
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("formation/all",1,"FormationControlleur","displayformations");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/quizz",1,"FormationControlleur","displayformation");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/myformations",1,"FormationControlleur","displayformation");
+
+
