@@ -39,9 +39,7 @@ class ConnexionController
                         $monlog->setDate(date("Y/m/d"));
                         $monlog->setHeure(date("H:i"));
                         $daoLogs->saveLogs($monlog);
-
                         Session::initialiserSessionGlobale($User->getId(), $User->getMail(), $User->getDroit());
-
                         header('Location: /site/accueil');
                         exit();
                     } else {

@@ -29,6 +29,8 @@ if (isset($_SERVER["PATH_INFO"])) {
 session_start();
 $fragments = explode("/", $path);
 
+
+
 $dao = new DAOManageAccess();
 $mesAcces = $dao->findByURL($fragments[0] . "/" . $fragments[1]);
 $flag = 403;
@@ -39,25 +41,25 @@ if (sizeof($mesAcces) != 0) {
         break;
       }
     case 2: {
-        if ($_SESSION["droit"] == 2) {
+        if ($_SESSION["role"] == 2) {
           $flag = 1;
         }
         break;
       }
     case 3: {
-        if ($_SESSION["droit"] == 3 || $_SESSION["droit"] == 4) {
+        if ($_SESSION["role"] == 3 || $_SESSION["role"] == 4) {
           $flag = 1;
         }
         break;
       }
     case 4: {
-        if ($_SESSION["droit"] == 4) {
+        if ($_SESSION["role"] == 4) {
           $flag = 1;
         }
         break;
       }
     case 5: {
-        if ($_SESSION["droit"] == 3 || $_SESSION["droit"] == 2 || $_SESSION["droit"] == 4) {
+        if ($_SESSION["role"] == 3 || $_SESSION["role"] == 2 || $_SESSION["role"] == 4) {
           $flag = 1;
         }
         break;

@@ -1,7 +1,7 @@
 <?php include "header.php";?>
 <body>
     <br> 
-<form action="" id="form_contact">
+<form  method="POST" action="../../site/sendContact" id="form_contact">
     
         
     <h1 id="title_contact">Nous contacter !</h1> <br><br><br><br> <br> <br> <br> <br> <br> 

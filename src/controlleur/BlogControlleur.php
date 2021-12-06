@@ -40,7 +40,7 @@ class BlogControlleur
             $article=$daoarticle->find($favori->getIdArticleFavori());
             array_push($articlesfavori,$article);
         }
-        $page = Renderer::render('blogAccueil.php', compact('articlesfavori'));
+        $page = Renderer::render('blogFavoris.php', compact('articlesfavori'));
         echo $page;
     }
 

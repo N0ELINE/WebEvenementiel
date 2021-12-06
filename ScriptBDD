@@ -59,8 +59,8 @@ CREATE TABLE NOTIF(
     heure TIME,
     contenu VARCHAR(100)
 );
-INSERT INTO NOTIF (date,heure,contenu) VALUES ("2018-09-24","23:59:59.999","une notif d'article");
-INSERT INTO NOTIF (date,heure,contenu) VALUES ("2016-03-21","12:43:52.988","une notif trop génial");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("1818-11-11","23:59:59.999","une notif d'article");
+INSERT INTO NOTIF (date,heure,contenu) VALUES ("2008-09-11","12:43:52.988","une notif trop génial");
 
 
 
@@ -118,6 +118,8 @@ CREATE TABLE FAVORI(
     FOREIGN KEY (idArticleFavori) REFERENCES ARTICLE(idArticle)
 );
 INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,1);
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,2);
+INSERT INTO FAVORI (idUserFavori,idArticleFavori) VALUES (1,3);
 
 
 CREATE TABLE EVENEMENT(
@@ -144,7 +146,7 @@ CREATE TABLE PARTICIPE(
     FOREIGN KEY (idUserParticipe) REFERENCES USER(idUser),
     FOREIGN KEY (idEventParticipe) REFERENCES EVENEMENT(idEvent)
 );
-INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
+-- INSERT INTO PARTICIPE (idEventParticipe,idUserParticipe,nbrPersonnes) VALUES (1,1,42);
 
 
 CREATE TABLE GALERIEEvent(
@@ -204,9 +206,9 @@ CREATE TABLE AVIS(
     FOREIGN KEY (idUserAvis) REFERENCES USER(idUser)
 );
 
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("azertyuio",5,1);
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("qsdfghjklm",5,1);
-INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("wxcvbn",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Ce site est incroyable !",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Il mérite 20/20 ce site tellement de bonne chose :)",5,1);
+INSERT INTO AVIS (contenu,etoiles,idUserAvis) VALUES ("Trop bien fait et géniale",5,1);
 
 
 CREATE TABLE AVISFORMATION(
@@ -233,7 +235,10 @@ CREATE TABLE LOGS(
     PRIMARY KEY (idUserLogs, dateu, heure),
     FOREIGN KEY (idUserLogs) REFERENCES USER(idUser)
     );
-    
+ INSERT INTO LOGS (idUserLogs,dateu,heure) VALUES (2,"2008-11-11","21:09:59.999");
+INSERT INTO LOGS (idUserLogs,dateu,heure) VALUES (2,"2014-12-02","13:14:49.988");
+
+
 CREATE TABLE QUESTIONS(
     idQuestion INT PRIMARY KEY  NOT NULL,
     idQuestionFormation INT NOT NULL,
@@ -285,7 +290,7 @@ CREATE TABLE MANAGEACCESS(
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/contact",1,"AccueilController","displayPageContact");
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("site/sendContact",1,"AccueilController","envoiContact");
 
- INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("admin",4,"AdministrateurControlleur","tableauDeBord");
+ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("admin/tab",4,"AdministrateurControlleur","tableauDeBord");
 
  INSERT INTO MANAGEACCESS(url,droit,controleur,fonction)  VALUES ("avis/add",2,"AvisControlleur","ajouterAvisEvent");
 
@@ -309,6 +314,8 @@ INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("evenement/min
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/new",3,"EvenementControlleur","ajouterEvenementCollaborateur");
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/edition",3,"EvenementControlleur","editionEvenementCollaborateur");
 INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/save",3,"EvenementControlleur","saveEventModify");
+INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("evenement/suppr",3,"EvenementControlleur","removeEvenementCollaborateur");
+
 
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction)  VALUES ("formation/all",1,"FormationControlleur","displayformations");
  INSERT INTO MANAGEACCESS (url,droit,controleur,fonction) VALUES ("formation/quizz",1,"FormationControlleur","displayformation");

@@ -20,16 +20,10 @@ class AvisControlleur {
             $vide=true;
         }
         $avis->setContenu($_avis);
-        
-        $_etoiles = htmlspecialchars(isset($_POST['etoiles']) ? $_POST['etoiles'] : NULL);
-        if ($_etoiles==NULL){
-            $_etoiles="";
-            $vide=true;
-        }
-        $avis->setEtoiles($_etoiles);
 
         $avis->setidConcerne($idEvent);
-
+        $avis->getidUserAvis($_SESSION["id"]);
+            //var_dump($avis);
         if($vide==false){
             $daoavis->saveAvisEvent($avis);
             

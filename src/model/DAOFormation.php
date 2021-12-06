@@ -20,6 +20,23 @@ Class DAOFormation {//
             return $result;
     }
 
+    function findByTypeFormationFormation($id) : object {
+        $requete = $this->cnx -> prepare("SELECT * FROM FORMATION WHERE idTypeFormation = :id");
+        $requete -> bindValue(':id', $id, PDO::PARAM_INT);
+        $j = $requete -> execute();
+        $result = $requete->fetchObject('Formation'); 
+        return $result;
+    }
+    function findAllTypeFormation() {
+        $requete = $this->cnx -> prepare("SELECT * FROM TYPEFORMATION");
+        $requete -> execute();
+            $type = array();
+            while ( $result = $requete->fetchObject('TypeFormation') ){
+                $type[] = $result; 
+            };
+            return $type; 
+    }
+
     
     public function findAll() :Array {
             $requete = $this->cnx -> prepare("SELECT * FROM FORMATION");

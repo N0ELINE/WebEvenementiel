@@ -2,9 +2,9 @@
    <body>
   
    <div class="Quizz">
-            <div style="font-size:20pt;">Quiz</div>
-             <div class="ques" id="question"> 
-             </div>
+            <div id="quiz">Quiz</div><br>
+             <b><div class="ques" id="question"> 
+             </div></b><br>
              <div><input type="radio" id="opt1" name="options">
                 <span id="optt1"></span>
             </div>
@@ -13,9 +13,9 @@
             </div>
             <div><input type="radio" id="opt3" name="options">
                 <span id="optt3"></span>
-            </div>
+            </div><br>
             <div class="lftCss">
-            <button class="nxtBtn" onclick="checkAnswer()">next ></button>
+            <button class="btn-hover color-4" onclick="checkAnswer()">next ></button>
             </div>
         </div>
         
